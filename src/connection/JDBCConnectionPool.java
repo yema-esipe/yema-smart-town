@@ -14,24 +14,20 @@ public class JDBCConnectionPool {
 	private PropertiesFileReader file = new PropertiesFileReader();
 	
 	public JDBCConnectionPool() {
-		 System.out.println("test1");
-
 		 try {
 			 file.init();
-			 System.out.println(file.getProperty("driver"));
 			 
 			 String driver = file.getProperty("driver");
 			 Class.forName(driver);
-			 
-			 System.out.println("après driver");
-			 
-			 System.out.println("test5");
+			 			 
 			 for (int i = 0; i < 10; i++) {
+				 System.out.println("après for name");
 				 myConnection = DriverManager.getConnection(file.getProperty("url"), file.getProperty("id"), file.getProperty("password"));
 				 connections.add(myConnection);
 			 }
 		 } catch (Exception e) {
 			 System.out.println("erreur connection");
+				e.printStackTrace();
 
 		 }
 	}

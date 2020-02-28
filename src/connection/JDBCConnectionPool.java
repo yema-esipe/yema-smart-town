@@ -13,21 +13,35 @@ public class JDBCConnectionPool {
 	private Connection myConnection;
 	private PropertiesFileReader file = new PropertiesFileReader();
 	
-	JDBCConnectionPool() {
+	public JDBCConnectionPool() {
+		 System.out.println("test1");
+
 		 try {
 			 file.init();
-			 Class.forName(file.getProperty("driver"));
+			 System.out.println(file.getProperty("driver"));
+			 
+			 String driver = file.getProperty("driver");
+			 Class.forName(driver);
+			 
+			 System.out.println("après driver");
+			 
+			 System.out.println("test5");
 			 for (int i = 0; i < 10; i++) {
 				 myConnection = DriverManager.getConnection(file.getProperty("url"), file.getProperty("id"), file.getProperty("password"));
 				 connections.add(myConnection);
 			 }
-		 } catch (Exception e) {}
+		 } catch (Exception e) {
+			 System.out.println("erreur connection");
+
+		 }
 	}
 		
 	public synchronized Connection giveConnection () {
-		while (connections.isEmpty()) {
+		 System.out.println("test2");
+
+		/*while (connections.isEmpty()) {
 			System.out.println("Veuillez patientez");
-		}
+		}*/
 		Connection tempConnection = connections.get(0); 
 		connections.remove(0);
 		return tempConnection;

@@ -5,8 +5,8 @@ import java.sql.Connection;
 public class DataSource {
 	private static JDBCConnectionPool pool;
 	
-	public DataSource(JDBCConnectionPool p) {
-		pool = p;
+	public DataSource() {
+		pool = new JDBCConnectionPool();
 	}
 	
 	public static Connection giveConnection() { //give to the client a connection available 

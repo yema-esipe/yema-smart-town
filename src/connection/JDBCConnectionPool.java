@@ -21,7 +21,6 @@ public class JDBCConnectionPool {
 			 Class.forName(driver);
 			 			 
 			 for (int i = 0; i < 10; i++) {
-				 System.out.println("après for name");
 				 myConnection = DriverManager.getConnection(file.getProperty("url"), file.getProperty("id"), file.getProperty("password"));
 				 connections.add(myConnection);
 			 }
@@ -33,11 +32,10 @@ public class JDBCConnectionPool {
 	}
 		
 	public synchronized Connection giveConnection () {
-		 System.out.println("test2");
 
-		/*while (connections.isEmpty()) {
+		while (connections.isEmpty()) {
 			System.out.println("Veuillez patientez");
-		}*/
+		}
 		Connection tempConnection = connections.get(0); 
 		connections.remove(0);
 		return tempConnection;

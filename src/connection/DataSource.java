@@ -1,23 +1,28 @@
 package connection;
 
+import java.sql.Connection;
+
 public class DataSource {
-	private static JDBCConnectionPool connection;
+	private static JDBCConnectionPool pool;
 	
-	public static JDBCConnectionPool getConnection() { //give to the client a connection available 
+	public static Connection getConnection() { //give to the client a connection available 
+		Connection connection = null;
 		try {
-			connection.getConnection();
-		} catch (Exception e) {}		
+			connection = pool.getConnection();
+		} catch (Exception e) {}
+		
+		return connection;
 	}
 	
-	public static void putConnection() {
+	public static void returnConnection(Connection c) {
 		try {
-			connection.putConnection();
+			pool.returnConnection(c);
 		} catch (Exception ee) {}
 	}
 	
 	public static void closeAllConnection() {
 		try {
-			connection.closeAllConnection();
+			pool.closeAllConnections();
 		} catch (Exception e) {}
 	}
 }

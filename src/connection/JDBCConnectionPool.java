@@ -1,26 +1,29 @@
 package connection;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import common.PropertiesFileReader;
+
 public class JDBCConnectionPool {
 	private ArrayList<Connection> connections = new ArrayList<Connection>();
-	private InfoAdmin infos;
-	
 	private Connection myConnection;
+	private PropertiesFileReader file = new PropertiesFileReader();
 	
 	JDBCConnectionPool() {
 		 try {
-			 Class.forName(infos.getDriver());
+			 file.init();
+			 Class.forName(file.getProperty("driver"));
 			 for (int i = 0; i < 10; i++) {
-				 myConnection = infos.getDriver().getConnection(infos.getUrl(), infos.getid(), infos.getmdp());
+				 myConnection = DriverManager.getConnection(file.getProperty("url"), file.getProperty("id"), file.getProperty("password"));
 			 }
 		 } catch (Exception e) {}
 	}
 		
-	public synchronized Connection getConnection () {
+	public synchronized Connection giveConnection () {
 		while (connections.isEmpty()) {
 			System.out.println("Veuillez patientez");
 		}
@@ -35,7 +38,7 @@ public class JDBCConnectionPool {
 	
 	public synchronized void closeAllConnections() {
 		try {
-			myConnection.close()
+			myConnection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

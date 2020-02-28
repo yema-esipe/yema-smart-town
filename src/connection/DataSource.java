@@ -5,13 +5,8 @@ import java.sql.Connection;
 public class DataSource {
 	private static JDBCConnectionPool pool;
 	
-	public static Connection getConnection() { //give to the client a connection available 
-		Connection connection = null;
-		try {
-			connection = pool.getConnection();
-		} catch (Exception e) {}
-		
-		return connection;
+	public static Connection giveConnection() { //give to the client a connection available 
+		return pool.giveConnection();
 	}
 	
 	public static void returnConnection(Connection c) {

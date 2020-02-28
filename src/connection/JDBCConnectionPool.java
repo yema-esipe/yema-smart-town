@@ -18,7 +18,7 @@ public class JDBCConnectionPool {
 	
 	public void putConnection (Connection c) {
 		connections.add(c);
-	}
+	}  
 	
 	public void closeAllConnections() {
 		

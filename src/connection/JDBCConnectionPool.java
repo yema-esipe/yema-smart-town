@@ -7,7 +7,7 @@ public class JDBCConnectionPool {
 	private ArrayList<Connection> connections = new ArrayList<Connection>();
 	 
 	JDBCConnectionPool() {
-		
+		 
 	}
 	
 	public Connection getConnection () {

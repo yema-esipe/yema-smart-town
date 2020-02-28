@@ -19,6 +19,7 @@ public class JDBCConnectionPool {
 			 Class.forName(file.getProperty("driver"));
 			 for (int i = 0; i < 10; i++) {
 				 myConnection = DriverManager.getConnection(file.getProperty("url"), file.getProperty("id"), file.getProperty("password"));
+				 connections.add(myConnection);
 			 }
 		 } catch (Exception e) {}
 	}

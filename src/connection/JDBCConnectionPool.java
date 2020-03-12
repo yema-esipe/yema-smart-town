@@ -15,8 +15,9 @@ public class JDBCConnectionPool {
 	public JDBCConnectionPool() {
 		 try {
 			 file.init();
-			 
+			 System.out.println(file.getProperty("url"));
 			 String driver = file.getProperty("driver");
+			 
 			 Class.forName(driver);
 			 
 			//open ten connections			 			 

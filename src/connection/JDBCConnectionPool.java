@@ -15,15 +15,15 @@ public class JDBCConnectionPool {
 	public JDBCConnectionPool() {
 		 try {
 			 file.init();
-			 System.out.println(file.getProperty("url"));
 			 String driver = file.getProperty("driver");
 			 
 			 Class.forName(driver);
-			 
+
 			//open ten connections			 			 
 			 for (int i = 0; i < 10; i++) {  
 				 myConnection = DriverManager.getConnection(file.getProperty("url"), file.getProperty("id"), file.getProperty("password"));
 				 connections.add(myConnection);
+
 			 }
 		 } catch (Exception e) {
 			 System.out.println("erreur connection");

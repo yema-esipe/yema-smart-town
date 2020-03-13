@@ -14,6 +14,7 @@ public class Crud {
 		source = new DataSource();
 	}
 	
+	@SuppressWarnings("static-access")
 	public ArrayList<String> executeQuery(String request) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
@@ -31,6 +32,7 @@ public class Crud {
 		return list;
 	}
 	
+	@SuppressWarnings("static-access")
 	public void executeUpdate(String request) {
 		try {
 			Connection connection = source.giveConnection();

@@ -15,6 +15,7 @@ public class PropertiesFileReader {
 
 	            // load a properties file
 			  applicationProperties.load(input);
+			  System.out.println(getProperty("url"));
 	           
 	        } catch (IOException ex) {
 	            ex.printStackTrace();

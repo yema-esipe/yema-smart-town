@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import common.PropertiesFileReader;
-
 public class JDBCConnectionPool {
 	private ArrayList<Connection> connections = new ArrayList<Connection>();
 	private Connection myConnection;

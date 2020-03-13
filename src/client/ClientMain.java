@@ -17,7 +17,7 @@ public class ClientMain {
 		int choice;
 		
 		System.out.println("*******************************************************************************************");
-		System.out.println("****************************** BIENVENUE AU MENU CRUD CLIENT ******************************");
+		System.out.println("****************************** WELCOME TO CRUD CLIENT MENU ******************************");
 		System.out.println("*******************************************************************************************");
 		
 		System.out.println("\n");

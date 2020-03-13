@@ -22,24 +22,24 @@ public class ClientMain {
 		
 		System.out.println("\n");
 		
-		System.out.println("1- Select operation");
+		System.out.println("1- Select operation");		
 		System.out.println("2- Insert operation");
 		System.out.println("3- Update operation");
 		System.out.println("4- Delete operation");
 		
 		System.out.println("\n");
 		
-		System.out.print("choose an option: ");
+		System.out.print("choose an option: ");  		//allows client to chose what he wants to do with the database
 		choice = enter.nextInt();
 		
-		System.out.println("write your request: ");
+		System.out.println("write your request: ");		//he cans write himself the request 
 		reqClient = enter2.nextLine();
 	
 		switch (choice) {
 		case 1:
 						
 			System.out.println("1- Select operation");
-			System.out.println(crud.executeQuery(reqClient));
+			System.out.println(crud.executeSelect(reqClient));
 			break;
 		case 2:
 						

@@ -15,7 +15,7 @@ public class Crud {
 	}
 	
 	@SuppressWarnings("static-access")
-	public ArrayList<String> executeQuery(String request) {
+	public ArrayList<String> executeSelect(String request) {		//return a list with the select result
 		ArrayList<String> list = new ArrayList<String>();
 		try {
 			Connection connection = source.giveConnection();
@@ -33,7 +33,7 @@ public class Crud {
 	}
 	
 	@SuppressWarnings("static-access")
-	public void executeUpdate(String request) {
+	public void executeUpdate(String request) {					// accomplished update/insert/delete request 
 		try {
 			Connection connection = source.giveConnection();
 			Statement myRequest = connection.createStatement();

@@ -32,8 +32,8 @@ public class JDBCConnectionPool {
 		 }
 	}
 	
-	//this method give connections to clients whose need it, 
-	//if there isn't any connection available, they have to wait
+	//this method gives connections to clients whose need it, if there isn't any connection available, they have to wait
+	
 	public synchronized Connection giveConnection () {
 
 		while (connections.isEmpty()) {
@@ -44,8 +44,8 @@ public class JDBCConnectionPool {
 		return tempConnection;
 	}
 	
-	//this method allow to return the connection used by a client
-	//thanks to that, the connection is available again
+	//this method allows to return the connection used by a client, thanks to that, the connection is available again
+	
 	public synchronized void returnConnection (Connection c) {
 		connections.add(c);
 	}  

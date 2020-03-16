@@ -15,8 +15,8 @@ public class ClientCommunication {
 	}
 	
 	public String sendMessage(String msg) throws IOException {
-		out.println(msg);
-		String resp = in.readLine();
+		out.println(msg); //envoi la requete passé en paramètre au serveur
+		String resp = in.readLine(); //censé donné une réponse du serveur 
 		return resp;
 	}
 	

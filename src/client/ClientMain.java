@@ -1,5 +1,6 @@
 package client;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import common.Crud;
@@ -7,9 +8,11 @@ import common.Crud;
 public class ClientMain {
 
 	@SuppressWarnings("resource")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		ClientCommunication client = new ClientCommunication();
+		client.startConnection("172.31.240.3", 8888);
 		
-		Crud crud = new Crud();
+		//Crud crud = new Crud();
 		
 		Scanner enter = new Scanner(System.in);
 		Scanner enter2 = new Scanner(System.in);
@@ -35,11 +38,20 @@ public class ClientMain {
 		System.out.println("write your request: ");		//he cans write himself the request 
 		reqClient = enter2.nextLine();
 	
+		//reqClient est la requête à envoyer au serveur
+		
+		String msg1 = client.sendMessage(reqClient);
+		String fin = client.sendMessage(".");
+		client.stopConnection();
+		System.out.println(msg1 + " " + " envoyé par client");
+		
+		/*
+		
 		switch (choice) {
 		case 1:
 						
 			System.out.println("1- Select operation");
-			System.out.println(crud.executeSelect(reqClient));
+			System.out.println(crud.executeSelect(reqClient)); //on doit changer ces lignes en 'envoie' de cette requête dans la socket
 			break;
 		case 2:
 						
@@ -60,7 +72,7 @@ public class ClientMain {
 		default:
 			break;
 		}
-		
+		*/
 	}
 }
 

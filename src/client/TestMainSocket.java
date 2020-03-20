@@ -9,7 +9,7 @@ public class TestMainSocket {
 			ClientCommunication client = new ClientCommunication();
 			client.startConnection("127.0.0.1", 8888);
 
-			String msg1 = client.sendMessage("test socker");
+			String msg1 = client.sendMessage("test socket");
 			String fin = client.sendMessage(".");
 			client.stopConnection();
 			System.out.println(msg1 + " " + " envoyé par client");

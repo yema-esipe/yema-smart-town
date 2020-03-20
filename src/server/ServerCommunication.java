@@ -22,7 +22,7 @@ public class ServerCommunication {
 	            out.println("good bye");
 	            break;
 	         }
-	         out.println(inputLine);
+	         out.println("REPONSE SERVER");
 		}
 	}
 	

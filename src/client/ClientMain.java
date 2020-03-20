@@ -34,6 +34,8 @@ public class ClientMain {
 		System.out.println("write your request: ");		//he cans write himself the request 
 		reqClient = enter2.nextLine();
 	
+		
+		//cette partie doit etre coté serveur
 		switch (choice) {
 		case 1:
 						

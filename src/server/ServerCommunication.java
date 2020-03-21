@@ -4,9 +4,7 @@ import java.io.*;
 import java.net.*;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 
 import common.Crud;
 
@@ -49,14 +47,12 @@ public class ServerCommunication {
 		while ((inputLine = in.readLine()) != null) {
 			if (".".equals(inputLine)) {
 				//out.println("bye");
+				
 				break;
 			}
-			//-> inputLine est une requete SQL, on se connecte à la BDD grâce au CRUD et on fait la requete (validé)
-			JSONArray json = crud.executeSelect(inputLine);
 			
-			//éditer l'obj JSON pour y mettre la réponse de la requete (après un select par exemple)
-			//Object obj = parser.parse(new FileReader("\\Users\\elisa\\git\\yema-smart-town\\src\\client\\Test.json")); //chemin à rectifier pour y avoir accès depuis n'importe quel ordi
-			
+			//il faut ajouter une condition - if cest un select, if cest un update/delete/insert
+			JSONArray json = crud.executeSelect(inputLine);	
 			
 			// envoyer
 			out.writeObject(json); //on renvoie un JSON donc un Object

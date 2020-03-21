@@ -12,9 +12,7 @@ public class TestMainSocket {
 			client.sendMessage("select Nom from users"); //msg1 contient la reponse de "test socket"
 			//client.sendMessage(".");
 			client.stopConnection();
-			
-			//System.out.println(msg1 + " " + " envoyé par client");
-			
+						
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

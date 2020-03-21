@@ -2,10 +2,8 @@ package client;
 
 import java.io.*;
 import java.net.*;
-import java.util.Iterator;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import common.JSONFileAccess;
 

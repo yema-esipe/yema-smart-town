@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,7 +19,6 @@ public class Crud {
 	
 	@SuppressWarnings({ "static-access", "unchecked" })
 	public JSONArray executeSelect(String request) {		//return a list with the select result 
-														//il faudrait ici que le methode renvois un json
 		JSONArray json = null;
 		try {
 			Connection connection = source.giveConnection();
@@ -30,7 +28,6 @@ public class Crud {
 			json = new JSONArray();
 			
 			while(result.next()) {
-				//list.add(result.getString(1));
 				JSONObject obj = new JSONObject();
 				String name = mRes.getColumnName(1);
 				

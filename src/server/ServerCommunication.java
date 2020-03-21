@@ -3,9 +3,12 @@ package server;
 import java.io.*;
 import java.net.*;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import common.Crud;
 
 public class ServerCommunication {
 	private ServerSocket serverSocket;
@@ -29,6 +32,7 @@ public class ServerCommunication {
         private Socket clientSocket;
         private ObjectOutputStream out;
         private BufferedReader in;
+        private Crud crud;
  
         public ThreadClient(Socket socket) {
             this.clientSocket = socket;
@@ -39,27 +43,30 @@ public class ServerCommunication {
 		out = new ObjectOutputStream(clientSocket.getOutputStream());
 		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));  
 		String inputLine;
-		JSONParser parser = new JSONParser();
+		crud = new Crud();
+		//JSONParser parser = new JSONParser();
 		
 		while ((inputLine = in.readLine()) != null) {
 			if (".".equals(inputLine)) {
 				//out.println("bye");
 				break;
 			}
+			//-> inputLine est une requete SQL, on se connecte à la BDD grâce au CRUD et on fait la requete (validé)
+			JSONArray json = crud.executeSelect(inputLine);
 			
-			Object obj = parser.parse(new FileReader("\\Users\\elisa\\git\\yema-smart-town\\src\\client\\Test.json"));
-			 			
-		   out.writeObject(obj); //on renvoie un JSON donc un Object
-		   out.flush();
+			//éditer l'obj JSON pour y mettre la réponse de la requete (après un select par exemple)
+			//Object obj = parser.parse(new FileReader("\\Users\\elisa\\git\\yema-smart-town\\src\\client\\Test.json")); //chemin à rectifier pour y avoir accès depuis n'importe quel ordi
+			
+			
+			// envoyer
+			out.writeObject(json); //on renvoie un JSON donc un Object
+			out.flush();
 		}
 	    
 		in.close();
 		out.close();
 		clientSocket.close();
-	    } catch (IOException e) {} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    } catch (IOException e) {}
 	}
     }
 }

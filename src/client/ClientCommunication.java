@@ -7,33 +7,34 @@ import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import common.JSONFileAccess;
+
 public class ClientCommunication {
 	private Socket clientSocket;
 	private PrintWriter out;
 	private ObjectInputStream in = null;
+	private JSONFileAccess file;
 	
 	public void startConnection(String ip, int port) throws IOException {
 		clientSocket = new Socket(ip, port);
 		out = new PrintWriter(clientSocket.getOutputStream(), true);
 		in = new ObjectInputStream(clientSocket.getInputStream());
+		file = new JSONFileAccess();
 	}
 	
 	public void sendMessage(String msg) throws IOException {
-		out.println(msg); //envoi la requete passé en paramètre au serveur
+		out.println(msg); //envoi la requete passée en paramètre au serveur
 		Object resp = null;
 		try {
-			resp = in.readObject(); //censé donné une réponse du serveur
+			resp = in.readObject(); // donne la réponse du serveur
 			
 			if (resp == null) System.err.println("Erreur");
 			else {
-				JSONObject jsonObject = (JSONObject) resp;
-				//affichage de la réponse
+				JSONArray json = (JSONArray) resp;
 				
-				JSONArray companyList = (JSONArray) jsonObject.get("Company List");
-				Iterator<JSONObject> iterator = companyList.iterator();
-				while (iterator.hasNext()) {
-					System.out.println(iterator.next()); 
-				}
+				//affichage de la réponse
+				file.readJSON(json);
+				
 			}
 		} catch(ClassNotFoundException e) {
 		    System.err.println("Classe inconnue : ");

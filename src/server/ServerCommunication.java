@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 
 import org.json.simple.JSONArray;
-
+import org.json.simple.JSONObject;
 
 import common.Crud;
 
@@ -36,23 +36,29 @@ public class ServerCommunication {
             this.clientSocket = socket;
         }
  
-        public void run()  {
+        @SuppressWarnings("unchecked")
+		public void run()  {
 	    try {
 		out = new ObjectOutputStream(clientSocket.getOutputStream());
 		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));  
 		String inputLine;
 		crud = new Crud();
-		//JSONParser parser = new JSONParser();
 		
 		while ((inputLine = in.readLine()) != null) {
 			if (".".equals(inputLine)) {
-				//out.println("bye");
+				JSONObject obj = new JSONObject();
+				obj.put("Etat", "FINAL");
+				
+				JSONArray json = new JSONArray();
+				json.add(obj);
+				
+				out.writeObject(json);
 				
 				break;
 			}
 			
 			//il faut ajouter une condition - if cest un select, if cest un update/delete/insert
-			JSONArray json = crud.executeSelect(inputLine);	
+			JSONArray json = crud.executeUpdate(inputLine);	
 			
 			// envoyer
 			out.writeObject(json); //on renvoie un JSON donc un Object

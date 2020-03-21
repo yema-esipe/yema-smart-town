@@ -42,15 +42,23 @@ public class Crud {
 	}
 	
 	@SuppressWarnings("static-access")
-	public void executeUpdate(String request) {					// accomplished update/insert/delete request 
+	public JSONArray executeUpdate(String request) {					// accomplished update/insert/delete request 
+		JSONArray json = new JSONArray();
+
 		try {
 			Connection connection = source.giveConnection();
 			Statement myRequest = connection.createStatement();
 			myRequest.executeUpdate(request);
+			
+			JSONObject obj = new JSONObject();
+			obj.put("Etat", "requete executee");
+			
+			json.add(obj);
 						
 			source.returnConnection(connection);
 			source.closeAllConnection();
 		} catch(Exception e) {}
+		return json;
 	}
 	
 }

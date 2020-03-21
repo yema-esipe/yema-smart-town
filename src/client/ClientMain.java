@@ -16,11 +16,16 @@ public class ClientMain {
 		int choice;
 		
 		System.out.println("********************************************************************************");
-		System.out.println("************************* WELCOME TO CRUD CLIENT MENU **************************");
+		System.out.println("************************* WELCOME TO CLIENT MENU *******************************");
 		System.out.println("********************************************************************************");
 		
 		System.out.println("\n");
-		
+		/*
+		 Idée de scénario :
+		 affiche la table
+		 demande ce que le client veut faire
+		 il n'ecrit plus directement les requetes elles seront ecrites directement en fonction de ce qu'il veut 
+		 */
 		System.out.println("1- Select operation");		
 		System.out.println("2- Insert operation");
 		System.out.println("3- Update operation");

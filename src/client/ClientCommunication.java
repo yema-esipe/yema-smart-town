@@ -26,7 +26,7 @@ public class ClientCommunication {
 		try {
 			resp = in.readObject(); // donne la réponse du serveur
 			
-			if (resp == null) System.err.println("Erreur");
+			if (resp == null) System.err.println("Erreur reponse null");
 			else {
 				JSONArray json = (JSONArray) resp;
 				

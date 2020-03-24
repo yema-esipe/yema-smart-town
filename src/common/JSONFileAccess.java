@@ -16,4 +16,26 @@ public class JSONFileAccess { //classe pertinente ?
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public JSONObject convertJSON(String msg) {
+		JSONObject obj = new JSONObject();
+
+		String resq = "";
+		int i = 0;
+		//definir si cest un select ou update/insert/delete (on récupère le 1er mot)
+		while (msg.charAt(i) != ' ') {
+			resq = resq + msg.charAt(i);
+			i++;
+		}
+		
+		if (resq.equals("select")) { //creer un JSON qui a comme clé select et valeur la requete
+			obj.put("select", msg);
+		} else if ((resq.equals("update")) || (resq.equals("delete")) || (resq.equals("insert"))) {
+			obj.put("update", msg);
+		}
+		//gerer les erreurs
+		
+		return obj;
+	}
+	
 }

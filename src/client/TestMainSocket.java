@@ -9,8 +9,9 @@ public class TestMainSocket {
 	public static void main(String[] args) {
 		
 		try {
+			
 			ClientCommunication client = new ClientCommunication();
-			client.startConnection("127.0.0.1", 2595);
+			client.startConnection("127.0.0.1", 3775);
 			Crud crud = new Crud();
 			Scanner enter = new Scanner(System.in);
 			Scanner enter2 = new Scanner(System.in);
@@ -18,8 +19,8 @@ public class TestMainSocket {
 			Scanner enter4 = new Scanner(System.in);
 			Scanner enter5 = new Scanner(System.in);
 			Scanner enter6 = new Scanner(System.in);
-
-
+						
+			//System.out.println(json.convertJSON("select * from users").containsKey("select"));
 			//test dialogue
 			
 			System.out.println("********************************************************************************");
@@ -63,7 +64,7 @@ public class TestMainSocket {
 			}
 
 			
-			client.sendMessage(".");
+			//client.sendMessage(".");
 			client.stopConnection();
 						
 		} catch (IOException e) {

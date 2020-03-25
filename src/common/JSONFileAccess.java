@@ -28,11 +28,9 @@ public class JSONFileAccess { //classe pertinente ?
 			i++;
 		}
 		
-		if (resq.equals("select")) { //creer un JSON qui a comme clé select et valeur la requete
-			obj.put("select", msg);
-		} else if ((resq.equals("update")) || (resq.equals("delete")) || (resq.equals("insert"))) {
-			obj.put("update", msg);
-		}
+	 //creer un JSON qui a comme clé select et valeur la requete
+		obj.put(resq, msg);
+		
 		//gerer les erreurs
 		
 		return obj;

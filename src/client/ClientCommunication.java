@@ -25,7 +25,8 @@ public class ClientCommunication {
 		//etape de transition msg en JSON
 		JSONObject obj = new JSONObject();
 		obj = file.convertJSON(msg); //la requete est mise sous JSON
-		
+		System.out.println(msg);
+		System.out.println(obj);
 		
 		out.writeObject(obj); //envoi la requete passée en paramètre au serveur
 		Object resp = null;

@@ -47,9 +47,11 @@ public class ServerCommunication {
 		crud = new Crud();
 		
 		while ((request = (JSONObject) in.readObject()) != null) {
-		/*if (".".equals(inputLine)) {
+			System.out.println(request.keySet());
+
+		if (request.containsKey("fin")) {
 				JSONObject obj = new JSONObject();
-				obj.put("Etat", "FINAL");
+				obj.put(" ", "FIN de la communication");
 				
 				JSONArray json = new JSONArray();
 				json.add(obj);
@@ -57,22 +59,31 @@ public class ServerCommunication {
 				out.writeObject(json);
 				
 				break;
-			}*/
-			
+				
+			} else if (request.containsKey("select")) {
+				String s = (String) request.get("select");
+				JSONArray json = crud.executeSelect(s);	
+				
+				// envoyer
+				out.writeObject(json); //on renvoie un JSON donc un Object
+				out.flush();
+				
+			} else if ((request.containsKey("update")) || (request.containsKey("insert")) || (request.containsKey("delete"))) {
+				System.out.println(request.keySet());
+				String s = (String) request.get("select");
+				JSONArray json = crud.executeUpdate(s);	
+				
+				// envoyer
+				out.writeObject(json); //on renvoie un JSON donc un Object
+				out.flush();
+			} 
 						
-			//il faut ajouter une condition - if cest un select, if cest un update/delete/insert
-			String s = (String) request.get("select");
-			
-			JSONArray json = crud.executeSelect(s);	
-			
-			// envoyer
-			out.writeObject(json); //on renvoie un JSON donc un Object
-			out.flush();
 		}
-	    
+	   // System.out.println("devrait s'afficher");
 		in.close();
 		out.close();
 		clientSocket.close();
+		
 	    } catch (IOException e) {} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

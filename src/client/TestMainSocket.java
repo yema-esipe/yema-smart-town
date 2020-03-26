@@ -3,23 +3,26 @@ package client;
 import java.io.IOException;
 import java.util.Scanner;
 
-import common.Crud;
-import connection.DataSource;
-
 public class TestMainSocket {
 	public static void main(String[] args) {
 		
 		try {
 		
 			ClientCommunication client = new ClientCommunication();
-			client.startConnection("127.0.0.1", 3996);
-			Crud crud = new Crud();
+			client.startConnection("127.0.0.1", 2330);
+			@SuppressWarnings("resource")
 			Scanner enter = new Scanner(System.in);
+			@SuppressWarnings("resource")
 			Scanner enter2 = new Scanner(System.in);
+			@SuppressWarnings("resource")
 			Scanner enter3 = new Scanner(System.in);
+			@SuppressWarnings("resource")
 			Scanner enter4 = new Scanner(System.in);
+			@SuppressWarnings("resource")
 			Scanner enter5 = new Scanner(System.in);
+			@SuppressWarnings("resource")
 			Scanner enter6 = new Scanner(System.in);
+			@SuppressWarnings("resource")
 			Scanner enter7 = new Scanner(System.in);
 						
 			
@@ -68,7 +71,7 @@ public class TestMainSocket {
 					
 						System.out.println("Age : ");
 						rep5 = enter6.nextInt();
-						client.sendMessage("insert into users(Nom, Prenom, Age) values (" + rep3 + ", " + rep4 + ", " + rep5 + ")");
+						client.sendMessage("insert into users (Nom, Prenom, Age) values ('" + rep3 + "', '" + rep4 + "', " + rep5 + ")");
 				
 					}
 					
@@ -84,6 +87,7 @@ public class TestMainSocket {
 				} else {
 					client.sendMessage("fin ");
 					client.stopConnection();
+					break;
 				}					
 			}	
 							

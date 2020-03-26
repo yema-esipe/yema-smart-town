@@ -25,21 +25,19 @@ public class ClientCommunication {
 		//etape de transition msg en JSON
 		JSONObject obj = new JSONObject();
 		obj = file.convertJSON(msg); //la requete est mise sous JSON
-		System.out.println(msg);
-		System.out.println(obj);
 		
 		out.writeObject(obj); //envoi la requete passée en paramètre au serveur
 		Object resp = null;
+		
 		try {
 			resp = in.readObject(); // donne la réponse du serveur
 			
 			if (resp == null) System.err.println("Erreur reponse null");
 			else {
-				JSONArray json = (JSONArray) resp;
+				JSONArray retour = (JSONArray) resp;
 				
 				//affichage de la réponse
-				file.readJSON(json);
-				
+				file.readJSON(retour);		
 			}
 		} catch(ClassNotFoundException e) {
 		    System.err.println("Classe inconnue : ");

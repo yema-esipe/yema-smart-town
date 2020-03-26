@@ -19,7 +19,7 @@ public class ServerCommunication {
 		} catch (InterruptedException ex) {}
 		
 	    while (true) {
-	    	System.out.println("Serveur en attente");
+	    	System.out.println("Serveur à l'écoute");
 	         new ThreadClient(serverSocket.accept()).start();
 	    }
 	}
@@ -47,39 +47,38 @@ public class ServerCommunication {
 		crud = new Crud();
 		
 		while ((request = (JSONObject) in.readObject()) != null) {
-			System.out.println(request.keySet());
 
 		if (request.containsKey("fin")) {
-				JSONObject obj = new JSONObject();
-				obj.put(" ", "FIN de la communication");
-				
 				JSONArray json = new JSONArray();
+				JSONObject obj = new JSONObject();
+				obj.put("fin", "FIN de la communication");
 				json.add(obj);
-				
 				out.writeObject(json);
 				
 				break;
 				
 			} else if (request.containsKey("select")) {
 				String s = (String) request.get("select");
-				JSONArray json = crud.executeSelect(s);	
+				JSONArray resp = crud.executeSelect(s);	
+				//on supprime le contenu de lobjet pr pouvoir le réutiliser
+				request.remove("select");
+				// envoyer
+				out.writeObject(resp); //on renvoie un JSON donc un Object
+				out.flush();
 				
+			} else if (request.containsKey("update")) {
+				String i = (String) request.get("update");
+				JSONArray json = crud.executeUpdate(i);	
+				
+				request.remove("update");
 				// envoyer
 				out.writeObject(json); //on renvoie un JSON donc un Object
 				out.flush();
-				
-			} else if ((request.containsKey("update")) || (request.containsKey("insert")) || (request.containsKey("delete"))) {
-				System.out.println(request.keySet());
-				String s = (String) request.get("select");
-				JSONArray json = crud.executeUpdate(s);	
-				
-				// envoyer
-				out.writeObject(json); //on renvoie un JSON donc un Object
-				out.flush();
-			} 
+			} else {
+				break;
+			}
 						
 		}
-	   // System.out.println("devrait s'afficher");
 		in.close();
 		out.close();
 		clientSocket.close();

@@ -32,7 +32,7 @@ public class ClientMain {
 		System.out.println("4- Delete operation");
 		
 		System.out.println("\n");
-		
+		 
 		System.out.print("choose an option: ");  		//allows client to chose what he wants to do with the database
 		choice = enter.nextInt();
 		

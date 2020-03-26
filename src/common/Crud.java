@@ -26,13 +26,18 @@ public class Crud {
 			ResultSet result = myRequest.executeQuery(request);
 			ResultSetMetaData mRes = result.getMetaData();
 			json = new JSONArray();
-			
-			while(result.next()) {
-				JSONObject obj = new JSONObject();
-				String name = mRes.getColumnName(1);
-				
-				obj.put(name, result.getString(name));
-				json.add(obj);
+						 			 
+			while (result.next()) {
+				JSONObject jsonObj = new JSONObject();
+				for (int i = 1; i <= mRes.getColumnCount(); i++) {
+					Object obj = result.getObject(i);
+					if (obj == null) {
+						jsonObj.put(mRes.getColumnName(i), "null");
+					} else {
+						jsonObj.put(mRes.getColumnName(i), obj.toString());
+					}
+				}
+				json.add(jsonObj);
 			}
 
 			source.returnConnection(connection);
@@ -41,15 +46,18 @@ public class Crud {
 		return json;
 	}
 	
-	@SuppressWarnings("static-access")
+	
+	
+	@SuppressWarnings({ "static-access", "unchecked" })
 	public JSONArray executeUpdate(String request) {					// accomplished update/insert/delete request 
 		JSONArray json = new JSONArray();
 
 		try {
 			Connection connection = source.giveConnection();
 			Statement myRequest = connection.createStatement();
-			myRequest.executeUpdate(request);
 			
+			myRequest.executeUpdate(request);
+						
 			JSONObject obj = new JSONObject();
 			obj.put("Etat", "requete executee");
 			
@@ -57,7 +65,10 @@ public class Crud {
 						
 			source.returnConnection(connection);
 			source.closeAllConnection();
-		} catch(Exception e) {}
+		} catch(Exception e) {
+			System.err.println("erreur dans le executeUpdate");
+			e.printStackTrace();
+		}
 		return json;
 	}
 	

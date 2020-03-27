@@ -65,7 +65,7 @@ public class TestMainSocket {
 					
 						System.out.println("Nom : ");
 						rep3 = enter4.nextLine();
-					
+					 
 						System.out.println("Prenom : ");
 						rep4 = enter5.nextLine();
 					

@@ -78,7 +78,7 @@ public class ServerCommunication {
 				break;
 			}
 						
-		}
+		} 
 		in.close();
 		out.close();
 		clientSocket.close();

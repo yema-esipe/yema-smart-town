@@ -42,7 +42,7 @@ public class JSONFileAccess { //classe pertinente ?
 		if ((resq.equals("insert")) || (resq.equals("update")) || (resq.equals("delete"))) {
 			resq = "update";
 		}
-		//la clé du json nous dit si cest un executeupdate ou bien un executeselect
+		//la clé du json nous dit si cest un executeupdate ou bien un executeselect 
 		obj.put(resq, msg);
 				
 		return obj;

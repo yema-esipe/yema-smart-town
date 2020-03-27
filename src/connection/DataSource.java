@@ -2,7 +2,7 @@ package connection;
 
 import java.sql.Connection;
 
-public class DataSource {
+public class DataSource { 
 	private static JDBCConnectionPool pool;
 	
 	public DataSource() {

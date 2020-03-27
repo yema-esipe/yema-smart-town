@@ -6,7 +6,7 @@ import java.util.Scanner;
 import common.Crud;
 
 public class ClientMain {
-
+ 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws IOException {
 		Crud crud = new Crud();

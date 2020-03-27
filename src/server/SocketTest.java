@@ -6,8 +6,7 @@ public class SocketTest {
 	public static void main (String[] args) {
 		try {
 			ServerCommunication server = new ServerCommunication();
-			server.start(2330); 
-
+			server.start(50014); 
 			server.stop(); 
 		} catch (IOException e) {}
 	}

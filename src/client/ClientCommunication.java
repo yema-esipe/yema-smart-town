@@ -2,47 +2,33 @@ package client;
 
 import java.io.*; 
 import java.net.*;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import common.JSONFileAccess;
+import common.ConvertJSON;
+import common.Request;
+import common.Response;
 
 public class ClientCommunication {
 	private Socket clientSocket;
-	private ObjectOutputStream out;
-	private ObjectInputStream in = null;
-	private JSONFileAccess file;
+	private PrintWriter out;
+	private BufferedReader in = null;
+	private ConvertJSON converter;
 	
 	public void startConnection(String ip, int port) throws IOException {
 		clientSocket = new Socket(ip, port);
-		out = new ObjectOutputStream(clientSocket.getOutputStream());
-		in = new ObjectInputStream(clientSocket.getInputStream());
-		file = new JSONFileAccess();
+		out = new PrintWriter(clientSocket.getOutputStream(), true);
+		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		converter = new ConvertJSON();
 	}
 	
-	public void sendMessage(String msg) throws IOException {
-		//etape de transition msg en JSON
-		JSONObject obj = new JSONObject();
-		obj = file.convertJSON(msg); //la requete est mise sous JSON
+	public void sendMessage(Request req) throws IOException {
 		
-		out.writeObject(obj); //envoi la requete passée en paramètre au serveur
-		Object resp = null;
+		String jsonRequest = converter.RequestToJson(req); 
+		out.println(jsonRequest); //envoi la requete passée en paramètre au serveur
 		
-		try {
-			resp = in.readObject(); // donne la réponse du serveur
-			
-			if (resp == null) System.err.println("Erreur reponse null");
-			else {
-				JSONArray retour = (JSONArray) resp;
-				
-				//affichage de la réponse
-				file.readJSON(retour);		
-			}
-		} catch(ClassNotFoundException e) {
-		    System.err.println("Classe inconnue : ");
-		    System.exit(1);
-		}
+		String jsonResponse = in.readLine();
+		Response resp = converter.JsontoResponse(jsonResponse);
+		
+		System.out.println(resp.toString());
+		
 	}
 	
 	public void stopConnection() throws IOException {

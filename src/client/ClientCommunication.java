@@ -5,7 +5,7 @@ import java.net.*;
 import common.ConvertJSON;
 import common.Request;
 import common.Response;
-
+ 
 public class ClientCommunication {
 	private Socket clientSocket;
 	private PrintWriter out;

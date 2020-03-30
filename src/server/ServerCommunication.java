@@ -2,6 +2,7 @@ package server;
 
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import common.ConvertJSON;
 import common.Request;
@@ -14,7 +15,7 @@ public class ServerCommunication {
 		serverSocket = new ServerSocket(port);
 
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 		} catch (InterruptedException ex) {}
 
 		while (true) {
@@ -31,6 +32,8 @@ public class ServerCommunication {
 		private Socket clientSocket;
 		private PrintWriter out;
 		private BufferedReader in;
+		//ajout
+		private AtomicBoolean running = new AtomicBoolean(false);
 
 		private ConvertJSON converter;
 		private Request req;
@@ -38,9 +41,15 @@ public class ServerCommunication {
 		public ThreadClient(Socket socket) {
 			this.clientSocket = socket;
 		} 
-
+		
+		public void interrupt() {
+			running.set(false);
+		}
+		
 		public void run()  {
-			try {
+			running.set(true);
+			while (running.get()) {
+			try {	
 				out = new PrintWriter(clientSocket.getOutputStream(), true);
 				in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
@@ -101,8 +110,14 @@ public class ServerCommunication {
 				in.close();
 				out.close();
 				clientSocket.close();
-
-			} catch (IOException e) {}
+				
+				this.currentThread().interrupt();
+				System.out.println("Thread was interrupted");
+				
+			} catch (IOException e) {}	
+			} //fin du while 
+			running.set(true);
+			
 		}
 	}
 }

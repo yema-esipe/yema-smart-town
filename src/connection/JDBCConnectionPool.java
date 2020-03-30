@@ -18,7 +18,7 @@ public class JDBCConnectionPool {
 			 Class.forName(driver);
 
 			//open ten connections			 			 
-			 for (int i = 0; i < 9; i++) {  
+			 for (int i = 0; i < 6; i++) {  
 				 myConnection = DriverManager.getConnection(file.getProperty("url"), file.getProperty("id"), file.getProperty("password"));
 				 connections.add(myConnection);
 
@@ -51,7 +51,9 @@ public class JDBCConnectionPool {
 	
 	public synchronized void closeAllConnections() {
 		try {
-			myConnection.close();
+			for(Connection c : connections) {
+				c.close();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

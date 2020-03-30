@@ -55,6 +55,7 @@ public class DAOUser extends DAO<User> {
  			return resp;
  			
  		} catch (Exception e) {
+ 			e.printStackTrace();
  			resp.setResponse_type("DELETE");
 			resp.setResponse_state("L'opération ne s'est pas correctement déroulée");
  			return resp;
@@ -80,6 +81,7 @@ public class DAOUser extends DAO<User> {
  			return resp;
  			
  		} catch (Exception e) {
+ 			e.printStackTrace();
  			resp.setResponse_type("UPDATE");
 			resp.setResponse_state("L'opération ne s'est pas correctement déroulée");
  			return resp;

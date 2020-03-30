@@ -38,7 +38,14 @@ public class Response {
 	}
 		
 	public String toString() {
-		return "response_type : " + response_type + '\n' + "response_state : " + response_state + '\n' + "values : "+ values;
+		if (this.response_type.equals("SELECT"))
+			return "server_response : " + response_state + '\n' + "values : "+ values;
+		if ((this.response_type.equals("UPDATE")) || (response_type.equals("INSERT")) || (response_type.equals("DELETE")))
+			return "server_response_state : " + response_state;
+		if (this.response_type.equals("end"))
+			return "server_response_state : " + response_state;
+		else
+			return "server_response : Problème dans la requête";
 	}
 	
 }

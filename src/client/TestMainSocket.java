@@ -97,9 +97,9 @@ public class TestMainSocket {
 				} else if (rep1.equals("4")) {
 					System.out.println("Fine, you chose DELETE, please give us the following information : ");
 					
-					System.out.println("Last name user to remove : "); String nomD = enter4_1.nextLine();
+					System.out.print("Last name user to remove : "); String nomD = enter4_1.nextLine();
 					
-					System.out.println("First name user to remove : "); String prenomD = enter4_2.nextLine();
+					System.out.print("First name user to remove : "); String prenomD = enter4_2.nextLine();
 					
 					req.setOperation_type("delete");
 					req.setTarget("users");

@@ -2,15 +2,23 @@ package client;
 
 import java.io.IOException;
 import java.util.Scanner;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import common.Request;
 
 public class TestMainSocket {
+	 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		
-		try {
+		Logger LOGGER = Logger.getLogger(TestMainSocket.class.getName());
 		
+		try {
+			
+			System.out.println("\n");
+			LOGGER.log(Level.INFO, "*** Début Programme client ***");
+			System.out.println("\n");
+			
 			ClientCommunication client = new ClientCommunication();
 			client.startConnection("172.31.249.205", 8888);
 			Request req = new Request();
@@ -129,5 +137,7 @@ public class TestMainSocket {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
+		System.out.println("\n\n");
+		LOGGER.log(Level.INFO, "*** Fin Programme client ***");
 	}
 }

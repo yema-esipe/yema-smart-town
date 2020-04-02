@@ -49,6 +49,7 @@ public class ServerCommunication {
 		private AtomicBoolean running = new AtomicBoolean(false);
 
 		private ConvertJSON converter;
+		@SuppressWarnings("unused")
 		private Request req;
 
 		public ThreadClient(Socket socket) {
@@ -68,6 +69,7 @@ public class ServerCommunication {
  * After, when we will have several DAO, we will use factory method 
  * run sends the response to the client, it uses converter object to do the conversion between json-request and json-response
  */
+		@SuppressWarnings("static-access")
 		public void run()  {
 			running.set(true);
 			while (running.get()) {

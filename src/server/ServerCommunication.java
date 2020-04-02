@@ -7,10 +7,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import common.ConvertJSON;
 import common.Request;
 import common.Response;
-
+/**
+ * ServerCommunication implements server socket connection with clients
+ * it can have multiple client connection thanks to multi-threading 
+ * */
 public class ServerCommunication {
 	private ServerSocket serverSocket;
-
+	
+/**
+ * start establish the connection with clients
+ * The server is pending a new client with a thread
+ */
 	public void start(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 
@@ -24,15 +31,21 @@ public class ServerCommunication {
 		}
 	}
 
+/**
+ * stop close the server socket 
+ */
 	public void stop() throws IOException {
 		serverSocket.close();
 	}
-
+	
+/**
+ * this static class ThreadClient allow to the server to treat several request client
+ * to each client connection, a thread is starting
+ */
 	private static class ThreadClient extends Thread {
 		private Socket clientSocket;
 		private PrintWriter out;
 		private BufferedReader in;
-		//ajout
 		private AtomicBoolean running = new AtomicBoolean(false);
 
 		private ConvertJSON converter;
@@ -42,10 +55,19 @@ public class ServerCommunication {
 			this.clientSocket = socket;
 		} 
 		
+/**
+ * close properly the thread when run is finish
+ */
 		public void interrupt() {
 			running.set(false);
 		}
-		
+
+/**
+ * run establish the client request treatment 
+ * Here we just have one DAO (user), all the treatments are on the run
+ * After, when we will have several DAO, we will use factory method 
+ * run sends the response to the client, it uses converter object to do the conversion between json-request and json-response
+ */
 		public void run()  {
 			running.set(true);
 			while (running.get()) {
@@ -57,7 +79,7 @@ public class ServerCommunication {
 				req = new Request();
 				String jsonRequest;
 
-				while ((jsonRequest = in.readLine()) != null) { //est différent de 'fin'
+				while ((jsonRequest = in.readLine()) != null) {
 					Request req = converter.JsontoRequest(jsonRequest);
 					Response resp;
 					String jsonResponse;
@@ -115,7 +137,7 @@ public class ServerCommunication {
 				System.out.println("Thread was interrupted");
 				
 			} catch (IOException e) {}	
-			} //fin du while 
+			} //end while 
 			running.set(true);
 			
 		}

@@ -4,7 +4,14 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+ * ConvertJSON is common to server and client
+ * it allows to do the four conversion that we need :
+ *  - request-jsonString (1 -> client side) 
+ *  - jsonString-request (2 -> server side) 
+ *  - response-jsonString (3 -> server side) 
+ *  - jsonString-response (4 -> client side) 
+ */
 public class ConvertJSON {
 	private ObjectMapper mapper = new ObjectMapper();
 	

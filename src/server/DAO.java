@@ -3,9 +3,12 @@ package server;
 import common.Response;
 import connection.DataSource;
 
-/* Cette classe va  faire le lien entre la couche d'accès aux données 
- * et la couche métier de notre application
- * */ 
+/**
+ *  This generic class make the link between the data access layer and the business layer of our application
+ *  
+ *  Each method return a Response object 
+ *  @param request is client request transfers thanks to request object 
+ */ 
 
 public abstract class DAO<T> {
 	
@@ -18,34 +21,22 @@ public abstract class DAO<T> {
       }
        
       /**
-      * Méthode de création
-      * @param obj
-      * @return boolean 
-      */
+      * insert -> return Response object with the result of the request (problems or not)
+      */	
       public abstract Response insert(String request);
-     
- 
 
       /**
-      * Méthode pour effacer
-      * @param obj
-      * @return boolean 
+      * delete -> return Response object with the result of the request (problems or not)
       */
       public abstract Response delete(String request);
 
- 
-
       /**
-      * Méthode de mise à jour
-      * @param obj
-      * @return boolean
+      * update -> return Response object with the result of the request (problems or not)
       */
       public abstract Response update(String request);
 
- 
       /**
-      * Méthode de recherche de toutes les informations
-      * @return T
-     */
+      * select -> return Response object with the result of the request (problems or not)
+      */
       public abstract Response select(String request);
 }

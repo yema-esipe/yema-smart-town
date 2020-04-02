@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import common.Response;
 import common.User;
 
+/**
+ * DAOUser extends DAO class
+ * Each method get connection thanks to the connection pool and return that before to return the request result
+ */
 public class DAOUser extends DAO<User> {
 	public DAOUser() {
 		super();

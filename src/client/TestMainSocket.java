@@ -12,7 +12,7 @@ public class TestMainSocket {
 		try {
 		
 			ClientCommunication client = new ClientCommunication();
-			client.startConnection("127.0.0.1", 50026);
+			client.startConnection("127.0.0.1", 8888);
 			Request req = new Request();
 			
 			Scanner enter = new Scanner(System.in);

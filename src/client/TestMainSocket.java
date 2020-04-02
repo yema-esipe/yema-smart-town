@@ -12,10 +12,11 @@ public class TestMainSocket {
 		try {
 		
 			ClientCommunication client = new ClientCommunication();
-			client.startConnection("127.0.0.1", 8888);
+			client.startConnection("172.31.249.205", 8888);
 			Request req = new Request();
 			
 			Scanner enter = new Scanner(System.in);
+			Scanner enterName = new Scanner(System.in);
 			Scanner enterFin = new Scanner(System.in);
 			
 			Scanner enter2_1 = new Scanner(System.in);
@@ -35,9 +36,10 @@ public class TestMainSocket {
 			System.out.println("********************************************************************************");
 		
 			boolean fin = false;
-			
+			System.out.print("Please, enter your name -> "); String user = enterName.nextLine();
+
 			while (!fin) {
-				System.out.println("What do you want to do ? ");
+				System.out.println(user + ". What do you want to do ? ");
 				System.out.println("Select -> 1");
 				System.out.println("Insert -> 2");
 				System.out.println("Update -> 3");
@@ -51,6 +53,7 @@ public class TestMainSocket {
 					req.setOperation_type("select");
 					req.setTarget("users");
 					req.setRequest("select * from users");
+					req.setClient(user);
 			
 					client.sendMessage(req);
 									
@@ -70,7 +73,8 @@ public class TestMainSocket {
 					req.setOperation_type("insert");
 					req.setTarget("users");
 					req.setRequest("insert into users (Nom, Prenom, Age) values ('" + nom + "', '" + prenom + "', " + age + ")");
-			
+					req.setClient(user);
+
 					client.sendMessage(req);
 					
 				} else if (rep1.equals("3")) {
@@ -86,7 +90,8 @@ public class TestMainSocket {
 					 req.setOperation_type("update");
 					 req.setTarget("users");
 					 req.setRequest("update users set " + col + " = '" + val + "' where " + colRef + " = '" + valRef + "'");
-					 
+    				 req.setClient(user);
+
 					 client.sendMessage(req);
 					 
 				} else if (rep1.equals("4")) {
@@ -99,7 +104,8 @@ public class TestMainSocket {
 					req.setOperation_type("delete");
 					req.setTarget("users");
 					req.setRequest("delete from users where (Nom = '" + nomD + "' AND Prenom = '" + prenomD + "')");
-					
+					req.setClient(user);
+
 					client.sendMessage(req);
 				}
 				
@@ -111,6 +117,8 @@ public class TestMainSocket {
 					req.setOperation_type("end");
 					req.setTarget("");
 					req.setRequest("");
+					req.setClient(user);
+
 					client.sendMessage(req);
 					
 					client.stopConnection();

@@ -29,13 +29,13 @@ public class DAOUser extends DAO<User> {
 			source.closeAllConnection();
 			
 			resp.setResponse_type("INSERT");
-			resp.setResponse_state("L'opération s'est correctement déroulée");
+			resp.setResponse_state("The operation is completed successfully");
 			
 			return resp;
 			
 		} catch (Exception e) {
 			resp.setResponse_type("INSERT");
-			resp.setResponse_state("L'opération ne s'est pas correctement déroulée");
+			resp.setResponse_state("ERROR - the operation isn't completed successfully");
 			return resp;
 		}
 		 
@@ -54,14 +54,14 @@ public class DAOUser extends DAO<User> {
  			source.closeAllConnection();
  		
  			resp.setResponse_type("DELETE");
-			resp.setResponse_state("L'opération s'est correctement déroulée");
+			resp.setResponse_state("The operation is completed successfully");
 			
  			return resp;
  			
  		} catch (Exception e) {
  			e.printStackTrace();
  			resp.setResponse_type("DELETE");
-			resp.setResponse_state("L'opération ne s'est pas correctement déroulée");
+			resp.setResponse_state("ERROR - the operation isn't completed successfully");
  			return resp;
  		}
  		 
@@ -80,14 +80,14 @@ public class DAOUser extends DAO<User> {
  			source.closeAllConnection();
  			
  			resp.setResponse_type("UPDATE");
-			resp.setResponse_state("L'opération s'est correctement déroulée");
+			resp.setResponse_state("The operation is completed successfully");
 			
  			return resp;
  			
  		} catch (Exception e) {
  			e.printStackTrace();
  			resp.setResponse_type("UPDATE");
-			resp.setResponse_state("L'opération ne s'est pas correctement déroulée");
+			resp.setResponse_state("ERROR - the operation isn't completed successfully");
  			return resp;
  		}
  		 
@@ -112,7 +112,7 @@ public class DAOUser extends DAO<User> {
   			source.closeAllConnection();
   		
   			resp.setResponse_type("SELECT");
-			resp.setResponse_state("L'opération s'est correctement déroulée");
+			resp.setResponse_state("The operation is completed successfully");
 			resp.setValues(list); 
 			
   			return resp;
@@ -120,7 +120,7 @@ public class DAOUser extends DAO<User> {
   		} catch (Exception e) {
   			e.printStackTrace();
   			resp.setResponse_type("SELECT");
-			resp.setResponse_state("L'opération ne s'est pas correctement déroulée");
+			resp.setResponse_state("ERROR - the operation isn't completed successfully");
   			return resp;
   		}
   		 

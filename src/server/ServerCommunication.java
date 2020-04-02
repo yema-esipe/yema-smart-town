@@ -83,13 +83,15 @@ public class ServerCommunication {
 					Request req = converter.JsontoRequest(jsonRequest);
 					Response resp;
 					String jsonResponse;
-
+					System.out.println("Traitement de " + req.getClient() + "for a " + req.getOperation_type() + " request");
+					
 					if (req.getOperation_type().equals("end")) {
 						resp = new Response();
 						resp.setResponse_type("end");
-						resp.setResponse_state("La communication est terminée");
+						resp.setResponse_state("Bye " + req.getClient());
 						
 						jsonResponse = converter.ResponseToJson(resp);
+						System.out.println("End of " + req.getClient() + " communication");
 						out.println(jsonResponse);
 						break;
 					}

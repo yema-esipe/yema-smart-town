@@ -12,7 +12,7 @@ public class SocketTest {
 		
 		try {
 			System.out.println("\n");
-			LOGGER.log(Level.INFO, "*** Fin Programme Serveur ***");
+			LOGGER.log(Level.INFO, "*** Début Programme Serveur ***");
 			System.out.println("\n");
 			
 			ServerCommunication server = new ServerCommunication();

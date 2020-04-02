@@ -17,7 +17,6 @@ public class JDBCConnectionPool {
 			 
 			 Class.forName(driver);
 
-			//open ten connections			 			 
 			 for (int i = 0; i < 6; i++) {  
 				 myConnection = DriverManager.getConnection(file.getProperty("url"), file.getProperty("id"), file.getProperty("password"));
 				 connections.add(myConnection);
@@ -30,8 +29,10 @@ public class JDBCConnectionPool {
 		 }
 	}
 	
-	//this method gives connections to clients whose need it, if there isn't any connection available, they have to wait
-	
+	/**
+	 * giveConnection method gives connections to clients whose need it
+	 * if there isn't any connection available, they have to wait
+	 */
 	public synchronized Connection giveConnection () {
 
 		while (connections.isEmpty()) {
@@ -42,13 +43,17 @@ public class JDBCConnectionPool {
 		return tempConnection;
 	}
 	
-	//this method allows to return the connection used by a client, thanks to that, the connection is available again
-	
+	/**
+	 * returnConnection method allows to return the connection used by a client
+	 * thanks to that, the connection is available again
+	*/
 	public synchronized void returnConnection (Connection c) {
 		connections.add(c);
 	}  
 	
-	
+	/**
+	 * closeAllConnection method allows to close all the connection used by different clients
+	*/
 	public synchronized void closeAllConnections() {
 		try {
 			for(Connection c : connections) {

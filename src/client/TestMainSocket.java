@@ -37,7 +37,7 @@ public class TestMainSocket {
 			boolean fin = false;
 			
 			while (!fin) {
-				System.out.println("Que souhaitez-vous faire ? ");
+				System.out.println("What do you want to do ? ");
 				System.out.println("Select -> 1");
 				System.out.println("Insert -> 2");
 				System.out.println("Update -> 3");
@@ -46,7 +46,7 @@ public class TestMainSocket {
 				String rep1 = enter.nextLine();
 			
 				if (rep1.equals("1")) {
-					System.out.println("Très bien, vous avez choisi SELECT, voici la table Users");
+					System.out.println("Fine, you chose SELECT, this is Users query");
 										
 					req.setOperation_type("select");
 					req.setTarget("users");
@@ -55,13 +55,13 @@ public class TestMainSocket {
 					client.sendMessage(req);
 									
 				} else if (rep1.equals("2")) {
-					System.out.println("Très bien, vous avez choisi INSERT, veuillez nous préciser les informations suivantes :");
+					System.out.println("Fine, you chose INSERT, please give us the following information :");
 					String nom; String prenom; int age;
 					
-					System.out.println("Nom : ");
+					System.out.println("Last name : ");
 					nom = enter2_1.nextLine();
 					 
-					System.out.println("Prenom : ");
+					System.out.println("First name : ");
 					prenom = enter2_2.nextLine();
 					
 					System.out.println("Age : ");
@@ -74,15 +74,15 @@ public class TestMainSocket {
 					client.sendMessage(req);
 					
 				} else if (rep1.equals("3")) {
-					System.out.println("Très bien, vous avez choisi UPDATE, veuillez entrez les informations suivantes : ");
+					System.out.println("Fine, you chose UPDATE, please give us the following information : ");
 					
-					System.out.print("Colonne à modifier : "); String col = enter3_1.nextLine();
+					System.out.print("Field to change : "); String col = enter3_1.nextLine();
 					
-					System.out.print("Nouvelle valeur : "); String val = enter3_2.nextLine();
+					System.out.print("New value : "); String val = enter3_2.nextLine();
 					
-					System.out.print("Colonne de référence : "); String colRef = enter3_3.nextLine();
+					System.out.print("Reference field : "); String colRef = enter3_3.nextLine();
 					
-					System.out.print("Valeur actuelle : "); String valRef = enter3_4.nextLine();
+					System.out.print("Current value : "); String valRef = enter3_4.nextLine();
 					 req.setOperation_type("update");
 					 req.setTarget("users");
 					 req.setRequest("update users set " + col + " = '" + val + "' where " + colRef + " = '" + valRef + "'");
@@ -90,11 +90,11 @@ public class TestMainSocket {
 					 client.sendMessage(req);
 					 
 				} else if (rep1.equals("4")) {
-					System.out.println("Très bien, vous avez choisi DELETE, veuillez entrez les informations suivantes : ");
+					System.out.println("Fine, you chose DELETE, please give us the following information : ");
 					
-					System.out.println("Nom du user à retirer : "); String nomD = enter4_1.nextLine();
+					System.out.println("Last name user to remove : "); String nomD = enter4_1.nextLine();
 					
-					System.out.println("Prenom du user à retier : "); String prenomD = enter4_2.nextLine();
+					System.out.println("First name user to remove : "); String prenomD = enter4_2.nextLine();
 					
 					req.setOperation_type("delete");
 					req.setTarget("users");
@@ -103,7 +103,7 @@ public class TestMainSocket {
 					client.sendMessage(req);
 				}
 				
-				System.out.println("Avez-vous fini ? Y/N");
+				System.out.println("Are you finished ? Y/N");
 				String r = enterFin.nextLine();
 				
 				if (r.equals("Y")) {

@@ -17,7 +17,6 @@ public class ConvertJSON {
 	
 	public ConvertJSON() {}
 	
-	
 	public String RequestToJson(Request req) {
 		String jsonString = "";
 		try {

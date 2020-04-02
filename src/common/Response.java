@@ -1,11 +1,17 @@
 package common;
-
+/**
+ * Response class allows to keep useful information whose be sent by the server
+ * - response_type : to know if the response is about select/update/delete/insert client request
+ * - response_state : to know if the request is correctly performed
+ * - values : for select request, it is the values of the database contained in a ArrayList
+ * It concerned two sides (server response and client reception) --> common
+ */
 import java.util.ArrayList;
 
 public class Response {
-	private String response_type; 			//type de la requete initial : update/insert/delete/select
-	private String response_state;			//reponse d'un update/insert/delete/select 
-	private ArrayList<String> values;		//reponse d'un select
+	private String response_type;
+	private String response_state;			
+	private ArrayList<String> values;		
 	
 	public Response() {
 		values = new ArrayList<String>();

@@ -1,5 +1,11 @@
 package common;
-
+/**
+ * Request class allows to keep useful information whose be treated by the server
+ * - operation_type -> to know if the client wants a select/insert/delete or update request
+ * - target -> to know which DAO is concerned
+ * - request -> in SQL, based on client request
+ * It concerned two sides (client request and server treatment about it) --> common
+ */
 public class Request {
 	private String operation_type;
 	private String target;

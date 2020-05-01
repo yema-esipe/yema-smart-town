@@ -16,11 +16,11 @@ public class TestMainSocket {
 		try {
 			
 			System.out.println("\n");
-			LOGGER.log(Level.INFO, "*** Début Programme client ***");
+			LOGGER.log(Level.INFO, "*** Client Program Beginning ***");
 			System.out.println("\n");
 			
 			ClientCommunication client = new ClientCommunication();
-			client.startConnection("172.31.249.205", 8888);
+			client.startConnection("127.0.0.1", 4567);
 			Request req = new Request();
 			
 			Scanner enter = new Scanner(System.in);
@@ -138,6 +138,6 @@ public class TestMainSocket {
 			e.printStackTrace();
 		}	
 		System.out.println("\n\n");
-		LOGGER.log(Level.INFO, "*** Fin Programme client ***");
+		LOGGER.log(Level.INFO, "*** End client program ***");
 	}
 }

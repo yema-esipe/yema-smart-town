@@ -47,7 +47,7 @@ public class ServerCommunication {
 		private PrintWriter out;
 		private BufferedReader in;
 		private AtomicBoolean running = new AtomicBoolean(false);
-
+		private Factory factory = new Factory();
 		private ConvertJSON converter;
 		@SuppressWarnings("unused")
 		private Request req;
@@ -98,6 +98,42 @@ public class ServerCommunication {
 						break;
 					}
 					
+					
+						if (req.getOperation_type().equals("insert")) {					
+							resp = factory.getData(req.getTarget()).insert(req.getRequest());
+
+							jsonResponse = converter.ResponseToJson(resp);
+							out.println(jsonResponse);
+						}
+
+						if (req.getOperation_type().equals("delete")) {
+							DAOUser u = new DAOUser();
+							resp = u.delete(req.getRequest());
+
+							jsonResponse = converter.ResponseToJson(resp);
+							out.println(jsonResponse);
+						}
+
+						if (req.getOperation_type().equals("update")) {
+							DAOUser u = new DAOUser();
+							resp = u.update(req.getRequest());
+
+							jsonResponse = converter.ResponseToJson(resp);
+							out.println(jsonResponse);
+						}
+
+						if (req.getOperation_type().equals("select")) {
+							DAOUser u = new DAOUser();
+							resp = u.select(req.getRequest());
+
+							jsonResponse = converter.ResponseToJson(resp);
+							out.println(jsonResponse);
+						}
+					
+					
+					
+					
+					/*
 					if (req.getTarget().equals("users")) {
 						if (req.getOperation_type().equals("insert")) {
 							DAOUser u = new DAOUser();
@@ -131,6 +167,7 @@ public class ServerCommunication {
 							out.println(jsonResponse);
 						}
 					}
+					*/
 				}
 
 				in.close();

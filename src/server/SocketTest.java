@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import connection.ServeConfigFileReader;
-
+import connection.PropertiesFileReader;
 
 public class SocketTest {
 	public static void main (String[] args) {
 		
 		Logger LOGGER = Logger.getLogger(SocketTest.class.getName());
-		ServeConfigFileReader serveconfig = new ServeConfigFileReader();
-		serveconfig.init();
 		
-		final int SERVER_PORT = Integer.parseInt(serveconfig.getProperty("serverport"));
+		PropertiesFileReader file = new PropertiesFileReader();
+		file.init("ressources/serveconfig.properties");
+		
+		final int SERVER_PORT = Integer.parseInt(file.getProperty("serverport"));
 		
 		try {
 			System.out.println("\n");

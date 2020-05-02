@@ -10,8 +10,8 @@ public class PropertiesFileReader {
 		applicationProperties = new Properties();
 	}
 	
-	public void init() {
-		  try (InputStream input = getClass().getClassLoader().getResourceAsStream("ressources/application.properties")) {
+	public void init(String path) {
+		  try (InputStream input = getClass().getClassLoader().getResourceAsStream(path)) {
 
 	            // load a properties file
 			  applicationProperties.load(input);

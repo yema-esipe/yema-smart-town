@@ -12,7 +12,7 @@ public class JDBCConnectionPool {
 	
 	public JDBCConnectionPool() {
 		 try {
-			 file.init();
+			 file.init("ressources/application.properties");
 			 String driver = file.getProperty("driver");
 			 
 			 Class.forName(driver);

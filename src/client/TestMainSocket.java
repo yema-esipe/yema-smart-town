@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import common.Request;
-import connection.ServeConfigFileReader;
+import connection.PropertiesFileReader;
 
 public class TestMainSocket {
 	 
@@ -13,8 +13,8 @@ public class TestMainSocket {
 	public static void main(String[] args) {
 		
 		Logger LOGGER = Logger.getLogger(TestMainSocket.class.getName());
-		ServeConfigFileReader serveconfig = new ServeConfigFileReader();
-		serveconfig.init();
+		PropertiesFileReader serveconfig = new PropertiesFileReader();
+		serveconfig.init("ressources/serveconfig.properties");
 		
 		final int SERVER_PORT = Integer.parseInt(serveconfig.getProperty("serverport"));
 		final String SERVER_ADDRESS = serveconfig.getProperty("serveraddress");

@@ -10,12 +10,11 @@ import java.util.ArrayList;
 
 public class Response {
 	private String response_type;
-	private String response_state;			
-	private ArrayList<String> values;		
+	private boolean response_state;			
+	private ArrayList<Object> values;		
 	
 	public Response() {
-		values = new ArrayList<String>();
-		response_state = "";
+		values = new ArrayList<Object>();
 		response_type = "";
 	}
 
@@ -27,19 +26,19 @@ public class Response {
 		this.response_type = response_type;
 	}
 
-	public String getResponse_state() {
+	public boolean getResponse_state() {
 		return response_state;
 	}
 
-	public void setResponse_state(String response_state) {
+	public void setResponse_state(boolean response_state) {
 		this.response_state = response_state;
 	}
 
-	public ArrayList<String> getValues() {
+	public ArrayList<Object> getValues() {
 		return values;
 	}
 
-	public void setValues(ArrayList<String> values) {
+	public void setValues(ArrayList<Object> values) {
 		this.values = values;
 	}
 		

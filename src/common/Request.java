@@ -10,14 +10,13 @@ package common;
 public class Request {
 	private String operation_type;
 	private String target;
-	private String request;
-	private String client;
+	private String source;
+	private Object obj;
 	
 	public Request () {
 		operation_type = "";
 		target = "";
-		request = "";
-		client = "";
+		source = "";
 	}
 
 	public String getOperation_type() {
@@ -36,20 +35,20 @@ public class Request {
 		this.target = target;
 	}
 
-	public String getRequest() {
-		return request;
+	public String getSource() {
+		return source;
 	}
 
-	public void setRequest(String request) {
-		this.request = request;
+	public void setSource(String client) {
+		this.source = client;
 	}
 
-	public String getClient() {
-		return client;
+	public Object getObj() {
+		return obj;
 	}
 
-	public void setClient(String client) {
-		this.client = client;
+	public void setObj(Object obj) {
+		this.obj = obj;
 	}
 	
 }

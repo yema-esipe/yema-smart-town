@@ -1,7 +1,8 @@
 package server;
 
-import common.Response;
-import connection.DataSource;
+import java.sql.Connection;
+import java.util.ArrayList;
+
 
 /**
  *  This generic class make the link between the data access layer and the business layer of our application
@@ -12,31 +13,26 @@ import connection.DataSource;
 
 public abstract class DAO<T> {
 	
-	protected DataSource source = null;
-	protected Response resp = new Response();
-
-      public DAO(){
-        @SuppressWarnings("unused")
-		DataSource source = new DataSource();
-      }
+      public DAO() {}
        
       /**
-      * insert -> return Response object with the result of the request (problems or not)
-      */	
-      public abstract Response insert(String request);
+       * insert -> return Response object with the result of the request (problems or not)
+       */	
+       public abstract boolean insert(T obj, Connection connection);
 
-      /**
-      * delete -> return Response object with the result of the request (problems or not)
-      */
-      public abstract Response delete(String request);
+       /**
+       * delete -> return Response object with the result of the request (problems or not)
+       */
+       public abstract boolean delete(T obj, Connection connection);
 
-      /**
-      * update -> return Response object with the result of the request (problems or not)
-      */
-      public abstract Response update(String request);
+       /**
+       * update -> return Response object with the result of the request (problems or not)
+       */
+       public abstract boolean update(T obj, Connection connection);
 
-      /**
-      * select -> return Response object with the result of the request (problems or not)
-      */
-      public abstract Response select(String request);
+       /**
+       * select -> return Response object with the result of the request (problems or not)
+       */
+       public abstract ArrayList<T> select(Connection connection);
+       
 }

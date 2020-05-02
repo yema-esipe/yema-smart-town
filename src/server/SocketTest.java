@@ -12,7 +12,7 @@ public class SocketTest {
 		Logger LOGGER = Logger.getLogger(SocketTest.class.getName());
 		
 		PropertiesFileReader file = new PropertiesFileReader();
-		file.init("ressources/serveconfig.properties");
+		file.initServer();
 		
 		final int SERVER_PORT = Integer.parseInt(file.getProperty("serverport"));
 		

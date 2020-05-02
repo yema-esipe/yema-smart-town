@@ -10,8 +10,20 @@ public class PropertiesFileReader {
 		applicationProperties = new Properties();
 	}
 	
-	public void init(String path) {
-		  try (InputStream input = getClass().getClassLoader().getResourceAsStream(path)) {
+	public void initJDBC() {
+		  try (InputStream input = getClass().getClassLoader().getResourceAsStream("ressources/application.properties")) {
+
+	            // load a properties file
+			  applicationProperties.load(input);
+			//  System.out.println(getProperty("url"));
+	           
+	        } catch (IOException ex) {
+	            ex.printStackTrace();
+	        }
+	}
+	
+	public void initServer() {
+		  try (InputStream input = getClass().getClassLoader().getResourceAsStream("ressources/serveconfig.properties")) {
 
 	            // load a properties file
 			  applicationProperties.load(input);

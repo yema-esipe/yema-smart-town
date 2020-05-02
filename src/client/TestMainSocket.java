@@ -14,7 +14,7 @@ public class TestMainSocket {
 		
 		Logger LOGGER = Logger.getLogger(TestMainSocket.class.getName());
 		PropertiesFileReader serveconfig = new PropertiesFileReader();
-		serveconfig.init("ressources/serveconfig.properties");
+		serveconfig.initServer();
 		
 		final int SERVER_PORT = Integer.parseInt(serveconfig.getProperty("serverport"));
 		final String SERVER_ADDRESS = serveconfig.getProperty("serveraddress");

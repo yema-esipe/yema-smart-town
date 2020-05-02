@@ -1,6 +1,7 @@
 package server;
 
 public class Factory {
+	@SuppressWarnings("rawtypes")
 	public static DAO getData(String target){
 		if(target.equals("users"))
 			return new DAOUser();

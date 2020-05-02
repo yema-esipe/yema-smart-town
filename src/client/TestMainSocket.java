@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import common.Request;
+import connection.ServeConfigFileReader;
 
 public class TestMainSocket {
 	 
@@ -12,6 +13,11 @@ public class TestMainSocket {
 	public static void main(String[] args) {
 		
 		Logger LOGGER = Logger.getLogger(TestMainSocket.class.getName());
+		ServeConfigFileReader serveconfig = new ServeConfigFileReader();
+		serveconfig.init();
+		
+		final int SERVER_PORT = Integer.parseInt(serveconfig.getProperty("serverport"));
+		final String SERVER_ADDRESS = serveconfig.getProperty("serveraddress");
 		
 		try {
 			
@@ -20,7 +26,7 @@ public class TestMainSocket {
 			System.out.println("\n");
 			
 			ClientCommunication client = new ClientCommunication();
-			client.startConnection("127.0.0.1", 4567);
+			client.startConnection(SERVER_ADDRESS, SERVER_PORT);
 			Request req = new Request();
 			
 			Scanner enter = new Scanner(System.in);

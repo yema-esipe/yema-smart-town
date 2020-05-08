@@ -14,7 +14,7 @@ public class SocketTest {
 		PropertiesFileReader file = new PropertiesFileReader();
 		file.initServer();
 		
-		final int SERVER_PORT = Integer.parseInt(file.getProperty("serverport"));
+		final int SERVER_PORT = Integer.parseInt(file.getProperty("serverportAQS"));
 		
 		try {
 			System.out.println("\n");

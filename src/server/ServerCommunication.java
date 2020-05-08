@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import common.ConvertJSON;
@@ -76,7 +77,7 @@ public class ServerCommunication {
 		 * After, when we will have several DAO, we will use factory method 
 		 * run sends the response to the client, it uses converter object to do the conversion between json-request and json-response
 		 */
-		@SuppressWarnings("static-access")
+		@SuppressWarnings({ "static-access", "unchecked" })
 		public void run()  {
 			running.set(true);
 			while (running.get()) {
@@ -89,10 +90,10 @@ public class ServerCommunication {
 						Request req = converter.JsontoRequest(jsonRequest);
 						Response resp = new Response();
 						String jsonResponse;
-						System.out.println("Treatment of " + req.getSource() + " for a " + req.getOperation_type() + " request");
+						System.out.println("Treatment of " + req.getSource() + " for a " + req.getOperation_type() + " request \n request : " + jsonRequest);
 
 						if (req.getOperation_type().equals("end")) {
-							resp.setResponse_type("end");
+							resp.setResponse_type("BYE " + req.getSource());
 							resp.setResponse_state(true);
 
 							jsonResponse = converter.ResponseToJson(resp);
@@ -101,44 +102,64 @@ public class ServerCommunication {
 							break;
 						}
 
-						//SEULEMENT LE INSERT est fait avec la méthode Factory !
-						//Pour le/les Select on ajoute la liste d'objet dans l'objet Response
-
 						if (req.getOperation_type().equals("insert")) {					
 							boolean result = factory.getData(req.getTarget()).insert(req.getObj(), connection);
-							
 							resp.setResponse_type("insert");
 							resp.setResponse_state(result);
-							
-							jsonResponse = converter.ResponseToJson(resp);
-							out.println(jsonResponse);
-						}
-						/*
+							jsonResponse = converter.ResponseToJson(resp); System.out.println(jsonResponse);
 
-						if (req.getOperation_type().equals("delete")) {
-							DAOUser u = new DAOUser();
-							resp = u.delete(req.getRequest());
-
-							jsonResponse = converter.ResponseToJson(resp);
 							out.println(jsonResponse);
 						}
 
-						if (req.getOperation_type().equals("update")) {
-							DAOUser u = new DAOUser();
-							resp = u.update(req.getRequest());
+						if (req.getOperation_type().equals("delete")) {					
+							boolean result = factory.getData(req.getTarget()).delete(req.getObj(), connection);
+							resp.setResponse_type("delete");
+							resp.setResponse_state(result);
 
 							jsonResponse = converter.ResponseToJson(resp);
 							out.println(jsonResponse);
 						}
 
-						if (req.getOperation_type().equals("select")) {
-							DAOUser u = new DAOUser();
-							resp = u.select(req.getRequest());
+						if (req.getOperation_type().equals("update")) {					
+							boolean result = factory.getData(req.getTarget()).update(req.getObj(), connection);
+							resp.setResponse_type("update");
+							resp.setResponse_state(result);
 
 							jsonResponse = converter.ResponseToJson(resp);
 							out.println(jsonResponse);
 						}
-						*/
+
+						if (req.getOperation_type().equals("select")) {					
+							ArrayList<String> result = factory.getData(req.getTarget()).select(connection);
+							resp.setResponse_type("select");
+							resp.setResponse_state(true);
+							resp.setValues(result);
+
+							jsonResponse = converter.ResponseToJson(resp);  System.out.println(jsonResponse);
+							out.println(jsonResponse);
+						}
+
+						if (req.getOperation_type().equals("selectAVG")) {	//Possible de mettre dans le DAO si requete similaire
+							DataAirDAO dao = new DataAirDAO();
+							ArrayList<String> result = dao.selectAVG(req.getObj(), connection);
+							resp.setResponse_type("selectAVG");
+							resp.setResponse_state(true);
+							resp.setValues(result);
+
+							jsonResponse = converter.ResponseToJson(resp); System.out.println(jsonResponse);
+							out.println(jsonResponse);
+						}
+
+						if (req.getOperation_type().equals("selectID")) { //Possible de mettre dans le DAO si requete similaire
+							AlertDAO dao = new AlertDAO();
+							ArrayList<String> result = dao.selectID(req.getObj(), connection); 
+							resp.setResponse_type("selectID");
+							resp.setResponse_state(true);
+							resp.setValues(result);
+
+							jsonResponse = converter.ResponseToJson(resp); System.out.println(jsonResponse);
+							out.println(jsonResponse);
+						}
 
 					}
 
@@ -150,6 +171,7 @@ public class ServerCommunication {
 
 					this.currentThread().interrupt();
 					System.out.println("Thread was interrupted");
+					System.out.println("\n");
 
 				} catch (IOException e) {}	
 			} //end while 
@@ -158,6 +180,3 @@ public class ServerCommunication {
 		}
 	}
 }
-
-
-

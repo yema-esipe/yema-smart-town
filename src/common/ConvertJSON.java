@@ -58,4 +58,84 @@ public class ConvertJSON {
 		return resp;
 	}
 	
+
+	public String DeviceAirToJson(DeviceAir device) {
+		String jsonString = "";
+		try {
+			jsonString = mapper.writeValueAsString(device);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonString;
+	}
+	
+	public DeviceAir JsontoDeviceAir(String jsonString) {
+		DeviceAir device = new DeviceAir();
+		try {
+			device = mapper.readValue(jsonString, DeviceAir.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return device;
+	}
+	
+	public String AlertToJson(Alert alert) {
+		String jsonString = "";
+		try {
+			jsonString = mapper.writeValueAsString(alert);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonString;
+	}
+	
+	public Alert JsontoAlert(String jsonString) {
+		Alert alert = new Alert();
+		try {
+			alert = mapper.readValue(jsonString, Alert.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return alert;
+	}
+	
+	public String DataToJson(DataAir data) {
+		String jsonString = "";
+		try {
+			jsonString = mapper.writeValueAsString(data);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonString;
+	}
+	
+	public DataAir JsontoData(String jsonString) {
+		DataAir data = new DataAir();
+		try {
+			data = mapper.readValue(jsonString, DataAir.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+	
+	public String ConfigToJson(DeviceConfigAir config) {
+		String jsonString = "";
+		try {
+			jsonString = mapper.writeValueAsString(config);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonString;
+	}
+	
+	public DeviceConfigAir JsontoConfig(String jsonString) {
+		DeviceConfigAir config = new DeviceConfigAir();
+		try {
+			config = mapper.readValue(jsonString, DeviceConfigAir.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return config;
+	}
 }

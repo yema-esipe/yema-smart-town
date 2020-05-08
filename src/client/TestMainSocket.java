@@ -52,7 +52,7 @@ public class TestMainSocket {
 			boolean fin = false;
 			System.out.print("Please, enter your name -> "); String user = enterName.nextLine();
 
-			while (!fin) {
+			/*while (!fin) {
 				System.out.println(user + ". What do you want to do ? ");
 				System.out.println("Select -> 1");
 				System.out.println("Insert -> 2");
@@ -138,7 +138,7 @@ public class TestMainSocket {
 					client.stopConnection();
 
 				}
-			}	
+			}	*/
 						
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -11,11 +11,11 @@ import java.util.ArrayList;
 public class Response {
 	private String response_type;
 	private boolean response_state;			
-	private ArrayList<Object> values;		
+	private ArrayList<String> values;
 	
 	public Response() {
-		values = new ArrayList<Object>();
 		response_type = "";
+		values = null;
 	}
 
 	public String getResponse_type() {
@@ -34,18 +34,19 @@ public class Response {
 		this.response_state = response_state;
 	}
 
-	public ArrayList<Object> getValues() {
+	public ArrayList<String> getValues() {
 		return values;
 	}
 
-	public void setValues(ArrayList<Object> values) {
+	public void setValues(ArrayList<String> values) {
 		this.values = values;
 	}
 		
+
 	public String toString() {
-		if (this.response_type.equals("SELECT"))
-			return "server_response : " + response_state + '\n' + "values : "+ values;
-		if ((this.response_type.equals("UPDATE")) || (response_type.equals("INSERT")) || (response_type.equals("DELETE")))
+		if (this.response_type.equals("select"))
+			return "server_response : " + response_state + '\n' + "values : "+ values.toString();
+		if ((this.response_type.equals("update")) || (response_type.equals("insert")) || (response_type.equals("delete")))
 			return "server_response_state : " + response_state;
 		if (this.response_type.equals("end"))
 			return "server_response_state : " + response_state;

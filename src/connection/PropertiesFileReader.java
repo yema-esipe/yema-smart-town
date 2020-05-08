@@ -34,6 +34,18 @@ public class PropertiesFileReader {
 	        }
 	}
 	
+	public void initSensor() {
+		  try (InputStream input = getClass().getClassLoader().getResourceAsStream("ressources/aqs-config.properties")) {
+
+	            // load a properties file
+			  applicationProperties.load(input);
+			//  System.out.println(getProperty("url"));
+	           
+	        } catch (IOException ex) {
+	            ex.printStackTrace();
+	        }
+	}
+	
 	public String getProperty(String key) {
 		return applicationProperties.getProperty(key);
 	}

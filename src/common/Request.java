@@ -11,12 +11,11 @@ public class Request {
 	private String operation_type;
 	private String target;
 	private String source;
-	private Object obj;
+	private String obj;
 	
 	public Request () {
 		operation_type = "";
 		target = "";
-		source = "";
 	}
 
 	public String getOperation_type() {
@@ -35,19 +34,20 @@ public class Request {
 		this.target = target;
 	}
 
+
 	public String getSource() {
 		return source;
 	}
 
-	public void setSource(String client) {
-		this.source = client;
+	public void setSource(String source) {
+		this.source = source;
 	}
 
-	public Object getObj() {
+	public String getObj() {
 		return obj;
 	}
 
-	public void setObj(Object obj) {
+	public void setObj(String obj) {
 		this.obj = obj;
 	}
 	

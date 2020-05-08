@@ -16,6 +16,30 @@ public class DAOUser extends DAO<User> {
 	public DAOUser() {
 		super();
 	}
+
+	@Override
+	public boolean insert(String obj, Connection connection) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(String obj, Connection connection) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean update(String obj, Connection connection) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ArrayList<String> select(Connection connection) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/*
 	
@@ -129,27 +153,4 @@ public class DAOUser extends DAO<User> {
      }
      */
 
-	@Override
-	public boolean insert(User obj, Connection connection) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean delete(User obj, Connection connection) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean update(User obj, Connection connection) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ArrayList<User> select(Connection connection) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

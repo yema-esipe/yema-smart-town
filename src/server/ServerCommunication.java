@@ -7,18 +7,24 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import common.ConvertJSON;
-import common.Request;
-import common.Response;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+//import common.ConvertJSON;
+//import common.Request;
+//import common.Response;
 import connection.DataSource;
 
 public class ServerCommunication {
 	private ServerSocket serverSocket;
 	protected static DataSource source;
-
+	
+	public ServerCommunication(){
+		
+	}
 	/**
 	 * start establish the connection with clients
 	 * The server is pending a new client with a thread
@@ -26,19 +32,23 @@ public class ServerCommunication {
 	public void start(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 		source = new DataSource();
+		System.out.println("test2");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException ex) {}
 
 		while (true) {
 			System.out.println("Serveur à l'écoute");
-			new ThreadClient(serverSocket.accept(), source).start();
+			ThreadClient t = new ThreadClient(serverSocket.accept(), source);
+			t.start();
+			
 		}
 	}
 
 	/**
 	 * stop close the server socket 
 	 */
+	@SuppressWarnings("static-access")
 	public void stop() throws IOException {
 		source.closeAllConnection();
 		serverSocket.close();
@@ -54,11 +64,13 @@ public class ServerCommunication {
 		private BufferedReader in;
 		private AtomicBoolean running = new AtomicBoolean(false);
 		private Connection connection;
-		private Factory factory = new Factory();
+		//private Factory factory = new Factory();
 
-		private ConvertJSON converter = new ConvertJSON();
-		private Request req = new Request();
+		//private ConvertJSON converter = new ConvertJSON();
+		//@SuppressWarnings("unused")
+		//private Request req = new Request();
 
+		@SuppressWarnings("static-access")
 		public ThreadClient(Socket socket, DataSource source) {
 			this.clientSocket = socket;
 			connection = source.giveConnection();
@@ -81,18 +93,20 @@ public class ServerCommunication {
 		public void run()  {
 			running.set(true);
 			while (running.get()) {
-				try {	
+				try {
+					ObjectMapper mapper = new ObjectMapper();
 					out = new PrintWriter(clientSocket.getOutputStream(), true);
 					in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-					String jsonRequest;
+					String jsonRequest = "";
+					HashMap<String, String> request = mapper.readValue(jsonRequest, HashMap.class);
 
 					while ((jsonRequest = in.readLine()) != null) {
-						Request req = converter.JsontoRequest(jsonRequest);
-						Response resp = new Response();
+						//Request req = converter.JsontoRequest(jsonRequest);
+						//Response resp = new Response();
 						String jsonResponse;
-						System.out.println("Treatment of " + req.getSource() + " for a " + req.getOperation_type() + " request \n request : " + jsonRequest);
+						//System.out.println("Treatment of " + req.getSource() + " for a " + req.getOperation_type() + " request \n request : " + jsonRequest);
 
-						if (req.getOperation_type().equals("end")) {
+						/*if (req.getOperation_type().equals("end")) {
 							resp.setResponse_type("BYE " + req.getSource());
 							resp.setResponse_state(true);
 
@@ -160,8 +174,84 @@ public class ServerCommunication {
 							jsonResponse = converter.ResponseToJson(resp); System.out.println(jsonResponse);
 							out.println(jsonResponse);
 						}
+						
+						if (req.getOperation_type().equals("selectID")) { //Possible de mettre dans le DAO si requete similaire
+							AlertDAO dao = new AlertDAO();
+							ArrayList<String> result = dao.selectID(req.getObj(), connection); 
+							resp.setResponse_type("selectID");
+							resp.setResponse_state(true);
+							resp.setValues(result);
 
-					}
+							jsonResponse = converter.ResponseToJson(resp); System.out.println(jsonResponse);
+							out.println(jsonResponse);
+						}*/
+						
+						/* pour les requetes de calcul EC*/
+						
+						if (request.get("operation_type").equals("avgdistance")) {
+							PollutionDataDAO dao = new PollutionDataDAO(); 
+							HashMap<String , Float> result = dao.avgdistance(request.get("date_debut"), request.get("date_fin"), connection);
+							HashMap<String , Object> response = new HashMap<String , Object>();
+							response.put("response_type", "avgdistance");
+							response.put("values", result);
+							 
+							jsonResponse = mapper.writeValueAsString(response);
+							System.out.println(jsonResponse);
+							out.println(jsonResponse);
+							
+						}
+						
+						if (request.get("operation_type").equals("countnb")) {
+							PollutionDataDAO dao = new PollutionDataDAO(); 
+							HashMap<String , Integer> result = dao.countnb(request.get("date_debut"), request.get("date_fin"), connection);
+							HashMap<String , Object> response = new HashMap<String , Object>();
+							response.put("response_type", "countnb");
+							response.put("values", result);
+							
+							jsonResponse = mapper.writeValueAsString(response);
+							System.out.println(jsonResponse);
+							out.println(jsonResponse);
+						}
+						
+						if (request.get("operation_type").equals("selectco2")) {
+							TypeOfTravelDAO dao = new TypeOfTravelDAO(); 
+							HashMap<String , Float> result = dao.selectco2(connection);
+							HashMap<String , Object> response = new HashMap<String , Object>();
+							response.put("response_type", "selectco2");
+							response.put("values", result);
+							
+							jsonResponse = mapper.writeValueAsString(response);
+							System.out.println(jsonResponse);
+							out.println(jsonResponse);
+						}
+						
+						if (request.get("operation_type").equals("selectnbpassengeravg")) {
+							TypeOfTravelDAO dao = new TypeOfTravelDAO(); 
+							HashMap<String , Integer> result = dao.selectnbpassengeravg(connection);
+							HashMap<String , Object> response = new HashMap<String , Object>();
+							response.put("response_type", "selectnbpassengeravg");
+							response.put("values", result);
+							
+							jsonResponse = mapper.writeValueAsString(response);
+							System.out.println(jsonResponse);
+							out.println(jsonResponse);
+						}
+						
+						if (request.get("operation_type").equals("selectnbcarmax")) {
+							DeviceConfigNbCarDAO dao = new DeviceConfigNbCarDAO(); 
+							HashMap<String , Integer> result = dao.selectnbcarmax(connection);
+							HashMap<String , Object> response = new HashMap<String , Object>();
+							response.put("response_type", "selectnbcarmax");
+							response.put("values", result);
+							
+							jsonResponse = mapper.writeValueAsString(response);
+							System.out.println(jsonResponse);
+							out.println(jsonResponse);
+						}
+						
+						/*Fin calculEC*/
+
+					} 
 
 					source.returnConnection(connection);
 

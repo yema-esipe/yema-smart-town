@@ -98,11 +98,12 @@ public class ServerCommunication {
 					out = new PrintWriter(clientSocket.getOutputStream(), true);
 					in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 					String jsonRequest = "";
-					HashMap<String, String> request = mapper.readValue(jsonRequest, HashMap.class);
+					
 
 					while ((jsonRequest = in.readLine()) != null) {
 						//Request req = converter.JsontoRequest(jsonRequest);
 						//Response resp = new Response();
+						HashMap<String, String> request = mapper.readValue(jsonRequest, HashMap.class);
 						String jsonResponse;
 						//System.out.println("Treatment of " + req.getSource() + " for a " + req.getOperation_type() + " request \n request : " + jsonRequest);
 
@@ -190,7 +191,7 @@ public class ServerCommunication {
 						
 						if (request.get("operation_type").equals("avgdistance")) {
 							PollutionDataDAO dao = new PollutionDataDAO(); 
-							HashMap<String , Float> result = dao.avgdistance(request.get("date_debut"), request.get("date_fin"), connection);
+							HashMap<String , Double> result = dao.avgdistance(request.get("date_debut"), request.get("date_fin"), connection);
 							HashMap<String , Object> response = new HashMap<String , Object>();
 							response.put("response_type", "avgdistance");
 							response.put("values", result);
@@ -215,7 +216,7 @@ public class ServerCommunication {
 						
 						if (request.get("operation_type").equals("selectco2")) {
 							TypeOfTravelDAO dao = new TypeOfTravelDAO(); 
-							HashMap<String , Float> result = dao.selectco2(connection);
+							HashMap<String , Double> result = dao.selectco2(connection);
 							HashMap<String , Object> response = new HashMap<String , Object>();
 							response.put("response_type", "selectco2");
 							response.put("values", result);
@@ -247,6 +248,16 @@ public class ServerCommunication {
 							jsonResponse = mapper.writeValueAsString(response);
 							System.out.println(jsonResponse);
 							out.println(jsonResponse);
+						}
+						
+						if ((request.get("operation_type")).equals("end")) {
+							
+							HashMap<String , Object> response = new HashMap<String , Object>();
+							response.put("response_type", "end");
+							jsonResponse = mapper.writeValueAsString(response);
+							System.out.println("fin de traitement !");
+							out.println(jsonResponse);
+							break;	
 						}
 						
 						/*Fin calculEC*/

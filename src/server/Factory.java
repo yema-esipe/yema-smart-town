@@ -18,6 +18,14 @@ public class Factory {
 			return new AppliSaveDAO();
 		else if (target.equals("dataairavg"))
 			return new DataAirAVGDAO();
+		else if(target.equals("pollutiondata"))
+			return new PollutionDataDAO();
+		
+		else if(target.equals("typeoftravel"))
+			return new TypeOfTravelDAO();
+		
+		else if(target.equals("deviceconfignbcar"))
+			return new DeviceConfigNbCarDAO();
 		else
 			return null; 
 	}

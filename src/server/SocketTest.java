@@ -14,15 +14,15 @@ public class SocketTest {
 		PropertiesFileReader file = new PropertiesFileReader();
 		file.initServer();
 		
-		final int SERVER_PORT = Integer.parseInt(file.getProperty("serverportAQS"));
+		final int SERVER_PORT = Integer.parseInt(file.getProperty("serverportClient"));
 		
 		try {
 			System.out.println("\n");
-			LOGGER.log(Level.INFO, "*** Server program beginning ***");
+			LOGGER.log(Level.INFO, "*** Server program beginning ***"); 
 			System.out.println("\n");
 			
 			ServerCommunication server = new ServerCommunication();
-			server.start(SERVER_PORT); 
+			server.start(SERVER_PORT);  
 			server.stop(); 
 		} catch (IOException e) {}
 		

@@ -44,11 +44,21 @@ public class ClientCommunication {
 		
 	}
 	
+	/* test d'envoi de message en stringjson*/
+	public void send(String msg) throws IOException {
+		out.println(msg);	
+	}
+	/* test d'envoi de message en stringjson*/
+	public String get() throws IOException {
+		String jsonResponse = in.readLine();	
+		return jsonResponse;	
+	}
+	
 /**
  * stopConnection is called when client doesn't have request anymore
  * connection between server and client is closed
  */
-	
+	 
 	public void stopConnection() throws IOException {
 		in.close();
 		out.close();

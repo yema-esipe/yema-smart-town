@@ -8,7 +8,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import common.ConvertJSON;
 import common.Request;
@@ -86,11 +89,14 @@ public class ServerCom {
 			running.set(true);
 			while (running.get()) {
 			try {	
+				ObjectMapper mapper = new ObjectMapper();
 				out = new PrintWriter(clientSocket.getOutputStream(), true);
 				in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-				String jsonRequest;
+				String jsonRequest ="";
+				
 
 				while ((jsonRequest = in.readLine()) != null) {
+					HashMap<String, String> request = mapper.readValue(jsonRequest, HashMap.class);
 					Request req = converter.JsontoRequest(jsonRequest);
 					Response resp = new Response();
 					String jsonResponse;
@@ -164,6 +170,80 @@ public class ServerCom {
 						jsonResponse = converter.ResponseToJson(resp); System.out.println(jsonResponse);
 						out.println(jsonResponse);
 					}	
+					
+					/* pour les requetes de calcul EC*/
+					
+					if (request.get("operation_type").equals("avgdistance")) {
+						PollutionDataDAO dao = new PollutionDataDAO(); 
+						HashMap<String , Double> result = dao.avgdistance(request.get("date_debut"), request.get("date_fin"), connection);
+						HashMap<String , Object> response = new HashMap<String , Object>();
+						response.put("response_type", "avgdistance");
+						response.put("values", result);
+						 
+						jsonResponse = mapper.writeValueAsString(response);
+						System.out.println(jsonResponse);
+						out.println(jsonResponse);
+						
+					}
+					
+					if (request.get("operation_type").equals("countnb")) {
+						PollutionDataDAO dao = new PollutionDataDAO(); 
+						HashMap<String , Integer> result = dao.countnb(request.get("date_debut"), request.get("date_fin"), connection);
+						HashMap<String , Object> response = new HashMap<String , Object>();
+						response.put("response_type", "countnb");
+						response.put("values", result);
+						
+						jsonResponse = mapper.writeValueAsString(response);
+						System.out.println(jsonResponse);
+						out.println(jsonResponse);
+					}
+					
+					if (request.get("operation_type").equals("selectco2")) {
+						TypeOfTravelDAO dao = new TypeOfTravelDAO(); 
+						HashMap<String , Double> result = dao.selectco2(connection);
+						HashMap<String , Object> response = new HashMap<String , Object>();
+						response.put("response_type", "selectco2");
+						response.put("values", result);
+						
+						jsonResponse = mapper.writeValueAsString(response);
+						System.out.println(jsonResponse);
+						out.println(jsonResponse);
+					}
+					
+					if (request.get("operation_type").equals("selectnbpassengeravg")) {
+						TypeOfTravelDAO dao = new TypeOfTravelDAO(); 
+						HashMap<String , Integer> result = dao.selectnbpassengeravg(connection);
+						HashMap<String , Object> response = new HashMap<String , Object>();
+						response.put("response_type", "selectnbpassengeravg");
+						response.put("values", result);
+						
+						jsonResponse = mapper.writeValueAsString(response);
+						System.out.println(jsonResponse);
+						out.println(jsonResponse);
+					}
+					
+					if (request.get("operation_type").equals("selectnbcarmax")) {
+						DeviceConfigNbCarDAO dao = new DeviceConfigNbCarDAO(); 
+						HashMap<String , Integer> result = dao.selectnbcarmax(connection);
+						HashMap<String , Object> response = new HashMap<String , Object>();
+						response.put("response_type", "selectnbcarmax");
+						response.put("values", result);
+						
+						jsonResponse = mapper.writeValueAsString(response);
+						System.out.println(jsonResponse);
+						out.println(jsonResponse);
+					}
+					if ((request.get("operation_type")).equals("end")) {
+						
+						HashMap<String , Object> response = new HashMap<String , Object>();
+						response.put("response_type", "end");
+						jsonResponse = mapper.writeValueAsString(response);
+						System.out.println("fin de traitement !");
+						out.println(jsonResponse);
+						break;	
+					}
+					
+					/*Fin calculEC*/
 									
 				}
 

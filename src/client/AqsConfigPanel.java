@@ -93,7 +93,7 @@ public class AqsConfigPanel extends JPanel {
 		panel.setBackground(Color.WHITE); 
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 4); panel.setBorder(border);
 
-		JLabel label = new JLabel("<html> <font size=30> CAPTEUR NÂ°" + device.getId() + "</font> </html>", JLabel.CENTER); label.setFont(titleFont); label.setForeground(Color.BLACK);
+		JLabel label = new JLabel("<html> <font size=30> CAPTEUR N°" + device.getId() + "</font> </html>", JLabel.CENTER); label.setFont(titleFont); label.setForeground(Color.BLACK);
 		panel.add(label); 
 		panel.setBounds(50, 10, 350, 100);
 		
@@ -112,7 +112,7 @@ public class AqsConfigPanel extends JPanel {
 		
 		/** Sensor state */
 		String s; String color;
-		if (device.isActive()) {s = "ON"; color = "GREEN"; change = "DÃ©sactiver le capteur";}  else {s = "OFF"; color = "RED"; change = "Activer le capteur";}
+		if (device.isActive()) {s = "ON"; color = "GREEN"; change = "Désactiver le capteur";}  else {s = "OFF"; color = "RED"; change = "Activer le capteur";}
 		JLabel state = new JLabel("<html>Etat actuel : " + "<font color = " + color + "> " + s + " </font> </html>"); state.setFont(basiqueFont); state.setForeground(Color.WHITE);
 		panelSensor.add(state);
 		
@@ -123,13 +123,13 @@ public class AqsConfigPanel extends JPanel {
 		this.add(updateState);
 		
 		/** ResponseState */
-		if ((serverResponse.equals("Le capteur a Ã©tÃ© dÃ©sactivÃ©")) || (serverResponse.equals("Le capteur a Ã©tÃ© activÃ©"))) {responseState = new JLabel("<html> <font size=4> " + serverResponse + "</font> </html>"); responseState.setVisible(true);}
+		if ((serverResponse.equals("Le capteur a été désactivé")) || (serverResponse.equals("Le capteur a été activé"))) {responseState = new JLabel("<html> <font size=4> " + serverResponse + "</font> </html>"); responseState.setVisible(true);}
 		else {responseState = new JLabel();}
 		responseState.setFont(basiqueFont); responseState.setForeground(Color.white); 
 		panelSensor.add(responseState); 
 		
 		/** frequency */
-		JLabel frequency = new JLabel("<html>  FrÃ©quence actuelle des <br> relevÃ©s : " + device.getFrequency() + "sec  </html>"); 
+		JLabel frequency = new JLabel("<html>  Fréquence actuelle des <br> relevés : " + device.getFrequency() + "sec  </html>"); 
 		frequency.setFont(basiqueFont); frequency.setForeground(Color.white);
 		panelSensor.add(frequency);
 		
@@ -142,7 +142,7 @@ public class AqsConfigPanel extends JPanel {
 		panelSensor.add(new JLabel(""));
 		
 		/** newFrequency */
-		askFreqency = new JLabel("<html> <font size=5> Veuillez entrer une nouvelle frÃ©quence comprise entre 1 et 10 : </font> </html>");
+		askFreqency = new JLabel("<html> <font size=5> Veuillez entrer une nouvelle fréquence comprise entre 1 et 10 : </font> </html>");
 		askFreqency.setFont(basiqueFont); askFreqency.setForeground(Color.white); askFreqency.setVisible(false);
 		panelSensor.add(askFreqency); 
 		
@@ -157,7 +157,7 @@ public class AqsConfigPanel extends JPanel {
 		this.add(validateF);
 		
 		/** ResponseFrequency */
-		if (serverResponse.equals("La modification a Ã©tÃ© validÃ©e")) {responseFrequency = new JLabel("<html> <font size = 4>" + serverResponse + "</font> </html>"); responseFrequency.setVisible(true);}
+		if (serverResponse.equals("La modification a été validé")) {responseFrequency = new JLabel("<html> <font size = 4>" + serverResponse + "</font> </html>"); responseFrequency.setVisible(true);}
 		else {responseFrequency = new JLabel();}
 		responseFrequency.setFont(basiqueFont); responseFrequency.setForeground(Color.white);
 		panelSensor.add(responseFrequency); 
@@ -188,23 +188,23 @@ public class AqsConfigPanel extends JPanel {
 		co2.setBounds(475, 180, 300, 100); this.add(co2);
 		JButton updateCo2 = new JButton("Modifier"); updateCo2.setBounds(725, 220, 70, 20); indicButton.add(updateCo2);
 		
-		JLabel carbonMonoxide = new JLabel("Monoxyde de carbone : " + config.getCarbonMonoxide() + "Âµg/m^3"); carbonMonoxide.setFont(littleFont); carbonMonoxide.setForeground(Color.white);
+		JLabel carbonMonoxide = new JLabel("Monoxyde de carbone : " + config.getCarbonMonoxide() + "µg/m^3"); carbonMonoxide.setFont(littleFont); carbonMonoxide.setForeground(Color.white);
 		carbonMonoxide.setBounds(475, 230, 300, 100); this.add(carbonMonoxide);
 		JButton updateCarbonMonoxide = new JButton("Modifier"); updateCarbonMonoxide.setBounds(725, 270, 70, 20); indicButton.add(updateCarbonMonoxide);
 
-		JLabel finesParticules = new JLabel("Particules Fines : " + config.getFinesParticules() + "Âµg/m^3"); finesParticules.setFont(littleFont); finesParticules.setForeground(Color.white);
+		JLabel finesParticules = new JLabel("Particules Fines : " + config.getFinesParticules() + "µg/m^3"); finesParticules.setFont(littleFont); finesParticules.setForeground(Color.white);
 		finesParticules.setBounds(475, 280, 300, 100); this.add(finesParticules);
 		JButton updateFP = new JButton("Modifier"); updateFP.setBounds(725, 320, 70, 20); indicButton.add(updateFP);
 
-		JLabel sulfurDioxide = new JLabel("Dioxyde de soufre : " + config.getSulfurDioxide() + "Âµg/m^3"); sulfurDioxide.setFont(littleFont); sulfurDioxide.setForeground(Color.white);
+		JLabel sulfurDioxide = new JLabel("Dioxyde de soufre : " + config.getSulfurDioxide() + "µg/m^3"); sulfurDioxide.setFont(littleFont); sulfurDioxide.setForeground(Color.white);
 		sulfurDioxide.setBounds(805, 180, 300, 100); this.add(sulfurDioxide);
 		JButton updateSD = new JButton("Modifier"); updateSD.setBounds(1035, 220, 70, 20); indicButton.add(updateSD);
 
-		JLabel nitrogenDioxide = new JLabel("Dioxyde d'azote : " + config.getNitrogenDioxide() + "Âµg/m^3"); nitrogenDioxide.setFont(littleFont); nitrogenDioxide.setForeground(Color.white);
+		JLabel nitrogenDioxide = new JLabel("Dioxyde d'azote : " + config.getNitrogenDioxide() + "µg/m^3"); nitrogenDioxide.setFont(littleFont); nitrogenDioxide.setForeground(Color.white);
 		nitrogenDioxide.setBounds(805, 230, 300, 100); this.add(nitrogenDioxide);
 		JButton updateND = new JButton("Modifier"); updateND.setBounds(1035, 270, 70, 20); indicButton.add(updateND);
 
-		JLabel ozone = new JLabel("Dioxyde d'azote : " + config.getOzone() + "Âµg/m^3"); ozone.setFont(littleFont); ozone.setForeground(Color.white);
+		JLabel ozone = new JLabel("Dioxyde d'azote : " + config.getOzone() + "µg/m^3"); ozone.setFont(littleFont); ozone.setForeground(Color.white);
 		ozone.setBounds(805, 280, 300, 100); this.add(ozone);
 		JButton updateO = new JButton("Modifier"); updateO.setBounds(1035, 320, 70, 20); indicButton.add(updateO);
 
@@ -230,7 +230,7 @@ public class AqsConfigPanel extends JPanel {
 
 	
 	public void createIndexView() {
-		JLabel info = new JLabel("<html> <font color = red> REGLEMENTATION EN FRANCE DES INDICES DE QUALITE D'AIR </font> <br> Veuillez sÃ©lectionner un indicteur :");
+		JLabel info = new JLabel("<html> <font color = red> REGLEMENTATION EN FRANCE DES INDICES DE QUALITE D'AIR </font> <br> Veuillez sélectionner un indicteur :");
 		info.setBounds(475, 340, 640, 100); info.setFont(littleFont); info.setForeground(Color.white);this.add(info);
 		
 		Object[] elements = {"Dioxyde de carbone", "Monoxyde de carbone", "Particules Fines", "Dioxyde de soufre", "Dioxyde d'azote", "Ozone"};
@@ -307,7 +307,7 @@ public class AqsConfigPanel extends JPanel {
 		panel.setLayout(new GridLayout(1, 1));
 		panel.setBackground(Color.WHITE); 
 
-		JLabel label = new JLabel("<html> <font size = 3>*Toute configuration se rÃ©alise avec un capteur dÃ©sactivÃ©. <br> Un capteur ne peut Ãªtre dÃ©sactivÃ© en Ã©tat d'alerte.</font> </html>", JLabel.CENTER); label.setFont(titleFont); label.setForeground(Color.BLACK);
+		JLabel label = new JLabel("<html> <font size = 3>*Toute configuration se réalise avec un capteur désactivé. <br> Un capteur ne peut être désactivé en état d'alerte.</font> </html>", JLabel.CENTER); label.setFont(titleFont); label.setForeground(Color.BLACK);
 		panel.add(label); 
 		panel.setBounds(800, 600, 320, 50);
 		

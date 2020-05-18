@@ -11,23 +11,20 @@ import java.util.ArrayList;
 
 import common.ConvertJSON;
 import common.DataAir;
-import common.DeviceAir;
-
 
 public class DataAirDAO extends DAO<DataAir> {
 	private ConvertJSON converter = new ConvertJSON();
 
 
 	public boolean insert(String data, Connection connection) {
-		System.out.println("----------------- NEW VALUE --------------");
-
+		System.out.println(" ------------------   NEW VALUE  -------------------");
 		PreparedStatement preparedStatement = null;
 		DataAir dataAir = converter.JsontoData(data);
 		String datetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss"));
 
 		try {
 			preparedStatement = connection.prepareStatement("INSERT INTO dataair(date, co2, carbonMonoxide, finesParticules, sulfurDioxide, nitrogenDioxide, ozone, idDeviceAir) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-			
+
 			preparedStatement.setString(1, datetime);
 			preparedStatement.setFloat(2, dataAir.getCo2());
 			preparedStatement.setFloat(3, dataAir.getCarbonMonoxide());
@@ -37,9 +34,8 @@ public class DataAirDAO extends DAO<DataAir> {
 			preparedStatement.setFloat(7, dataAir.getOzone());
 			preparedStatement.setInt(8, dataAir.getIdDeviceAir());
 
-
 			preparedStatement.executeUpdate();
-			
+
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,16 +43,17 @@ public class DataAirDAO extends DAO<DataAir> {
 		}	
 	}
 
-	public boolean delete(String data, Connection connection) {
+	public boolean delete(String id, Connection connection) {
 		PreparedStatement preparedStatement = null;
-		DataAir dataAir = converter.JsontoData(data);
-
+		int idDevice = Integer.valueOf(id);
 		try {
-			preparedStatement = connection.prepareStatement("DELETE FROM dataair WHERE id = ?");
-			
-			preparedStatement.setInt(1, dataAir.getId());
+			preparedStatement = connection.prepareStatement("DELETE FROM dataair WHERE idDeviceAir = ?");
+
+			preparedStatement.setInt(1, idDevice);
 			preparedStatement.executeUpdate();
-			
+
+			DataAirAVGDAO dao = new DataAirAVGDAO();
+			dao.delete(id, connection);
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,14 +66,19 @@ public class DataAirDAO extends DAO<DataAir> {
 	}
 
 	public ArrayList<String> select(Connection connection) {
+		return null;
+	}
+
+	public ArrayList<String> selectID(String id, Connection connection) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
 			Statement myRequest = connection.createStatement();
-			ResultSet result = myRequest.executeQuery("SELECT * FROM dataair");
-			
+			ResultSet result = myRequest.executeQuery("SELECT * FROM dataair WHERE idDeviceAir = " + Integer.valueOf(id) + " ORDER BY date DESC LIMIT 10");
+
+
 			while(result.next()) {
 				DataAir data = new DataAir();
-				
+
 				data.setId(result.getInt(1));
 				data.setDate(result.getString(2));
 				data.setCo2(result.getFloat(3));
@@ -86,46 +88,16 @@ public class DataAirDAO extends DAO<DataAir> {
 				data.setNitrogenDioxide(result.getFloat(7));
 				data.setOzone(result.getFloat(8));
 				data.setIdDeviceAir(result.getInt(9));
-				
+
 				String json = converter.DataToJson(data);
 				list.add(json);
 			}
-			
+
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return list;
-		}
-	}
-
-	public ArrayList<String> selectAVG(String deviceAir, Connection connection) {
-		ArrayList<String> list = new ArrayList<String>();
-		DeviceAir device = converter.JsontoDeviceAir(deviceAir);
-		try {
-			Statement myRequest = connection.createStatement();
-			ResultSet result = myRequest.executeQuery("SELECT idDeviceAir, AVG(co2), AVG(carbonMonoxide), AVG(finesParticules), AVG(sulfurDioxide), AVG(nitrogenDioxide), AVG(ozone) FROM (SELECT * FROM dataair WHERE idDeviceAir = " + device.getId() + " ORDER BY date DESC LIMIT " + device.getNbStatement() + ") as newTable");
-			
-			while(result.next()) {
-				DataAir data = new DataAir();
-				
-				data.setIdDeviceAir(result.getInt(1));
-				data.setCo2(result.getFloat(2));
-				data.setCarbonMonoxide(result.getFloat(3));
-				data.setFinesParticules(result.getFloat(4));
-				data.setSulfurDioxide(result.getFloat(5));
-				data.setNitrogenDioxide(result.getFloat(6));
-				data.setOzone(result.getFloat(7));
-				
-				String json = converter.DataToJson(data);
-
-				list.add(json);
-			}
-			
-			return list;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return list;
-		}
+		}	
 	}
 
 }

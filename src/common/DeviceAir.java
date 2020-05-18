@@ -1,7 +1,6 @@
 package common;
 
 import java.util.ArrayList;
-import airsensor.YamlFileReader;
 
 public class DeviceAir {
 	private int id;
@@ -10,6 +9,7 @@ public class DeviceAir {
 	private int frequency;
 	private int nbStatement;
 	private boolean onAlert;
+	private float quality;
 	private ArrayList<DataAir> datas;
 	
 	public DeviceAir() {
@@ -53,6 +53,14 @@ public class DeviceAir {
 		this.onAlert = onAlert;
 	}
 	
+	public float getQuality() {
+		return quality;
+	}
+
+	public void setQuality(float quality) {
+		this.quality = quality;
+	}
+
 	public ArrayList<DataAir> getDatas() {
 		return datas;
 	}

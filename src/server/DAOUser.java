@@ -40,6 +40,12 @@ public class DAOUser extends DAO<User> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ArrayList<String> selectID(String id, Connection connection) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/*
 	

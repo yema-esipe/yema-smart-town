@@ -1,4 +1,4 @@
-package airsensor;
+package common_aqs_client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,24 +11,30 @@ import common.Request;
 import common.Response;
 import connection.PropertiesFileReader;
 
-public class AQSCommunication {
+public class CommunicationWithServer {
 	private Socket AQSSocket;
 	private PrintWriter out;
 	private BufferedReader in = null;
 	private ConvertJSON converter;
 	
-	private int SERVER_PORT;
+	private int SERVER_PORT_AQS;
+	private int SERVER_PORT_CLIENT;
 	private String SERVER_ADDRESS;
 	private PropertiesFileReader serveconfig = new PropertiesFileReader();
 	
-	public AQSCommunication() {
+	public CommunicationWithServer() {
 		serveconfig.initServer();
-		SERVER_PORT = Integer.parseInt(serveconfig.getProperty("serverportAQS"));
+		SERVER_PORT_AQS = Integer.parseInt(serveconfig.getProperty("serverportAQS"));
+		SERVER_PORT_CLIENT = Integer.parseInt(serveconfig.getProperty("serverportClient"));
 		SERVER_ADDRESS = serveconfig.getProperty("serveraddress");
 	}
 	
-	public int getPORT() {
-		return SERVER_PORT;
+	public int getPORTAQS() {
+		return SERVER_PORT_AQS;
+	}
+
+	public int getPORTClient() {
+		return SERVER_PORT_CLIENT;
 	}
 	
 	public String getADDRESS() {
@@ -70,6 +76,7 @@ public class AQSCommunication {
  */
 	
 	public void stopConnection() throws IOException {
+		System.out.println("close");
 		in.close();
 		out.close();
 		AQSSocket.close();

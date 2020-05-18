@@ -14,7 +14,11 @@ public class Factory {
 		
 		else if(target.equals("deviceconfigair"))
 			return new DeviceConfigAirDAO();
-		else 
+		else if(target.equals("applisave"))
+			return new AppliSaveDAO();
+		else if (target.equals("dataairavg"))
+			return new DataAirAVGDAO();
+		else
 			return null; 
 	}
 }

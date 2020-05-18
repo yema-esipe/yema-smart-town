@@ -29,9 +29,11 @@ public abstract class DAO<T> {
       */
       public abstract boolean update(String obj, Connection connection);
 
-      /**
+            /**
       * select -> return Response object with the result of the request (problems or not)
       */
       public abstract ArrayList<String> select(Connection connection);
       
+      public abstract ArrayList<String> selectID(String id, Connection connection);
+
 }

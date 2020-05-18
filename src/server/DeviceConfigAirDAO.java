@@ -13,19 +13,14 @@ import common.DeviceConfigAir;
 public class DeviceConfigAirDAO extends DAO<DeviceConfigAir> {
 	private ConvertJSON converter = new ConvertJSON();
 
-	public boolean insert(String configAir, Connection connection) {
+	public boolean insert(String id, Connection connection) {
 		PreparedStatement preparedStatement = null;
-		DeviceConfigAir config = converter.JsontoConfig(configAir);
+		int idDevice = Integer.valueOf(id);
 		try {
-			preparedStatement = connection.prepareStatement("INSERT INTO deviceconfigair(co2, carbonMonoxide, finesParticules, sulfurDioxide, nitrogenDioxide, ozone) VALUES(?, ?, ?, ?, ?, ?)");
+			preparedStatement = connection.prepareStatement("INSERT INTO deviceconfigair(idDeviceAir, co2, carbonMonoxide, finesParticules, sulfurDioxide, nitrogenDioxide, ozone) VALUES( ?, 0, 0, 0, 0, 0, 0)");
 			
-			preparedStatement.setFloat(1, config.getCo2());
-			preparedStatement.setFloat(2, config.getCarbonMonoxide());
-			preparedStatement.setFloat(3, config.getFinesParticules());
-			preparedStatement.setFloat(4, config.getSulfurDioxide());
-			preparedStatement.setFloat(5, config.getNitrogenDioxide());
-			preparedStatement.setFloat(6, config.getOzone());
-
+			preparedStatement.setInt(1, idDevice);
+			
 			preparedStatement.executeUpdate();
 			
 			return true;
@@ -35,14 +30,13 @@ public class DeviceConfigAirDAO extends DAO<DeviceConfigAir> {
 		}	
 	}
 
-	public boolean delete(String configAir, Connection connection) {
+	public boolean delete(String id, Connection connection) {
 		PreparedStatement preparedStatement = null;
-		DeviceConfigAir config = converter.JsontoConfig(configAir);
-
+		int idDevice = Integer.valueOf(id);
 		try {
-			preparedStatement = connection.prepareStatement("DELETE FROM deviceconfigair WHERE id = ?");
+			preparedStatement = connection.prepareStatement("DELETE FROM deviceconfigair WHERE idDeviceAir = ?");
 			
-			preparedStatement.setInt(1, config.getId());
+			preparedStatement.setInt(1, idDevice);
 			preparedStatement.executeUpdate();
 			
 			return true;
@@ -86,12 +80,13 @@ public class DeviceConfigAirDAO extends DAO<DeviceConfigAir> {
 				DeviceConfigAir config = new DeviceConfigAir();
 				
 				config.setId(result.getInt(1));
-				config.setCo2(result.getFloat(2));
-				config.setCarbonMonoxide(result.getFloat(3));
-				config.setFinesParticules(result.getFloat(4));
-				config.setSulfurDioxide(result.getFloat(5));
-				config.setNitrogenDioxide(result.getFloat(6));
-				config.setOzone(result.getFloat(7));
+				config.setIdDevice(result.getInt(2));
+				config.setCo2(result.getFloat(3));
+				config.setCarbonMonoxide(result.getFloat(4));
+				config.setFinesParticules(result.getFloat(5));
+				config.setSulfurDioxide(result.getFloat(6));
+				config.setNitrogenDioxide(result.getFloat(7));
+				config.setOzone(result.getFloat(8));
 				
 				String json = converter.ConfigToJson(config);
 				list.add(json);
@@ -103,5 +98,33 @@ public class DeviceConfigAirDAO extends DAO<DeviceConfigAir> {
 			return list;
 		}
 	}
+	
+	public ArrayList<String> selectID(String id, Connection connection) {
+		ArrayList<String> list = new ArrayList<String>();
+		int idDevice = Integer.valueOf(id);
+		try {
+			Statement myRequest = connection.createStatement();
+			ResultSet result = myRequest.executeQuery("SELECT * FROM deviceconfigair WHERE idDeviceAir = " + idDevice);
+			
+			while(result.next()) {
+				DeviceConfigAir config = new DeviceConfigAir();
+				
+				config.setId(result.getInt(1));
+				config.setIdDevice(result.getInt(2));
+				config.setCo2(result.getFloat(3));
+				config.setCarbonMonoxide(result.getFloat(4));
+				config.setFinesParticules(result.getFloat(5));
+				config.setSulfurDioxide(result.getFloat(6));
+				config.setNitrogenDioxide(result.getFloat(7));
+				config.setOzone(result.getFloat(8));
+				
+				String json = converter.ConfigToJson(config);
+				list.add(json);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return list;
+		}	}
 
 }

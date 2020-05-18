@@ -1,27 +1,27 @@
 package common;
 
-public class DeviceConfigAir {
+public class DataAirAVG {
 	private int id;
-	private int idDevice;
+	private String date;
 	private float co2;
 	private float carbonMonoxide;
 	private float finesParticules;
 	private float sulfurDioxide;
 	private float nitrogenDioxide;
 	private float ozone;
-	
+	private int idDeviceAir;
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public int getIdDevice() {
-		return idDevice;
+	public String getDate() {
+		return date;
 	}
-	public void setIdDevice(int idDevice) {
-		this.idDevice = idDevice;
+	public void setDate(String date) {
+		this.date = date;
 	}
 	public float getCo2() {
 		return co2;
@@ -59,4 +59,11 @@ public class DeviceConfigAir {
 	public void setOzone(float ozone) {
 		this.ozone = ozone;
 	}
+	public int getIdDeviceAir() {
+		return idDeviceAir;
+	}
+	public void setIdDeviceAir(int idDeviceAir) {
+		this.idDeviceAir = idDeviceAir;
+	}
+
 }

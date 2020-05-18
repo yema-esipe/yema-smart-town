@@ -58,7 +58,7 @@ public class ConvertJSON {
 		return resp;
 	}
 	
-
+	
 	public String DeviceAirToJson(DeviceAir device) {
 		String jsonString = "";
 		try {
@@ -138,4 +138,45 @@ public class ConvertJSON {
 		}
 		return config;
 	}
+	
+	public String SaveToJson(AppliSave save) {
+		String jsonString = "";
+		try {
+			jsonString = mapper.writeValueAsString(save);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonString;
+	}
+	
+	public AppliSave JsontoSave(String jsonString) {
+		AppliSave save = new AppliSave();
+		try {
+			save = mapper.readValue(jsonString, AppliSave.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return save;
+	}
+	
+	public String DataAVGToJson(DataAirAVG dataAVG) {
+		String jsonString = "";
+		try {
+			jsonString = mapper.writeValueAsString(dataAVG);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonString;
+	}
+	
+	public DataAirAVG JsontoDataAVG(String jsonString) {
+		DataAirAVG dataAVG = new DataAirAVG();
+		try {
+			dataAVG = mapper.readValue(jsonString, DataAirAVG.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return dataAVG;
+	}
+	
 }

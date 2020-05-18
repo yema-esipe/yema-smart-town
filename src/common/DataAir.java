@@ -10,7 +10,7 @@ public class DataAir {
 	private float nitrogenDioxide;
 	private float ozone;
 	private int idDeviceAir;
-		
+
 	public int getId() {
 		return id;
 	}
@@ -65,5 +65,5 @@ public class DataAir {
 	public void setIdDeviceAir(int idDeviceAir) {
 		this.idDeviceAir = idDeviceAir;
 	}
-	
+
 }

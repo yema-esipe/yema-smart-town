@@ -22,7 +22,7 @@ public class TypeOfTravelDAO extends DAO<TypeOfTravel>{
 
 		public boolean delete(String data, Connection connection) {
 			return false;
-		}
+		} 
 
 		public boolean update(String obj, Connection connection) {
 			return false;

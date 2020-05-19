@@ -6,7 +6,7 @@ public class PollutionData {
 	private int distance;
 	private String date;
 	private int idtypeoftravel;
-	
+	 
 	public int getIdpollutiondata() {
 		return idpollutiondata;
 	}

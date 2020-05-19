@@ -26,7 +26,7 @@ public class ServerCom {
 /**
  * start establish the connection with clients
  * The server is pending a new client with a thread
- */
+ */ 
 	public void start(int portClient, int portAQS) throws IOException {
 		serverSocketClient = new ServerSocket(portClient);
 		serverSocketAQS = new ServerSocket(portAQS);

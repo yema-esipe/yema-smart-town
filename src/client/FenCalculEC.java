@@ -32,7 +32,7 @@ public class FenCalculEC extends JFrame implements ActionListener{
 	/**
 	 * 
 	 */
-	
+	 
 public static void setDistances(HashMap<String, Double> values) {
 		
 		pieton.setDistance(values.get("piéton"));

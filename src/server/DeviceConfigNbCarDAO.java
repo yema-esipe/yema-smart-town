@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 import common.DeviceConfigNbCar;
 
-
+ 
 public class DeviceConfigNbCarDAO extends DAO<DeviceConfigNbCar>{
 	//private ConvertJSON converter = new ConvertJSON();
 			Logger LOGGER = Logger.getLogger(DeviceConfigNbCarDAO.class.getName());

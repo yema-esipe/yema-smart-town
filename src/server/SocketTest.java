@@ -15,7 +15,7 @@ public class SocketTest {
 		file.initServer();
 		
 		final int SERVER_PORT = Integer.parseInt(file.getProperty("serverportClient"));
-		
+		 
 		try {
 			System.out.println("\n");
 			LOGGER.log(Level.INFO, "*** Server program beginning ***"); 

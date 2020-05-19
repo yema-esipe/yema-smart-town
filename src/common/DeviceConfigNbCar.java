@@ -1,7 +1,7 @@
 package common;
 
 public class DeviceConfigNbCar {
-	
+	 
 	private int idtypecar;
 	private int nbcarmax;
 	private int idtypeoftravel;

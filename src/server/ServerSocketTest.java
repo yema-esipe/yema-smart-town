@@ -15,7 +15,7 @@ public static void main (String[] args) {
 		
 		final int SERVER_PORT_CLIENT = Integer.parseInt(serveconfig.getProperty("serverportClient"));
 		final int SERVER_PORT_AQS = Integer.parseInt(serveconfig.getProperty("serverportAQS"));
-
+ 
 		try {
 			System.out.println("\n");
 			LOGGER.log(Level.INFO, "*** Server program beginning ***");

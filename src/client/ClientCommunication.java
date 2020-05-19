@@ -14,7 +14,7 @@ public class ClientCommunication {
 	private BufferedReader in = null;
 	private ConvertJSON converter;
 	
-/**
+/** 
  * startConnection open the connection with the server.
  * ip and port are those of the server
  */

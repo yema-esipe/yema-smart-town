@@ -1,7 +1,7 @@
 package common;
 
 public class TypeOfTravel {
-	
+	 
 	private int idtypeoftravel;
 	private String labeltype;
 	private Double co2;

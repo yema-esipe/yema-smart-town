@@ -8,7 +8,7 @@ public class Factory {
 		
 		else if(target.equals("dataair")) 
 			return new DataAirDAO();
-		
+	 	
 		else if(target.equals("alert")) 
 			return new AlertDAO();
 		

@@ -9,7 +9,7 @@ public class DataEC {
 	private Integer passengeravg;
 	private Double fe;
 	private Double ec;
-	 
+	  
 	public DataEC(String name) {
 		this.nom = name;
 		this.distance = 0.0D; // distance avg

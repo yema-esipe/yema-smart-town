@@ -22,7 +22,7 @@ public class PollutionDataDAO extends DAO<PollutionData> {
 	public boolean insert(String data, Connection connection) {
 		return false;	
 	}
-
+ 
 	public boolean delete(String data, Connection connection) {
 		return false;
 	}

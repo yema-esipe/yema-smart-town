@@ -24,7 +24,7 @@ public class ServerCommunication {
 	
 	public ServerCommunication(){
 		
-	}
+	} 
 	/**
 	 * start establish the connection with clients
 	 * The server is pending a new client with a thread

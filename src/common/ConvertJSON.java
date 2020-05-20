@@ -58,7 +58,7 @@ public class ConvertJSON {
 		return resp;
 	}
 	
-	
+	/*
 	public String DeviceAirToJson(DeviceAir device) {
 		String jsonString = "";
 		try {
@@ -177,6 +177,6 @@ public class ConvertJSON {
 			e.printStackTrace();
 		}
 		return dataAVG;
-	}
+	}*/
 	
 }

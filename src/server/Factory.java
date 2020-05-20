@@ -3,7 +3,7 @@ package server;
 public class Factory {
 	@SuppressWarnings("rawtypes")
 	public static DAO getData(String target){
-		if(target.equals("deviceair"))
+		/*if(target.equals("deviceair"))
 			return new DeviceAirDAO();
 		
 		else if(target.equals("dataair")) 
@@ -17,8 +17,8 @@ public class Factory {
 		else if(target.equals("applisave"))
 			return new AppliSaveDAO();
 		else if (target.equals("dataairavg"))
-			return new DataAirAVGDAO();
-		else if(target.equals("pollutiondata"))
+			return new DataAirAVGDAO();*/
+		 if(target.equals("pollutiondata"))
 			return new PollutionDataDAO();
 		
 		else if(target.equals("typeoftravel"))

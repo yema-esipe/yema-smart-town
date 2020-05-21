@@ -48,49 +48,49 @@ public class DeviceConfigNbCarDAO extends DAO<DeviceConfigNbCar>{
 					
 					Statement myRequest = connection.createStatement();
 					
-					ResultSet result = myRequest.executeQuery("SELECT deviceconfignb.nbcarmax FROM deviceconfignb, typeoftravel WHERE deviceconfignb.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'pieton' ");
+					ResultSet result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'pieton' ");
 					if(result.next()) {
 						tempon = result.getInt(1);
 						map.put("piéton", tempon);
 					} 
 					
-					result = myRequest.executeQuery("SELECT deviceconfignb.nbcarmax FROM deviceconfignb, typeoftravel WHERE deviceconfignb.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'velo' ");
+					result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'velo' ");
 					if(result.next()) {
 						tempon = result.getInt(1);
 						map.put("velo", tempon);
 					} 
 					
-					result = myRequest.executeQuery("SELECT deviceconfignb.nbcarmax FROM deviceconfignb, typeoftravel WHERE deviceconfignb.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'moto' ");
+					result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'moto' ");
 					if(result.next()) {
 						tempon = result.getInt(1);
 						map.put("moto", tempon);
 					} 
 					
-					result = myRequest.executeQuery("SELECT deviceconfignb.nbcarmax FROM deviceconfignb, typeoftravel WHERE deviceconfignb.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'voiture' ");
+					result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'voiture' ");
 					if(result.next()) {
 						tempon = result.getInt(1);
 						map.put("voiture", tempon);
 					}
 					
-					result = myRequest.executeQuery("SELECT deviceconfignb.nbcarmax FROM deviceconfignb, typeoftravel WHERE deviceconfignb.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'bus' ");
+					result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'bus' ");
 					if(result.next()) {
 						tempon = result.getInt(1);
 						map.put("bus", tempon);
 					}
 					
-					result = myRequest.executeQuery("SELECT deviceconfignb.nbcarmax FROM deviceconfignb, typeoftravel WHERE deviceconfignb.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'metro' ");
+					result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'metro' ");
 					if(result.next()) {
 						tempon = result.getInt(1);
 						map.put("metro", tempon);
 					}
 					
-					result = myRequest.executeQuery("SELECT deviceconfignb.nbcarmax FROM deviceconfignb, typeoftravel WHERE deviceconfignb.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'tram' ");
+					result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'tram' ");
 					if(result.next()) {
 						tempon = result.getInt(1);
 						map.put("tram", tempon);
 					}
 					
-					result = myRequest.executeQuery("SELECT deviceconfignb.nbcarmax FROM deviceconfignb, typeoftravel WHERE deviceconfignb.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'train' ");
+					result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'train' ");
 					if(result.next()) {
 						tempon = result.getInt(1);
 						map.put("train", tempon);

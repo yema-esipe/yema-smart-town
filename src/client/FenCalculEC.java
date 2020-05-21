@@ -2,10 +2,11 @@ package client;
 
 //import java.awt.Dimension;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -14,10 +15,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import connection.PropertiesFileReader;
 
 import java.awt.Color;
+import java.awt.EventQueue;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
@@ -27,13 +31,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
-public class FenCalculEC extends JFrame implements ActionListener{
+public class FenCalculEC extends JFrame implements ActionListener, DocumentListener{
 
 	/**
 	 * 
 	 */
 	 
-public static void setDistances(HashMap<String, Double> values) {
+public void setDistances(HashMap<String, Double> values) {
 		
 		pieton.setDistance(values.get("piéton"));
 		velo.setDistance(values.get("velo"));
@@ -45,7 +49,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		train.setDistance(values.get("train"));
 	}
 	
-	public static void setNombres(HashMap<String, Integer> values) {
+	public  void setNombres(HashMap<String, Integer> values) {
 		pieton.setNombre(values.get("piéton"));
 		velo.setNombre(values.get("velo"));
 		moto.setNombre(values.get("moto"));
@@ -56,7 +60,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		train.setNombre(values.get("train"));
 	}
 	
-	public static void setCo2s(HashMap<String, Double> values) {
+	public void setCo2s(HashMap<String, Double> values) {
 		pieton.setCo2(values.get("piéton"));
 		velo.setCo2(values.get("velo"));
 		moto.setCo2(values.get("moto"));
@@ -67,7 +71,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		train.setCo2(values.get("train"));
 	}
 	
-	public static void setNbpassengeravgs(HashMap<String, Integer> values) {
+	public void setNbpassengeravgs(HashMap<String, Integer> values) {
 		pieton.setPassengeravg(values.get("piéton"));
 		velo.setPassengeravg(values.get("velo"));
 		moto.setPassengeravg(values.get("moto"));
@@ -78,7 +82,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		train.setPassengeravg(values.get("train"));
 	}
 	
-	public static void setNbcarmaxs(HashMap<String, Integer> values) {
+	public void setNbcarmaxs(HashMap<String, Integer> values) {
 		pieton.setNombremax(values.get("piéton"));
 		velo.setNombremax(values.get("velo"));
 		moto.setNombremax(values.get("moto"));
@@ -136,7 +140,7 @@ public static void setDistances(HashMap<String, Double> values) {
 
 	private JTextField txtnombremaxpieton;
 	private JTextField txtnombremaxvelo;
-	private JTextField txtnombremaxmoto;
+	private JTextField txtnombremaxmoto; 
 	private JTextField txtnombremaxvoiture;
 	private JTextField txtnombremaxbus;
 	private JTextField txtnombremaxmetro;
@@ -163,18 +167,35 @@ public static void setDistances(HashMap<String, Double> values) {
 	
 	/*the DateEC*/
 	
-	public static DataEC pieton = new DataEC("piéton");
-	public static DataEC velo = new DataEC("velo");
-	public static DataEC moto = new DataEC("moto");
-	public static DataEC voiture = new DataEC("voiture");
-	public static DataEC bus = new DataEC("bus");
-	public static DataEC metro = new DataEC("metro");
-	public static DataEC tram = new DataEC("tram");
-	public static DataEC train = new DataEC("train");
+	private DataEC pieton = new DataEC("piéton");
+	private DataEC velo = new DataEC("velo");
+	private DataEC moto = new DataEC("moto");
+	private DataEC voiture = new DataEC("voiture");
+	private DataEC bus = new DataEC("bus");
+	private  DataEC metro = new DataEC("metro");
+	private DataEC tram = new DataEC("tram");
+	private DataEC train = new DataEC("train");
+	
 	private JTextField txtDatedebut;
 	private JTextField txtDatefin;
 	
+	private boolean booltxtdistpieton = false;
+	private boolean booltxtdistvelo = false;
+	private boolean booltxtdistmoto = false;
+	private boolean booltxtdistvoiture = false;
+	private boolean booltxtdistbus = false;
+	private boolean booltxtdistmetro = false;
+	private boolean booltxtdisttram = false;
+	private boolean booltxtdisttrain = false;
 	
+	private boolean booltxtnbpieton = false;
+	private boolean booltxtnbvelo = false;
+	private boolean booltxtnbmoto = false;
+	private boolean booltxtnbvoiture = false;
+	private boolean booltxtnbbus = false;
+	private boolean booltxtnbmetro = false;
+	private boolean booltxtnbtram = false;
+	private boolean booltxtnbtrain = false;
 	
 
 
@@ -182,7 +203,6 @@ public static void setDistances(HashMap<String, Double> values) {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -193,6 +213,8 @@ public static void setDistances(HashMap<String, Double> values) {
 				}
 			}
 		});
+		
+			
 		
 		
 	}
@@ -306,6 +328,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtdistancepieton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txtdistancepieton.setColumns(10);
 		txtdistancepieton.setBounds(110, 130, 110, 27);
+		txtdistancepieton.getDocument().addDocumentListener(this);
 		contentPane.add(txtdistancepieton);
 		
 		JLabel lbldistancepietonunite = new JLabel("km");
@@ -318,6 +341,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtdistancevelo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtdistancevelo.setColumns(10);
 		txtdistancevelo.setBounds(110, 185, 110, 27);
+		txtdistancevelo.getDocument().addDocumentListener(this);
 		contentPane.add(txtdistancevelo);
 		 
 		JLabel lbldistancevelounite = new JLabel("km");
@@ -330,6 +354,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtdistancemoto.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtdistancemoto.setColumns(10);
 		txtdistancemoto.setBounds(108, 239, 110, 27);
+		txtdistancemoto.getDocument().addDocumentListener(this);
 		contentPane.add(txtdistancemoto);
 		
 		JLabel lbldistancemotounite = new JLabel("km");
@@ -342,6 +367,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtdistancevoiture.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtdistancevoiture.setColumns(10);
 		txtdistancevoiture.setBounds(108, 292, 110, 27);
+		txtdistancevoiture.getDocument().addDocumentListener(this);
 		contentPane.add(txtdistancevoiture);
 		
 		JLabel lbldistancevoitureunite = new JLabel("km");
@@ -354,6 +380,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtdistancebus.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtdistancebus.setColumns(10);
 		txtdistancebus.setBounds(108, 344, 110, 27);
+		txtdistancebus.getDocument().addDocumentListener(this);
 		contentPane.add(txtdistancebus);
 		
 		JLabel lbldistancebusunite = new JLabel("km");
@@ -366,6 +393,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtdistancemetro.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtdistancemetro.setColumns(10);
 		txtdistancemetro.setBounds(108, 395, 110, 27);
+		txtdistancemetro.getDocument().addDocumentListener(this);
 		contentPane.add(txtdistancemetro);
 		
 		JLabel lbldistancemetrounite = new JLabel("km");
@@ -378,6 +406,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtdistancetram.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtdistancetram.setColumns(10);
 		txtdistancetram.setBounds(108, 447, 110, 27);
+		txtdistancetram.getDocument().addDocumentListener(this);
 		contentPane.add(txtdistancetram);
 		
 		JLabel lbldistancetramunite = new JLabel("km");
@@ -390,6 +419,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtdistancetrain.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtdistancetrain.setColumns(10);
 		txtdistancetrain.setBounds(108, 497, 110, 27);
+		txtdistancetrain.getDocument().addDocumentListener(this);
 		contentPane.add(txtdistancetrain);
 		
 		JLabel lbldistancetrainunite = new JLabel("km");
@@ -514,6 +544,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtnombrepieton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txtnombrepieton.setColumns(10);
 		txtnombrepieton.setBounds(576, 130, 110, 27);
+		txtnombrepieton.getDocument().addDocumentListener(this);
 		contentPane.add(txtnombrepieton);
 		
 		JLabel lblslash0 = new JLabel("/");
@@ -534,6 +565,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtnombrevelo.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtnombrevelo.setColumns(10);
 		txtnombrevelo.setBounds(576, 185, 110, 27);
+		txtnombrevelo.getDocument().addDocumentListener(this);
 		contentPane.add(txtnombrevelo);
 		
 		JLabel lblslash1 = new JLabel("/");
@@ -554,6 +586,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtnombremoto.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtnombremoto.setColumns(10);
 		txtnombremoto.setBounds(576, 239, 110, 27);
+		txtnombremoto.getDocument().addDocumentListener(this);
 		contentPane.add(txtnombremoto);
 		
 		JLabel lblslash2 = new JLabel("/");
@@ -574,6 +607,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtnombrevoiture.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtnombrevoiture.setColumns(10);
 		txtnombrevoiture.setBounds(576, 292, 110, 27);
+		txtnombrevoiture.getDocument().addDocumentListener(this);
 		contentPane.add(txtnombrevoiture);
 		
 		JLabel lblslash3 = new JLabel("/");
@@ -594,6 +628,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtnombrebus.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtnombrebus.setColumns(10);
 		txtnombrebus.setBounds(576, 344, 110, 27);
+		txtnombrebus.getDocument().addDocumentListener(this);
 		contentPane.add(txtnombrebus);
 		
 		JLabel lblslash4 = new JLabel("/");
@@ -614,6 +649,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtnombremetro.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtnombremetro.setColumns(10);
 		txtnombremetro.setBounds(576, 395, 110, 27);
+		txtnombremetro.getDocument().addDocumentListener(this);
 		contentPane.add(txtnombremetro);
 		
 		JLabel lblslash5 = new JLabel("/");
@@ -634,6 +670,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtnombretram.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtnombretram.setColumns(10);
 		txtnombretram.setBounds(574, 447, 110, 27);
+		txtnombretram.getDocument().addDocumentListener(this);
 		contentPane.add(txtnombretram);
 		
 		JLabel lblslash6 = new JLabel("/");
@@ -654,6 +691,7 @@ public static void setDistances(HashMap<String, Double> values) {
 		txtnombretrain.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtnombretrain.setColumns(10);
 		txtnombretrain.setBounds(576, 497, 110, 27);
+		txtnombretrain.getDocument().addDocumentListener(this);
 		contentPane.add(txtnombretrain);
 		
 		JLabel lblslash7 = new JLabel("/");
@@ -819,7 +857,16 @@ public static void setDistances(HashMap<String, Double> values) {
 		
 		btRetour = new JButton("Retour");
 		btRetour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent act) {
+				try {
+					@SuppressWarnings("unused")
+					YemaWindows fen = new YemaWindows();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				setVisible(false);
 			}
 		});
 		btRetour.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -879,14 +926,16 @@ public static void setDistances(HashMap<String, Double> values) {
 	
 	@SuppressWarnings("unchecked")
 	public void actionPerformed(ActionEvent e) {
+		        
+ 
 		try {
 			client.startConnection(SERVER_ADDRESS, SERVER_PORT);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			LOGGER.log(Level.WARNING, "Erreur de connexion client");
 		}
-		
-		
+
+		//String s = "";
 		ObjectMapper mapper = new ObjectMapper();
 		
 		HashMap<String, String> requestdistance = new HashMap<>();
@@ -915,9 +964,6 @@ public static void setDistances(HashMap<String, Double> values) {
 		
 		HashMap<String, String> fin = new HashMap<>();
 		fin.put("operation_type", "end");
-
-		
-		
 		
 		String jsonrequestdistance = "";
 		String jsonrequestnombre = "";
@@ -1015,9 +1061,10 @@ public static void setDistances(HashMap<String, Double> values) {
 		
 		/* carbon footprint values display with toString*/
 		
+
 		
 		pieton.setFe();
-		pieton.setEc();
+		pieton.setEc(); 
 		
 		velo.setFe();
 		velo.setEc();
@@ -1063,71 +1110,257 @@ public static void setDistances(HashMap<String, Double> values) {
 		
 		/*affichage  des distances moyennes*/
 		
-		if( txtdistancepieton.getText().equals("")) {
+		
+		if(txtdistancepieton.getText().equals("")) {
 			txtdistancepieton.setText(Double.toString(Math.round(pieton.getDistance()* 1000.0)/1000.0));
 		}
+		else {
+			if(booltxtdistpieton == true) {
+				pieton.setDistance(Double.valueOf(txtdistancepieton.getText()));
+				txtdistancepieton.setText(Double.toString(Math.round(pieton.getDistance()* 1000.0)/1000.0));
+				booltxtdistpieton = false;
+			}
+			else {
+				txtdistancepieton.setText(Double.toString(Math.round(pieton.getDistance()* 1000.0)/1000.0));
+			}
+			
+		}
 		
-		if( txtdistancevelo.getText().equals("")) {
+		
+		if(txtdistancevelo.getText().equals("")) {
 			txtdistancevelo.setText(Double.toString(Math.round(velo.getDistance()* 1000.0)/1000.0));
 		}
+		else {
+			if(booltxtdistvelo == true) {
+				velo.setDistance(Double.valueOf(txtdistancevelo.getText()));
+				txtdistancevelo.setText(Double.toString(Math.round(velo.getDistance()* 1000.0)/1000.0));
+				booltxtdistvelo = false;
+			}
+			else {
+				txtdistancevelo.setText(Double.toString(Math.round(velo.getDistance()* 1000.0)/1000.0));
+			}
+			
+		}
 		
-		if( txtdistancemoto.getText().equals("")) {
+		
+		if(txtdistancemoto.getText().equals("")) {
 			txtdistancemoto.setText(Double.toString(Math.round(moto.getDistance()* 1000.0)/1000.0));
 		}
+		else {
+			if(booltxtdistmoto == true) {
+				moto.setDistance(Double.valueOf(txtdistancemoto.getText()));
+				txtdistancemoto.setText(Double.toString(Math.round(moto.getDistance()* 1000.0)/1000.0));
+				booltxtdistmoto = false;
+			}
+			else {
+				txtdistancemoto.setText(Double.toString(Math.round(moto.getDistance()* 1000.0)/1000.0));
+			}
+			
+		}
 		
-		if( txtdistancevoiture.getText().equals("")) {
+		
+		if(txtdistancevoiture.getText().equals("")) {
 			txtdistancevoiture.setText(Double.toString(Math.round(voiture.getDistance()* 1000.0)/1000.0));
 		}
-		 
-		if( txtdistancebus.getText().equals("")) {
-			txtdistancebus.setText(Double.toString(Math.round(bus.getDistance()* 1000.0)/1000.0));
+		else {
+			if(booltxtdistvoiture == true) {
+				voiture.setDistance(Double.valueOf(txtdistancevoiture.getText()));
+				txtdistancevoiture.setText(Double.toString(Math.round(voiture.getDistance()* 1000.0)/1000.0));
+				booltxtdistvoiture = false;
+			}
+			else {
+				txtdistancevoiture.setText(Double.toString(Math.round(voiture.getDistance()* 1000.0)/1000.0));
+			}
+			
 		}
 		
-		if( txtdistancemetro.getText().equals("")) {
+		if(txtdistancebus.getText().equals("")) {
+			txtdistancebus.setText(Double.toString(Math.round(bus.getDistance()* 1000.0)/1000.0));
+			
+		}
+		else {
+			if(booltxtdistbus == true) {
+				bus.setDistance(Double.valueOf(txtdistancebus.getText()));
+				txtdistancebus.setText(Double.toString(Math.round(bus.getDistance()* 1000.0)/1000.0));
+				booltxtdistbus = false;
+			}
+			else {
+				txtdistancebus.setText(Double.toString(Math.round(bus.getDistance()* 1000.0)/1000.0));
+			}
+			
+		}
+		
+		if(txtdistancemetro.getText().equals("")) {
 			txtdistancemetro.setText(Double.toString(Math.round(metro.getDistance()* 1000.0)/1000.0));
 		}
+		else {
+			if(booltxtdistmetro == true) {
+				metro.setDistance(Double.valueOf(txtdistancemetro.getText()));
+				txtdistancemetro.setText(Double.toString(Math.round(metro.getDistance()* 1000.0)/1000.0));
+				booltxtdistmetro = false;
+			}
+			else {
+				txtdistancemetro.setText(Double.toString(Math.round(metro.getDistance()* 1000.0)/1000.0));
+			}
+			
+		}
 		
-		if( txtdistancetram.getText().equals("")) {
+		if(txtdistancetram.getText().equals("")) {
 			txtdistancetram.setText(Double.toString(Math.round(tram.getDistance()* 1000.0)/1000.0));
 		}
+		else {
+			if(booltxtdisttram == true) {
+				tram.setDistance(Double.valueOf(txtdistancetram.getText()));
+				txtdistancetram.setText(Double.toString(Math.round(tram.getDistance()* 1000.0)/1000.0));
+				booltxtdisttram = false;
+			}
+			else {
+				txtdistancetram.setText(Double.toString(Math.round(tram.getDistance()* 1000.0)/1000.0));
+			}
+			
+		}
 		
-		if( txtdistancetrain.getText().equals("")) {
+		if(txtdistancetrain.getText().equals("")) {
 			txtdistancetrain.setText(Double.toString(Math.round(train.getDistance()* 1000.0)/1000.0));
 		}
-	
+		else {
+			if(booltxtdisttrain == true) {
+				train.setDistance(Double.valueOf(txtdistancetrain.getText()));
+				txtdistancetrain.setText(Double.toString(Math.round(train.getDistance()* 1000.0)/1000.0));
+				booltxtdisttrain = false;
+			}
+			else {
+				txtdistancetrain.setText(Double.toString(Math.round(train.getDistance()* 1000.0)/1000.0));
+			}
+			
+		}
 
+		
+		
 		/*affichage des nombres de véhicules*/
 		
-		if( txtnombrepieton.getText().equals("")) {
-			txtnombrepieton.setText(Double.toString(Math.round(pieton.getNombre()* 1000.0)/1000.0));
+		if(txtnombrepieton.getText().equals("")) {
+			txtnombrepieton.setText(Integer.toString(pieton.getNombre()));
+		}
+		else {
+			if(booltxtnbpieton == true) {
+				pieton.setNombre(Integer.valueOf(txtnombrepieton.getText()));
+				txtnombrepieton.setText(Integer.toString(pieton.getNombre()));
+				booltxtnbpieton = false;
+			}
+			else {
+				txtnombrepieton.setText(Integer.toString(pieton.getNombre()));
+			}
+			
 		}
 		
-		if( txtnombrevelo.getText().equals("")) {
-			txtnombrevelo.setText(Double.toString(Math.round(velo.getNombre()* 1000.0)/1000.0));
+		
+		if(txtnombrevelo.getText().equals("")) {
+			txtnombrevelo.setText(Integer.toString(velo.getNombre()));
+		}
+		else {
+			if(booltxtnbvelo == true) {
+				velo.setNombre(Integer.valueOf(txtnombrevelo.getText()));
+				txtnombrevelo.setText(Integer.toString(velo.getNombre()));
+				booltxtnbvelo = false;
+			}
+			else {
+				txtnombrevelo.setText(Integer.toString(velo.getNombre()));
+			}
+			
 		}
 		
-		if( txtnombremoto.getText().equals("")) {
-			txtnombremoto.setText(Double.toString(Math.round(moto.getNombre()* 1000.0)/1000.0));
+		
+		if(txtnombremoto.getText().equals("")) {
+			txtnombremoto.setText(Integer.toString(moto.getNombre()));
+		}
+		else {
+			if(booltxtnbmoto == true) {
+				moto.setNombre(Integer.valueOf(txtnombremoto.getText()));
+				txtnombremoto.setText(Integer.toString(moto.getNombre()));
+				booltxtnbmoto = false;
+			}
+			else {
+				txtnombremoto.setText(Integer.toString(moto.getNombre()));
+			}
+			
 		}
 		
-		if( txtnombrevoiture.getText().equals("")) {
-			txtnombrevoiture.setText(Double.toString(Math.round(voiture.getNombre()* 1000.0)/1000.0));
+		
+		if(txtnombrevoiture.getText().equals("")) {
+			txtnombrevoiture.setText(Integer.toString(voiture.getNombre()));
+		}
+		else {
+			if(booltxtnbvoiture == true) {
+				voiture.setNombre(Integer.valueOf(txtnombrevoiture.getText()));
+				txtnombrevoiture.setText(Integer.toString(voiture.getNombre()));
+				booltxtnbvoiture = false;
+			}
+			else {
+				txtnombrevoiture.setText(Integer.toString(voiture.getNombre()));
+			}
+			
 		}
 		
-		if( txtnombrebus.getText().equals("")) {
-			txtnombrebus.setText(Double.toString(Math.round(bus.getNombre()* 1000.0)/1000.0));
+		if(txtnombrebus.getText().equals("")) {
+			txtnombrebus.setText(Integer.toString(bus.getNombre()));
+			
+		}
+		else {
+			if(booltxtnbbus == true) {
+				bus.setNombre(Integer.valueOf(txtnombrebus.getText()));
+				txtnombrebus.setText(Integer.toString(bus.getNombre()));
+				booltxtnbbus = false;
+			}
+			else {
+				txtnombrebus.setText(Integer.toString(bus.getNombre()));
+			}
+			
 		}
 		
-		if( txtnombremetro.getText().equals("")) {
-			txtnombremetro.setText(Double.toString(Math.round(metro.getNombre()* 1000.0)/1000.0));
+		if(txtnombremetro.getText().equals("")) {
+			txtnombremetro.setText(Integer.toString(metro.getNombre()));
+		}
+		else {
+			if(booltxtnbmetro == true) {
+				metro.setNombre(Integer.valueOf(txtnombremetro.getText()));
+				txtnombremetro.setText(Integer.toString(metro.getNombre()));
+				booltxtnbmetro = false;
+			}
+			else {
+				txtnombremetro.setText(Integer.toString(metro.getNombre()));
+			}
+			
 		}
 		
-		if( txtnombretram.getText().equals("")) {
-			txtnombretram.setText(Double.toString(Math.round(tram.getNombre()* 1000.0)/1000.0));
+		if(txtnombretram.getText().equals("")) {
+			txtnombretram.setText(Integer.toString(tram.getNombre()));
+		}
+		else {
+			if(booltxtnbtram == true) {
+				tram.setNombre(Integer.valueOf(txtnombretram.getText()));
+				txtnombretram.setText(Integer.toString(tram.getNombre()));
+				booltxtnbtram = false;
+			}
+			else {
+				txtnombretram.setText(Integer.toString(tram.getNombre()));
+			}
+			
 		}
 		
-		if( txtnombretrain.getText().equals("")) {
-			txtnombretrain.setText(Double.toString(Math.round(train.getNombre()* 1000.0)/1000.0));
+		if(txtnombretrain.getText().equals("")) {
+			txtnombretrain.setText(Integer.toString(train.getNombre()));
+		}
+		else {
+			if(booltxtnbtrain == true) {
+				train.setNombre(Integer.valueOf(txtnombretrain.getText()));
+				txtnombretrain.setText(Integer.toString(train.getNombre()));
+				booltxtnbtrain = false;
+			}
+			else {
+				txtnombretrain.setText(Integer.toString(train.getNombre()));
+			}
+			
 		}
 		
 		/*affichage des EC*/
@@ -1143,7 +1376,98 @@ public static void setDistances(HashMap<String, Double> values) {
 		
 		
 		/*affichage EC globale*/
-
+		
 		txtECglobale.setText(Double.toString(Math.round((( Double.parseDouble(txtECpieton.getText()) +   Double.parseDouble(txtECvelo.getText()) +   Double.parseDouble(txtECmoto.getText()) +   Double.parseDouble(txtECvoiture.getText()) +  Double.parseDouble(txtECbus.getText()) +   Double.parseDouble(txtECmetro.getText()) +   Double.parseDouble(txtECtram.getText()) +   Double.parseDouble(txtECtrain.getText())) / 1000D)* 1000.0)/1000.0)); 
+		
+		contentPane.repaint();
+		contentPane.revalidate();
+		  
+		
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void insertUpdate(DocumentEvent ev) {
+		// TODO Auto-generated method stub
+		
+		Object src = ev.getDocument(); 
+		
+		if(src == txtdistancepieton.getDocument()) {
+			pieton.setDistance(Double.valueOf(txtdistancepieton.getText()));
+			booltxtdistpieton = true;
+		}
+		if(src == txtdistancevelo.getDocument()) {
+			velo.setDistance(Double.valueOf(txtdistancevelo.getText()));
+			booltxtdistvelo = true;
+		}
+		if(src == txtdistancemoto.getDocument()) {
+			moto.setDistance(Double.valueOf(txtdistancemoto.getText()));
+			booltxtdistmoto = true;
+		}
+		if(src == txtdistancevoiture.getDocument()) {
+			voiture.setDistance(Double.valueOf(txtdistancevoiture.getText()));
+			booltxtdistvoiture = true;
+		}
+		if(src == txtdistancebus.getDocument()) {
+			bus.setDistance(Double.valueOf(txtdistancebus.getText()));
+			booltxtdistbus = true;
+		}
+		if(src == txtdistancemetro.getDocument()) {
+			metro.setDistance(Double.valueOf(txtdistancemetro.getText()));
+			booltxtdistmetro = true;
+		}
+		if(src == txtdistancetram.getDocument()) {
+			tram.setDistance(Double.valueOf(txtdistancetram.getText()));
+			booltxtdisttram = true;
+		}
+		if(src == txtdistancetrain.getDocument()) {
+			train.setDistance(Double.valueOf(txtdistancetrain.getText()));
+			booltxtdisttrain = true;
+		}
+		
+		if(src == txtnombrepieton.getDocument()) {
+			pieton.setNombre(Integer.valueOf(txtnombrepieton.getText()));
+			booltxtnbpieton = true;
+		}
+		if(src == txtnombrevelo.getDocument()) {
+			velo.setNombre(Integer.valueOf(txtnombrevelo.getText()));
+			booltxtnbvelo = true;
+		}
+		if(src == txtnombremoto.getDocument()) {
+			moto.setNombre(Integer.valueOf(txtnombremoto.getText()));
+			booltxtnbmoto = true;
+		}
+		if(src == txtnombrevoiture.getDocument()) {
+			voiture.setNombre(Integer.valueOf(txtnombrevoiture.getText()));
+			booltxtnbvoiture = true;
+		}
+		if(src == txtnombrebus.getDocument()) {
+			bus.setNombre(Integer.valueOf(txtnombrebus.getText()));
+			booltxtnbbus = true;
+		}
+		if(src == txtnombremetro.getDocument()) {
+			metro.setNombre(Integer.valueOf(txtnombremetro.getText()));
+			booltxtnbmetro = true;
+		}
+		if(src == txtnombretram.getDocument()) {
+			tram.setNombre(Integer.valueOf(txtnombretram.getText()));
+			booltxtnbtram = true;
+		}
+		if(src == txtnombretrain.getDocument()) {
+			train.setNombre(Integer.valueOf(txtnombretrain.getText()));
+			booltxtnbtrain = true;
+		}
+		
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent eve) {
+		// TODO Auto-generated method stub
 	} 
+
+
 }

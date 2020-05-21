@@ -118,49 +118,49 @@ public class PollutionDataDAO extends DAO<PollutionData> {
 			
 			Statement myRequest = connection.createStatement();
 			
-			ResultSet result = myRequest.executeQuery("SELECT COUNT(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'pieton' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
+			ResultSet result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'pieton' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getInt(1);
 				map.put("piéton", tempon);
 			} 
 			
-			result = myRequest.executeQuery("SELECT COUNT(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'velo' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
+			result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'velo' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getInt(1);
 				map.put("velo", tempon);
 			} 
 			
-			result = myRequest.executeQuery("SELECT COUNT(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'moto' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
+			result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'moto' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getInt(1);
 				map.put("moto", tempon);
 			} 
 			
-			result = myRequest.executeQuery("SELECT COUNT(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'voiture' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
+			result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'voiture' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getInt(1);
 				map.put("voiture", tempon);
 			}
 			
-			result = myRequest.executeQuery("SELECT COUNT(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'bus' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
+			result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'bus' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getInt(1);
 				map.put("bus", tempon);
 			}
 			
-			result = myRequest.executeQuery("SELECT COUNT(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'metro' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
+			result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'metro' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getInt(1); 
 				map.put("metro", tempon);
 			}
 			
-			result = myRequest.executeQuery("SELECT COUNT(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'tram' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
+			result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'tram' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getInt(1);
 				map.put("tram", tempon);
 			}
 			
-			result = myRequest.executeQuery("SELECT COUNT(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'train' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
+			result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'train' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getInt(1);
 				map.put("train", tempon);

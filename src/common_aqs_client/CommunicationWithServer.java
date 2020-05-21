@@ -11,6 +11,11 @@ import common.Request;
 import common.Response;
 import connection.PropertiesFileReader;
 
+/**
+ * CommunicationWithServer is common to clients and devices because all of them have to communicate with the server
+ * @author elisa
+ * they have their own port
+ */
 public class CommunicationWithServer {
 	private Socket AQSSocket;
 	private PrintWriter out;

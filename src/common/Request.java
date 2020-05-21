@@ -1,10 +1,10 @@
 package common;
 /**
  * Request class allows to keep useful information whose be treated by the server
- * - operation_type -> to know if the client wants a select/insert/delete or update request
+ * - operation_type -> to know if the client wants a select/insert/delete/update or more specific request
  * - target -> to know which DAO is concerned
- * - request -> in SQL, based on client request
- * - client -> to know who is connected
+ * - source -> to know who is connected
+ * - obj -> for insert operation for example, we need to put an object with the request, it is convert in json before
  * It concerned two sides (client request and server treatment about it) --> common
  */
 public class Request {
@@ -49,6 +49,10 @@ public class Request {
 
 	public void setObj(String obj) {
 		this.obj = obj;
+	}
+	
+	public String toString() {
+		return "operation_type : " + operation_type  + " ; target = " + target + " ; source : " + source + " ; object : " + obj; 
 	}
 	
 }

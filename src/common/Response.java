@@ -1,10 +1,10 @@
 package common;
 /**
  * Response class allows to keep useful information whose be sent by the server
- * - response_type : to know if the response is about select/update/delete/insert client request
+
+ * - response_type : to know if the response is about select/update/delete/insert or more specific request
  * - response_state : to know if the request is correctly performed
- * - values : for select request, it is the values of the database contained in a ArrayList
- * It concerned two sides (server response and client reception) --> common
+ * - values : for select request, it is the values of the database contained in a ArrayList, before convert in json
  */
 import java.util.ArrayList;
 
@@ -44,14 +44,7 @@ public class Response {
 		
 
 	public String toString() {
-		if (this.response_type.equals("select"))
-			return "server_response : " + response_state + '\n' + "values : "+ values.toString();
-		if ((this.response_type.equals("update")) || (response_type.equals("insert")) || (response_type.equals("delete")))
-			return "server_response_state : " + response_state;
-		if (this.response_type.equals("end"))
-			return "server_response_state : " + response_state;
-		else
-			return "server_response : Problème dans la requête";
+		return "server_response : " + response_state + '\n' + "values : "+ values.toString();
 	}
 	
 }

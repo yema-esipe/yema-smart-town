@@ -1,0 +1,7 @@
+!!com.baeldung.snakeyaml.DeviceConfigAir
+co2: 600
+carbonMonoxide: 23000
+finesParticules: 27
+sulfurDioxide: 159
+nitrogenDioxide: 134
+ozone: 104

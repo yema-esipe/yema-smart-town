@@ -1,0 +1,83 @@
+!!com.baeldung.snakeyaml.DeviceAir
+id: 3
+datas:
+   - id: 1
+     co2: 400
+     carbonMonoxide: 24000
+     finesParticules: 100
+     sulfurDioxide: 170
+     nitrogenDioxide: 140
+     ozone: 104
+     idDeviceAir : 3
+   - id: 2
+     co2: 500
+     carbonMonoxide: 24000
+     finesParticules: 60
+     sulfurDioxide: 170
+     nitrogenDioxide: 140
+     ozone: 104
+     idDeviceAir : 3
+   - id: 3
+     co2: 600
+     carbonMonoxide: 24000
+     finesParticules: 50
+     sulfurDioxide: 170
+     nitrogenDioxide: 140
+     ozone: 104
+     idDeviceAir : 3
+   - id: 4
+     co2: 600
+     carbonMonoxide: 24000
+     finesParticules: 30
+     sulfurDioxide: 170
+     nitrogenDioxide: 140
+     ozone: 105
+     idDeviceAir : 3
+   - id: 5
+     co2: 500
+     carbonMonoxide: 24000
+     finesParticules: 10
+     sulfurDioxide: 180
+     nitrogenDioxide: 140
+     ozone: 75
+     idDeviceAir : 3
+   - id: 6
+     co2: 500
+     carbonMonoxide: 24000
+     finesParticules: 10
+     sulfurDioxide: 170
+     nitrogenDioxide: 140
+     ozone: 90
+     idDeviceAir : 3
+   - id: 7
+     co2: 600
+     carbonMonoxide: 24000
+     finesParticules: 10
+     sulfurDioxide: 170
+     nitrogenDioxide: 140
+     ozone: 100
+     idDeviceAir : 3
+   - id: 8
+     co2: 500
+     carbonMonoxide: 24000
+     finesParticules: 10
+     sulfurDioxide: 170
+     nitrogenDioxide: 140
+     ozone: 100
+     idDeviceAir : 3
+   - id: 9
+     co2: 600
+     carbonMonoxide: 24000
+     finesParticules: 10
+     sulfurDioxide: 170
+     nitrogenDioxide: 140
+     ozone: 100
+     idDeviceAir : 3
+   - id: 10
+     co2: 600
+     carbonMonoxide: 24000
+     finesParticules: 20
+     sulfurDioxide: 170
+     nitrogenDioxide: 140
+     ozone: 100
+     idDeviceAir : 3

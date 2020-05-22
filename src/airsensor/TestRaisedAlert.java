@@ -1,18 +1,19 @@
 package airsensor;
 
 import java.io.IOException;
+
 import common.DeviceAir;
 /**
  * 
  * @author elisa
- * ChangeAlertMain is a test to see an alert launch and change
- * Sensor 3 is the simulator for that
+ * RaisedAlertMain is a test to see an alert raised
+ * sensor 2 is the simulator for that
  */
-public class ChangeAlertMain {
+public class TestRaisedAlert {
 public static void main(String[] args) throws IOException {
 		
 		DeviceAir device = new DeviceAir();
-		device.setId(3);
+		device.setId(2);
 		
 		SensorOperation operation = new SensorOperation(device);
 		try {

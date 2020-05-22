@@ -13,7 +13,8 @@ import common_aqs_client.RequestsAqsClient;
  * @author elisa
  * To replace the user data, configuration is recorded in yaml file in resources called 'aqs-configAir.yaml'
  */
-public class UpdateConfigMain {
+
+public class TestUpdateConfig {
 	public static void main(String[] args) {
 		YamlFileReader yaml = new YamlFileReader();
 		CommunicationWithServer communication = new CommunicationWithServer();

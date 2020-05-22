@@ -6,14 +6,14 @@ import common.DeviceAir;
 /**
  * 
  * @author elisa
- * RaisedAlertMain is a test to see an alert raised
- * sensor 2 is the simulator for that
+ * LaunchAlertMain is a test to see an alert launch
+ * Sensor 1 is the simulator for that
  */
-public class RaisedAlertMain {
+public class TestLaunchAlert {
 public static void main(String[] args) throws IOException {
 		
 		DeviceAir device = new DeviceAir();
-		device.setId(2);
+		device.setId(1);
 		
 		SensorOperation operation = new SensorOperation(device);
 		try {

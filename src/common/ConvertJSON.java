@@ -177,5 +177,87 @@ public class ConvertJSON {
 		}
 		return dataAVG;
 	}
+	public String BollardToJson(RetractableBollard bollard) {
+		String jsonString = "" ;
+		try { 
+			jsonString = mapper.writeValueAsString(bollard);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonString;
+			
+	}
+	
+	public String CarToJson (Car car ) {
+		
+		String jsonString = ""; 
+		try { 
+			jsonString = mapper.writeValueAsString(car);
+		}catch (JsonProcessingException e) {
+			e.printStackTrace();
+			}
+		return jsonString;
+	}
+	
+	
+	public Car JsonToCar(String jsonString) {
+		Car car = new Car();
+	try { car = mapper.readValue( jsonString,Car.class );
+	}catch (IOException e) {
+		e.printStackTrace();
+	}
+	return car;
+	}
+		
+	
+	
+	public RetractableBollard JsonToBollard(String jsonString) {
+		RetractableBollard bollard = new RetractableBollard();
+		try { bollard = mapper.readValue( jsonString,RetractableBollard.class );
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		return bollard;
+		}
+	
+	public String DeviceConfigNbCartoJson(DeviceConfigNbCar device) {
+		String jsonString = "";
+	try {
+		jsonString = mapper.writeValueAsString(device);
+	} catch (JsonProcessingException e) {
+		e.printStackTrace();
+	}
+	return jsonString;
+		}
+	
+	public DeviceConfigNbCar JsontoDeviceConfigNbCar(String jsonString) {
+		DeviceConfigNbCar device = new DeviceConfigNbCar();
+	try {
+		device = mapper.readValue(jsonString, DeviceConfigNbCar.class);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	return device;
+		}
+    public VehicleSensor JsontoVehicleSensor(String jsonString) {
+    	VehicleSensor sensor = new VehicleSensor();
+    
+	try {
+		sensor = mapper.readValue(jsonString, VehicleSensor.class);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	return sensor;
+	}
+    public String VehicleSensortoJson(VehicleSensor sensor) {
+		String jsonString = "";
+		try {
+			jsonString = mapper.writeValueAsString(sensor);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonString;
+		}
+	
 	
 }

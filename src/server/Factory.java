@@ -14,8 +14,10 @@ public class Factory {
 		
 		else if(target.equals("deviceconfigair"))
 			return new DeviceConfigAirDAO();
+		
 		else if(target.equals("applisave"))
 			return new AppliSaveDAO();
+		
 		else if (target.equals("dataairavg"))
 			return new DataAirAVGDAO();
 		
@@ -27,7 +29,16 @@ public class Factory {
 		
 		else if(target.equals("deviceconfignbcar"))
 			return new DeviceConfigNbCarDAO();
+		
+		else if(target.equals("retractablebollard"))
+			  return new BollardDAO();
+		
+		else if (target.equals("vehiculesensor"))
+				return new VehicleSensorDAO();
+		
+		else if (target.contentEquals("car"))
+				return new CarDAO();
 		else
-			return null; 
+				return null; 
 	}
 }

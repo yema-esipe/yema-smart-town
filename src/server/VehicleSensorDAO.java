@@ -1,0 +1,109 @@
+package server;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import common.ConvertJSON;
+
+
+import common.VehicleSensor;
+
+public class VehicleSensorDAO extends DAO<VehicleSensor> {
+	private ConvertJSON converter = new ConvertJSON();
+	
+	public boolean insert(String device, Connection connection) {
+		PreparedStatement preparedStatement = null;
+		VehicleSensor sensor = converter.JsontoVehicleSensor(device);
+
+		try {
+			preparedStatement = connection.prepareStatement("INSERT INTO vehiclesensor(address, isActive) VALUES(?, ?)");
+			
+			preparedStatement.setString(1, sensor.getAddress());
+			preparedStatement.setBoolean(2, sensor.isActive());
+			
+			preparedStatement.executeUpdate();
+			
+			return true; 	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(String device, Connection connection) {
+		PreparedStatement preparedStatement = null;
+		VehicleSensor sensor = converter.JsontoVehicleSensor(device);
+try {
+			
+			preparedStatement = connection.prepareStatement("DELETE FROM vehiclesensor WHERE id = ?");
+			
+			preparedStatement.setInt(1, sensor.getId());
+			preparedStatement.executeUpdate();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		return false;
+	}}
+
+	@Override
+	public boolean update(String device, Connection connection) {
+		PreparedStatement preparedStatement = null;
+		VehicleSensor sensor = converter.JsontoVehicleSensor(device);
+		try {
+			preparedStatement = connection.prepareStatement("UPDATE vehiclesensor SET address = ?, isActive = ?, state = ?,way = ? WHERE id = ?");
+			
+			preparedStatement.setString(1, sensor.getAddress());
+			preparedStatement.setBoolean(2, sensor.isActive());
+			
+			preparedStatement.setInt(5, sensor.getId());
+			preparedStatement.executeUpdate();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		return false;
+	}
+		}
+
+	@Override
+	public ArrayList<String> select(Connection connection) {
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			Statement myRequest = connection.createStatement();
+			ResultSet result = myRequest.executeQuery("SELECT * FROM vehiclesensor");
+			
+			while(result.next()) {
+				VehicleSensor sensor = new VehicleSensor();
+				
+				sensor.setId(result.getInt(1));
+				sensor.setAddress(result.getString(2));
+				sensor.setActive(result.getBoolean(3));
+				
+				
+				String json = converter.VehicleSensortoJson(sensor);
+				list.add(json);
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return list;
+		
+		
+	        } 
+		}
+
+	@Override
+	public ArrayList<String> selectID(String id, Connection connection) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
+	
+	

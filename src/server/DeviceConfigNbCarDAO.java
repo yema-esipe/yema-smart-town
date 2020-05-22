@@ -51,7 +51,7 @@ public class DeviceConfigNbCarDAO extends DAO<DeviceConfigNbCar>{
 					ResultSet result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'pieton' ");
 					if(result.next()) {
 						tempon = result.getInt(1);
-						map.put("piéton", tempon);
+						map.put("pieton", tempon);
 					} 
 					
 					result = myRequest.executeQuery("SELECT deviceconfignbcar.nbcarmax FROM deviceconfignbcar, typeoftravel WHERE deviceconfignbcar.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'velo' ");

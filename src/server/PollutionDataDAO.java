@@ -52,7 +52,7 @@ public class PollutionDataDAO extends DAO<PollutionData> {
 			ResultSet result = myRequest.executeQuery("SELECT AVG(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'pieton' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getDouble(1);
-				map.put("piéton", tempon);
+				map.put("pieton", tempon);
 			} 
 			
 			result = myRequest.executeQuery("SELECT AVG(distance) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'velo' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
@@ -121,7 +121,7 @@ public class PollutionDataDAO extends DAO<PollutionData> {
 			ResultSet result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'pieton' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");
 			if(result.next()) {
 				tempon = result.getInt(1);
-				map.put("piéton", tempon);
+				map.put("pieton", tempon);
 			} 
 			
 			result = myRequest.executeQuery("SELECT COUNT(*) FROM pollutiondata, typeoftravel WHERE pollutiondata.idtypeoftravel = typeoftravel.idtypeoftravel AND typeoftravel.labeltype = 'velo' AND pollutiondata.date BETWEEN STR_TO_DATE('"+date_debut+"', '%Y-%m-%d') AND STR_TO_DATE('"+date_fin+"', '%Y-%m-%d') ");

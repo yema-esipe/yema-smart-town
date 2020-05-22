@@ -49,7 +49,7 @@ public class TypeOfTravelDAO extends DAO<TypeOfTravel>{
 				ResultSet result = myRequest.executeQuery("SELECT co2 FROM typeoftravel WHERE  typeoftravel.labeltype = 'pieton'");
 				if(result.next()) {
 					tempon = result.getDouble(1);
-					map.put("piéton", tempon);
+					map.put("pieton", tempon);
 				} 
 				
 				result = myRequest.executeQuery("SELECT co2 FROM typeoftravel WHERE  typeoftravel.labeltype = 'velo'");				
@@ -118,7 +118,7 @@ public class TypeOfTravelDAO extends DAO<TypeOfTravel>{
 				ResultSet result = myRequest.executeQuery("SELECT nbpassengeravg FROM typeoftravel WHERE  typeoftravel.labeltype = 'pieton'");
 				if(result.next()) {
 					tempon = result.getInt(1);
-					map.put("piéton", tempon);
+					map.put("pieton", tempon);
 				} 
 				
 				result = myRequest.executeQuery("SELECT nbpassengeravg FROM typeoftravel WHERE  typeoftravel.labeltype = 'velo'");				

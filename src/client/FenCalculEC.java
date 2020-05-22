@@ -39,7 +39,7 @@ public class FenCalculEC extends JFrame implements ActionListener, DocumentListe
 	 
 public void setDistances(HashMap<String, Double> values) {
 		
-		pieton.setDistance(values.get("piéton"));
+		pieton.setDistance(values.get("pieton"));
 		velo.setDistance(values.get("velo"));
 		moto.setDistance(values.get("moto"));
 		voiture.setDistance(values.get("voiture"));
@@ -50,7 +50,7 @@ public void setDistances(HashMap<String, Double> values) {
 	}
 	
 	public  void setNombres(HashMap<String, Integer> values) {
-		pieton.setNombre(values.get("piéton"));
+		pieton.setNombre(values.get("pieton"));
 		velo.setNombre(values.get("velo"));
 		moto.setNombre(values.get("moto"));
 		voiture.setNombre(values.get("voiture"));
@@ -61,7 +61,7 @@ public void setDistances(HashMap<String, Double> values) {
 	}
 	
 	public void setCo2s(HashMap<String, Double> values) {
-		pieton.setCo2(values.get("piéton"));
+		pieton.setCo2(values.get("pieton"));
 		velo.setCo2(values.get("velo"));
 		moto.setCo2(values.get("moto"));
 		voiture.setCo2(values.get("voiture"));
@@ -72,7 +72,7 @@ public void setDistances(HashMap<String, Double> values) {
 	}
 	
 	public void setNbpassengeravgs(HashMap<String, Integer> values) {
-		pieton.setPassengeravg(values.get("piéton"));
+		pieton.setPassengeravg(values.get("pieton"));
 		velo.setPassengeravg(values.get("velo"));
 		moto.setPassengeravg(values.get("moto"));
 		voiture.setPassengeravg(values.get("voiture"));
@@ -83,7 +83,7 @@ public void setDistances(HashMap<String, Double> values) {
 	}
 	
 	public void setNbcarmaxs(HashMap<String, Integer> values) {
-		pieton.setNombremax(values.get("piéton"));
+		pieton.setNombremax(values.get("pieton"));
 		velo.setNombremax(values.get("velo"));
 		moto.setNombremax(values.get("moto"));
 		voiture.setNombremax(values.get("voiture"));
@@ -167,7 +167,7 @@ public void setDistances(HashMap<String, Double> values) {
 	
 	/*the DateEC*/
 	
-	private DataEC pieton = new DataEC("piéton");
+	private DataEC pieton = new DataEC("pieton");
 	private DataEC velo = new DataEC("velo");
 	private DataEC moto = new DataEC("moto");
 	private DataEC voiture = new DataEC("voiture");

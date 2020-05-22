@@ -246,7 +246,7 @@ public class AqsConfigPanel extends JPanel {
 
 	/** createIndexView allow to create the array of air quality index*/
 	public void createIndexView() {
-		JLabel info = new JLabel("<html> <font color = red> REGLEMENTATION EN FRANCE DES INDICES DE QUALITE D'AIR </font> <br> Veuillez sÃ©lectionner un indicteur :");
+		JLabel info = new JLabel("<html> <font color = red> REGLEMENTATION EN FRANCE DES INDICES DE QUALITE D'AIR </font> <br> Veuillez sélectionner un indicteur :");
 		info.setBounds(475, 340, 640, 100); info.setFont(littleFont); info.setForeground(Color.white);this.add(info);
 		
 		Object[] elements = {"Dioxyde de carbone", "Monoxyde de carbone", "Particules Fines", "Dioxyde de soufre", "Dioxyde d'azote", "Ozone"};

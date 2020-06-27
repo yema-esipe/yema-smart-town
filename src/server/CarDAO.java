@@ -18,7 +18,7 @@ public class CarDAO extends DAO<Car>{
 		Car car = converter.JsonToCar(device);
 
 		try {
-			preparedStatement = connection.prepareStatement("INSERT INTO Car(id, isintown) VALUES(?, ?)");
+			preparedStatement = connection.prepareStatement("INSERT INTO Car(id, isInTheCity) VALUES(?, ?)");
 			
 			preparedStatement.setInt(1, car.getId());
 			preparedStatement.setBoolean(2, car.getIsInTheCity());

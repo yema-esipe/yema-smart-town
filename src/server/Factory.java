@@ -33,7 +33,7 @@ public class Factory {
 		else if(target.equals("retractablebollard"))
 			  return new BollardDAO();
 		
-		else if (target.equals("vehiculesensor"))
+		else if (target.equals("vehiclesensor"))
 				return new VehicleSensorDAO();
 		
 		else if (target.contentEquals("car"))

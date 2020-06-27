@@ -28,7 +28,7 @@ public static void main (String[] args) {
 			ServerCommunication server = new ServerCommunication();
 
 			server.start(SERVER_PORT_CLIENT, SERVER_PORT_AQS); 
-
+			
 		} catch (IOException e) {}
 		
 		System.out.println("\n\n");

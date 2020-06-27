@@ -1,0 +1,9 @@
+!!com.baeldung.snakeyaml.Car
+id: 10
+address: 78 rue des invalides
+isAvtive: True
+state : True
+way : True
+
+
+     

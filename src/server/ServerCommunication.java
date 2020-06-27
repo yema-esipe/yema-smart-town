@@ -54,6 +54,7 @@ public class ServerCommunication {
 
 				while (true) {
 					new CommonThread(serverSocketClient.accept(), source).start();
+					
 				}
 			} catch (IOException e1) {
 				source.closeAllConnection();
@@ -108,6 +109,7 @@ public class ServerCommunication {
 		public CommonThread(Socket socket, DataSource source) {
 			this.clientSocket = socket;
 			connection = source.giveConnection();
+			System.out.println("test");
 		} 
 
 		/**

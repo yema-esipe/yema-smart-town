@@ -7,7 +7,7 @@ public class VehicleSensor {
 	private int id ;
 	private String address;
 	private boolean isActive;
-	private int NbVehicle ;
+	
 	public int getId() {
 		return id;
 	}
@@ -26,15 +26,10 @@ public class VehicleSensor {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public int getNbVehicle() {
-		return NbVehicle;
-	}
+	
 	@Override
 	public String toString() {
 		return "VehicleSensor [address=" + address + "]";
-	}
-	public void setNbVehicle(int nbVehicle) {
-		NbVehicle = nbVehicle;
 	}
 	
 	

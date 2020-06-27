@@ -17,7 +17,7 @@ public class YamlFileReader {
 	public ArrayList<DataAir> datainit1(int id) {
 		Yaml yaml = new Yaml(new Constructor(DeviceAir.class));
 		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("ressources/aqs-simulation-init.yaml");		
-		DeviceAir device = yaml.load(inputStream);
+		DeviceAir device = (DeviceAir) yaml.load(inputStream);
 		
 		device.setId(id);
 		for (DataAir d: device.getDatas()) {
@@ -43,7 +43,7 @@ public class YamlFileReader {
 			inputStream = this.getClass().getClassLoader().getResourceAsStream("ressources/aqs-simulation-3.yaml");
 		}
 		
-		DeviceAir device = yaml.load(inputStream);
+		DeviceAir device = (DeviceAir) yaml.load(inputStream);
 
 		return device.getDatas();
 
@@ -54,7 +54,7 @@ public class YamlFileReader {
 		Yaml yaml = new Yaml(new Constructor(Index.class));
 		InputStream inputStream =  this.getClass().getClassLoader().getResourceAsStream("ressources/aqs-index.yaml");
 		
-		Index index = yaml.load(inputStream);
+		Index index = (Index) yaml.load(inputStream);
 		return index;
 	}
 	
@@ -63,9 +63,16 @@ public class YamlFileReader {
 		Yaml yaml = new Yaml(new Constructor(DeviceConfigAir.class));
 		InputStream inputStream =  this.getClass().getClassLoader().getResourceAsStream("ressources/aqs-configAir.yaml");
 		
-		DeviceConfigAir config = yaml.load(inputStream);
+		DeviceConfigAir config = (DeviceConfigAir) yaml.load(inputStream);
 		
 		return config;
 	}
-
+	/**load data to car */
+     public Car initCarConfig() { 
+		Yaml yaml = new Yaml(new Constructor(Car.class));
+		InputStream inputStream =  this.getClass().getClassLoader().getResourceAsStream("ressources/AddCartest");
+		
+		Car config = (Car) yaml.load(inputStream);
+		
+		return config; }
 }

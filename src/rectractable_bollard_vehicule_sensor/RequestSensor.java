@@ -1,21 +1,32 @@
 package rectractable_bollard_vehicule_sensor;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.mysql.jdbc.Connection;
 
-
+import common.AppliSave;
+import common.Car;
 import common.ConvertJSON;
-
-
-
+import common.DataAirAVG;
 import common.RetractableBollard;
 import common.VehicleSensor;
+import server.CarDAO;
+import server.PollutionDataDAO;
 import common.DeviceConfigNbCar;
 import common.Request;
 import common.Response;
 public class RequestSensor {
 	
-	private SensorCommunication communication = new SensorCommunication();
+	private SensorCommunication communication ; 
 	private ConvertJSON converter = new ConvertJSON();
+	public RequestSensor(SensorCommunication communication) {
+		this.communication = communication;
+	}
+
 	
 	
 	/**
@@ -58,7 +69,7 @@ public class RequestSensor {
 			return null;
 		}
 	}
-	// merthode qui renvoie objet confignbcar donnant le nombre max de voiture dans la ville 
+	// merthode qui renvoie objet confignbcar donnant le nombre de voiture autorisé dans la ville 
 	
 	public DeviceConfigNbCar getNb() {
 		
@@ -80,7 +91,17 @@ public class RequestSensor {
 	  }}
 	
 	
-	}
+
+	
+
+				
+		
+			}
+			
+		
+	
+	
+	
 	
 	
 		

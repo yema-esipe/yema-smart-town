@@ -65,6 +65,14 @@ public class YemaPanel extends JPanel implements ActionListener {
 			}
 		} 
 		if (event.getSource() == car) {
+			wind.setVisible(false);
+		try {
+			BollardlunchCom fenstart = new BollardlunchCom();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+			
 			
 		} 
 		if (event.getSource() == carbonPrint) {

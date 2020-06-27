@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 import common.ConvertJSON;
 
 
@@ -100,9 +101,33 @@ try {
 		}
 
 	@Override
-	public ArrayList<String> selectID(String id, Connection connection) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		public ArrayList<String> selectID(String id, Connection connection) {
+			ArrayList<String> list = new ArrayList<String>();
+			int idSensor = Integer.valueOf(id);
+			try {
+				Statement myRequest = connection.createStatement();
+				ResultSet result = myRequest.executeQuery("SELECT * FROM vehiclesensor WHERE id = " + idSensor);
+				
+				while(result.next()) {
+					VehicleSensor sensor = new VehicleSensor();
+					
+					sensor.setId(result.getInt(1));
+					sensor.setAddress(result.getNString(2));
+					sensor.setActive(result.getBoolean(3));
+					
+					
+
+					String json = converter.VehicleSensortoJson(sensor);									
+					list.add(json);
+				}
+				
+				return list;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return list;
+			}
+		
 	}
 }
 	

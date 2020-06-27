@@ -102,7 +102,7 @@ public class AlertDAO extends DAO<Alert> {
 	}
 
 	public ArrayList<String> select(Connection connection) {
-		/*ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> list = new ArrayList<String>();
 		try {
 			Statement myRequest = connection.createStatement();
 			ResultSet result = myRequest.executeQuery("SELECT * FROM alert");
@@ -129,8 +129,8 @@ public class AlertDAO extends DAO<Alert> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return list;
-		}*/
-		return null;
+		}
+		
 	}
 	
 	public ArrayList<String> selectID(String id, Connection connection) {

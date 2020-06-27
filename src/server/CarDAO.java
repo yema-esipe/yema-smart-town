@@ -56,7 +56,7 @@ try {
 		Car car  = converter.JsonToCar(device);
 		try {
 			preparedStatement = connection.prepareStatement("UPDATE vehiclesensor SET address = ?, isActive = ?, state = ?,way = ? WHERE id = ?");
-			preparedStatement.setInt(5, car.getId());
+			preparedStatement.setInt(1, car.getId());
 			
 			preparedStatement.setBoolean(2, car.getIsInTheCity());
 			

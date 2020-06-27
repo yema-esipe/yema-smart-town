@@ -21,10 +21,10 @@ public class VehicleSensorDAO extends DAO<VehicleSensor> {
 		VehicleSensor sensor = converter.JsontoVehicleSensor(device);
 
 		try {
-			preparedStatement = connection.prepareStatement("INSERT INTO vehiclesensor(address, isActive) VALUES(?, ?)");
-			
-			preparedStatement.setString(1, sensor.getAddress());
-			preparedStatement.setBoolean(2, sensor.isActive());
+			preparedStatement = connection.prepareStatement("INSERT INTO vehiclesensor(id,address, isActive) VALUES(?,?, ?)");
+			preparedStatement.setInt(1, sensor.getId());
+			preparedStatement.setString(2, sensor.getAddress());
+			preparedStatement.setBoolean(3, sensor.isActive());
 			
 			preparedStatement.executeUpdate();
 			

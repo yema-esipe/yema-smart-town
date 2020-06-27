@@ -208,12 +208,33 @@ public class ConvertJSON {
 	}
 	return car;
 	}
+
+	public String infotrafficToJson (infotraffic info ) {
+		
+		String jsonString = ""; 
+		try { 
+			jsonString = mapper.writeValueAsString(info);
+		}catch (JsonProcessingException e) {
+			e.printStackTrace();
+			}
+		return jsonString;
+	}
+
+	public infotraffic JsonToinfotraffic(String jsonString) {
+		infotraffic info = new infotraffic();
+	try { info = mapper.readValue( jsonString,infotraffic.class );
+	}catch (IOException e) {
+		e.printStackTrace();
+	}
+	return info;
+	}
+	
 		
 	
 	
 	public RetractableBollard JsonToBollard(String jsonString) {
 		RetractableBollard bollard = new RetractableBollard();
-		try { bollard = mapper.readValue( jsonString,RetractableBollard.class );
+		try { bollard = mapper.readValue( jsonString ,RetractableBollard.class );
 		}catch (IOException e) {
 			e.printStackTrace();
 		}

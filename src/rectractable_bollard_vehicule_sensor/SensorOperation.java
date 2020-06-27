@@ -28,6 +28,7 @@ public class SensorOperation {
 	private PropertiesFileReader file = new PropertiesFileReader();
 	private int nbVehicule; 
 	private final String source;
+	Connection connection;
 	public SensorOperation (VehicleSensor sensor) {
 		this.sensor = sensor;
 		source = "sensor " + sensor.getId();
@@ -45,11 +46,12 @@ public class SensorOperation {
 			boolean end;
 			while (!end) {
 				
-				 Connection connection;
+				 
 				 CarDAO daocar = new CarDAO();
 				 nbVehicule = daocar.select(connection).size();
 				 request.setOperation_type("select");
-				 request.setTarget("Alert");
+				 request.setTarget("Alert"); 
+				 
 				 
 				 
 				

@@ -28,7 +28,7 @@ public class testAddBollard {
 		Logger LOGGER = Logger.getLogger(testAddCar.class.getName());
 		PropertiesFileReader serveconfig = new PropertiesFileReader();
 		serveconfig.initServer();
-		YamlFileReader simul = new YamlFileReader();
+	
 		final int SERVER_PORT = Integer.parseInt(serveconfig.getProperty("serverportClient"));
 		final String SERVER_ADDRESS = serveconfig.getProperty("serveraddress");
 		

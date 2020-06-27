@@ -89,6 +89,11 @@ public class RequestSensor {
 		e.printStackTrace();
 		return null;
 	  }}
+	public void setNbMax(int i) {
+		
+		
+		
+	}
 	
 	
 

@@ -20,12 +20,12 @@ public class BollardDAO extends DAO<RetractableBollard>{
 		RetractableBollard bollard  = converter.JsonToBollard(device);
 
 		try {
-			preparedStatement = connection.prepareStatement("INSERT INTO retarctablebollard (address, isActive, state, way) VALUES(?, ?, ?, ?)");
-			
-			preparedStatement.setString(1, bollard.getAddress());
-			preparedStatement.setBoolean(2,bollard.isActive());
-			preparedStatement.setBoolean(3, bollard.isState());
-			preparedStatement.setBoolean(4,bollard.isWay());
+			preparedStatement = connection.prepareStatement("INSERT INTO retractablebollard (id, address, isActive, state, way) VALUES(?,?, ?, ?, ?)");
+			preparedStatement.setInt(1, bollard.getId());
+			preparedStatement.setString(2, bollard.getAddress());
+			preparedStatement.setBoolean(3,bollard.isActive());
+			preparedStatement.setBoolean(4, bollard.isState());
+			preparedStatement.setBoolean(5,bollard.isWay());
 			
 
 			preparedStatement.executeUpdate();
@@ -114,7 +114,7 @@ public class BollardDAO extends DAO<RetractableBollard>{
 				bollard.setAddress(result.getString(2));
 				bollard.setActive(result.getBoolean(3));
 				bollard.setState(result.getBoolean(4));
-				bollard.setWay(result.getBoolean(6));
+				bollard.setWay(result.getBoolean(5));
 				
 				String json = converter.BollardToJson(bollard);
 				list.add(json);

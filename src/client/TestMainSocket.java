@@ -53,7 +53,7 @@ public class TestMainSocket {
 			Scanner enter13 = new Scanner(System.in);
 			Scanner enter14 = new Scanner(System.in);
 			Scanner enter15 = new Scanner(System.in);
-			Scanner enter16 = new Scanner(System.in);
+			Scanner enter16 = new Scanner(System.in); 
 			Scanner enter17 = new Scanner(System.in);
 			Scanner enter18 = new Scanner(System.in);
 			Scanner enter19 = new Scanner(System.in);
@@ -315,17 +315,18 @@ public class TestMainSocket {
 					
 					 
 				} else if (rep1.equals("4")) {
-					System.out.println("Select  -> 1");
+					System.out.println("Select max car number  -> 1");
 					System.out.println("Insert  -> 2");
 					System.out.println("Update  -> 3");
 					System.out.println("Delete  -> 4");
+					System.out.println("Show if there's alert  -> 5");
 
 					String rep2 = enter2.nextLine();
 				
 					if (rep2.equals("1")) {
-						System.out.println(" you chose SELECT ");
+						System.out.println(" you chose SELECT max car number ");
 						req.setSource("client");			
-						req.setOperation_type("select");
+						req.setOperation_type("selectnbmax");
 						req.setTarget("infotraffic");
 						
 				
@@ -402,10 +403,19 @@ public class TestMainSocket {
 						req.setObj(converter.infotrafficToJson(info));
 						client.sendMessage(req);
 						System.out.println("ok");
-						System.out.println("ok") ;
+						
                         
                         
 						
+					} else if (rep2.equals("5")) {
+						System.out.println(" you chose SELECT alert ");
+						req.setSource("client");			
+						req.setOperation_type("selectalert");
+						req.setTarget("infotraffic");
+						
+				
+						client.sendMessage(req);
+						System.out.println("ok");
 					}
 					
 					

@@ -27,41 +27,50 @@ public class SensorOperation {
 	private VehicleSensor sensor; 
 	private PropertiesFileReader file = new PropertiesFileReader();
 	private int nbVehicule; 
-	private final String source;
-	Connection connection;
-	public SensorOperation (VehicleSensor sensor) {
-		this.sensor = sensor;
-		source = "sensor " + sensor.getId();
-		file.initVSensor();
+	 private Connection connection;
 	
-	}
 	
-	public void start() throws InterruptedException {
+	
+	
+
+
+	
+
+
+	public void start(RetractableBollard bollard) throws InterruptedException {
 		SensorCommunication communication = new SensorCommunication();
-		DeviceConfigNbCar requestNb = new RequestSensor(communication).getNb();
+		
 
 		try {
 			communication.startConnection(communication.getADDRESS(), communication.getPORT());
 			Request request = new Request();
-			boolean end;
+			boolean end = true;
 			while (!end) {
 				
 				 
 				 CarDAO daocar = new CarDAO();
-				 nbVehicule = daocar.select(connection).size();
-				 request.setOperation_type("select");
-				 request.setTarget("Alert"); 
+				
+				nbVehicule = daocar.select(connection).size();
+				 request.setOperation_type("selectnbmax");
+				 request.setTarget("infotraffic"); 
+				 request.setSource("");
 				 
+				 ArrayList<String> list = communication.sendMessage(request).getValues();
 				 
-				 
-				
-				
-				
-				
-					
+				 ArrayList<Integer> numbers = new ArrayList<Integer>();
+
+				 for(int i = 0; i < list.size(); i++) {
+				    numbers.add(Integer.parseInt(list.get(i)));   
+				 }
+				int Max = numbers.get(1);
+				if (Max >nbVehicule) { 
+					System.out.println(" reussi");
+			}
+				else {break;
 				}
-			
-			communication.stopConnection();
+				}
+				 
+				 communication.stopConnection();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -70,4 +79,4 @@ public class SensorOperation {
 }
 	
 
-}
+

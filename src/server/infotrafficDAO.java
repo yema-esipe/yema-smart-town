@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import common.ConvertJSON;
+import common.RetractableBollard;
 import common.infotraffic;
 
 public class infotrafficDAO extends DAO<infotraffic>{
@@ -21,7 +22,7 @@ public class infotrafficDAO extends DAO<infotraffic>{
 		infotraffic info = converter.JsonToinfotraffic(device);
 
 		try {
-			preparedStatement = connection.prepareStatement("INSERT INTO infotraffic(alert, nbmaxcar, id) VALUES(?, ?)");
+			preparedStatement = connection.prepareStatement("INSERT INTO infotraffic(id, alert, nbmaxcar) VALUES(?, ?,?)");
 			
 			preparedStatement.setBoolean(2, info.getAlert());
 			preparedStatement.setInt(3, info.getNbmaxcar());
@@ -84,7 +85,61 @@ try {
 	@Override
 	public ArrayList<String> select(Connection connection) {
 		// TODO Auto-generated method stub
-		return null;
+		return null; 
 	}
+	public ArrayList<String> selectnbmax(Connection connection) {
+		// TODO Auto-generated method stub
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			Statement myRequest = connection.createStatement();
+			ResultSet result = myRequest.executeQuery("SELECT nbmaxcar FROM infotraffic");
+			
+			while(result.next()) {
+				infotraffic info =new infotraffic();
+				
+				 info.setNbmaxcar(result.getInt(1));
+				
+				
+				String json = converter.infotrafficToJson(info);
+				list.add(json);
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return list;
+		
+		
+	}
+		
 
 }
+	public ArrayList<String> selectalert(Connection connection) {
+		// TODO Auto-generated method stub
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			Statement myRequest = connection.createStatement();
+			ResultSet result = myRequest.executeQuery("SELECT alert FROM infotraffic");
+			
+			while(result.next()) {
+				infotraffic info =new infotraffic();
+				
+				 info.setAlert(result.getBoolean(1));
+				
+				
+				String json = converter.infotrafficToJson(info);
+				list.add(json);
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return list;
+		
+		
+	}
+	}
+}
+	
+	
+	

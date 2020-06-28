@@ -57,12 +57,12 @@ try {
 		PreparedStatement preparedStatement = null;
 		VehicleSensor sensor = converter.JsontoVehicleSensor(device);
 		try {
-			preparedStatement = connection.prepareStatement("UPDATE vehiclesensor SET address = ?, isActive = ?, state = ?,way = ? WHERE id = ?");
+			preparedStatement = connection.prepareStatement("UPDATE vehiclesensor SET address = ?, isActive = ? WHERE id = ?");
 			
-			preparedStatement.setString(1, sensor.getAddress());
-			preparedStatement.setBoolean(2, sensor.isActive());
+			preparedStatement.setString(2, sensor.getAddress());
+			preparedStatement.setBoolean(3, sensor.isActive());
 			
-			preparedStatement.setInt(5, sensor.getId());
+			preparedStatement.setInt(1, sensor.getId());
 			preparedStatement.executeUpdate();
 			
 			return true;

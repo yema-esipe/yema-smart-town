@@ -1,4 +1,4 @@
-!!com.baeldung.snakeyaml.Car
+!!com.baeldung.snakeyaml.RetractableBollard
 id: 10
 address: 78 rue des invalides
 isAvtive: True

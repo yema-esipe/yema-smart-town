@@ -272,7 +272,28 @@ public class ServerCommunication {
 
 								jsonResponse = converter.ResponseToJson(resp); System.out.println(jsonResponse);
 								out.println(jsonResponse);
-							}
+								
+							}if (req.getOperation_type().equals("selectalert")) {
+								infotrafficDAO dao = new infotrafficDAO();
+								ArrayList<String> result = dao.selectalert(connection);
+								resp.setResponse_type("selectalert");
+								resp.setResponse_state(true);
+								resp.setValues(result);
+
+								jsonResponse = converter.ResponseToJson(resp); System.out.println(jsonResponse);
+								out.println(jsonResponse);
+							
+							
+						}if (req.getOperation_type().equals("selectnbmax")) {
+							infotrafficDAO dao = new infotrafficDAO();
+							ArrayList<String> result = dao.selectnbmax(connection);
+							resp.setResponse_type("selectnbmax");
+							resp.setResponse_state(true);
+							resp.setValues(result);
+
+							jsonResponse = converter.ResponseToJson(resp); System.out.println(jsonResponse);
+							out.println(jsonResponse);
+						}
 
 
 							if (req.getOperation_type().equals("selectInformation")) {

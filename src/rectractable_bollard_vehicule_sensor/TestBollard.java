@@ -7,11 +7,12 @@ import java.util.logging.Logger;
 
 import client.ClientCommunication;
 import common.Request;
+import common.RetractableBollard;
 import connection.PropertiesFileReader;
 
 public class TestBollard {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		Logger LOGGER = Logger.getLogger(TestBollard.class.getName());
 		PropertiesFileReader serveconfig = new PropertiesFileReader();
@@ -29,13 +30,9 @@ public class TestBollard {
 			LOGGER.log(Level.WARNING, "Erreur de connexion client");
 		}
 		
-		Request req = new Request();
-		
-		req.setOperation_type("select");
-		req.setTarget("vehiclesensor");
-		req.setSource("client");
-		client.sendMessage(req); 
-		System.out.println("Ok"); 
+	   RetractableBollard bollard = new RetractableBollard();
+	   SensorOperation operation= new SensorOperation();
+	   operation.start(bollard);
 		
 	
 		

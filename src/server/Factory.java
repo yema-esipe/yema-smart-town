@@ -38,6 +38,8 @@ public class Factory {
 		
 		else if (target.contentEquals("car"))
 				return new CarDAO();
+		else if (target.contentEquals("infotraffic"))
+			return new infotrafficDAO();
 		else
 				return null; 
 	}

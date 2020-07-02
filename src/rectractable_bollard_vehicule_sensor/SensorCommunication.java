@@ -18,19 +18,23 @@ public class SensorCommunication {
 	private BufferedReader in = null;
 	private ConvertJSON converter;
 	
-	private int SERVER_PORT;
-	
+	private int SERVER_PORT_AQS;
+	private int SERVER_PORT_CLIENT;
 	private String SERVER_ADDRESS;
 	private PropertiesFileReader serveconfig = new PropertiesFileReader();
 	
-	public void BollardCommunication() {
+	public void SensorCommunication() {
 		serveconfig.initServer();
-		SERVER_PORT = Integer.parseInt(serveconfig.getProperty("serverportAQS"));
-		SERVER_ADDRESS = serveconfig.getProperty("serveraddress");
-	}
+		SERVER_PORT_AQS = Integer.parseInt(serveconfig.getProperty("serverportAQS"));
+		SERVER_PORT_CLIENT = Integer.parseInt(serveconfig.getProperty("serverportClient"));
+		SERVER_ADDRESS = serveconfig.getProperty("serveraddress");}
 	
-	public int getPORT() {
-		return SERVER_PORT;
+	public int getPORTAQS() {
+		return SERVER_PORT_AQS;
+	}
+
+	public int getPORTClient() {
+		return SERVER_PORT_CLIENT;
 	}
 	
 	public String getADDRESS() {

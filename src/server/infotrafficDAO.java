@@ -95,12 +95,12 @@ try {
 			ResultSet result = myRequest.executeQuery("SELECT nbmaxcar FROM infotraffic");
 			
 			while(result.next()) {
-				infotraffic info =new infotraffic();
+				int nbmaxcar = result.getInt("nbmaxcar") ;
 				
-				 info.setNbmaxcar(result.getInt(1));
+				// info.setNbmaxcar(result.getInt(1));
 				
 				
-				String json = converter.infotrafficToJson(info);
+				String json = String.valueOf(nbmaxcar);
 				list.add(json);
 			}
 			
@@ -122,13 +122,13 @@ try {
 			ResultSet result = myRequest.executeQuery("SELECT alert FROM infotraffic");
 			
 			while(result.next()) {
-				infotraffic info =new infotraffic();
+				Boolean  alert = result.getBoolean("alert");
 				
-				 info.setAlert(result.getBoolean(1));
-				
-				
-				String json = converter.infotrafficToJson(info);
+				String json = String.valueOf(alert);
 				list.add(json);
+				
+				
+				
 			}
 			
 			return list;

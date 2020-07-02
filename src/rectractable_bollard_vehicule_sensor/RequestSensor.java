@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.mysql.jdbc.Connection;
+
 
 import common.AppliSave;
 import common.Car;
@@ -89,11 +89,6 @@ public class RequestSensor {
 		e.printStackTrace();
 		return null;
 	  }}
-	public void setNbMax(int i) {
-		
-		
-		
-	}
 	
 	
 

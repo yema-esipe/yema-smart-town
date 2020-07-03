@@ -43,9 +43,9 @@ public class testAddBollard {
 		Yaml yaml = new Yaml(new Constructor(RetractableBollard.class));
 	
 		InputStream inputStream = yaml.getClass().getClassLoader().getResourceAsStream("ressources/AddBollardtest.yaml");
-		RetractableBollard bollard  = (RetractableBollard) yaml.load(inputStream);
+		RetractableBollard bollard  =  (RetractableBollard) yaml.load(inputStream);
 		ConvertJSON converter = new ConvertJSON();
-		//converter.CarToJson(car);
+		
 		
 		Request req = new Request();
 		req.setObj(converter.BollardToJson(bollard));

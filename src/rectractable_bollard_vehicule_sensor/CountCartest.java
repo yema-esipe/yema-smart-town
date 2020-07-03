@@ -24,7 +24,7 @@ public class CountCartest {
 		Logger LOGGER = Logger.getLogger(testAddCar.class.getName());
 		PropertiesFileReader serveconfig = new PropertiesFileReader();
 		serveconfig.initServer();
-		YamlFileReader simul = new YamlFileReader();
+		
 		final int SERVER_PORT = Integer.parseInt(serveconfig.getProperty("serverportClient"));
 		final String SERVER_ADDRESS = serveconfig.getProperty("serveraddress");
 		
@@ -36,24 +36,13 @@ public class CountCartest {
 			ex.printStackTrace();
 			LOGGER.log(Level.WARNING, "Erreur de connexion client");
 		}
-		Yaml yaml = new Yaml(new Constructor(RetractableBollard.class));
-	
-		InputStream inputStream = yaml.getClass().getClassLoader().getResourceAsStream("ressources/AddBollardtest.yaml");
-		RetractableBollard bollard  = (RetractableBollard) yaml.load(inputStream);
-		ConvertJSON converter = new ConvertJSON();
-		//converter.CarToJson(car);
-		
-		Request req = new Request();
-		req.setObj(converter.BollardToJson(bollard));
-		
-		
-		
-		
-		req.setOperation_type("insert");
-		req.setTarget("retractablebollard");
-		req.setSource("clienttest");
-		
-		client.sendMessage(req); 
+		Request request2= new Request();
+		 request2.setOperation_type("select");
+		 request2.setTarget("car"); 
+		 request2.setSource("client");                                                //code pour savoir nb de vehicule 
+		 
+		 int i = client.sendMessageresp(request2).getValues().size();
+		 System.out.println(i);
 		System.out.println("Ok"); 
 		
 		

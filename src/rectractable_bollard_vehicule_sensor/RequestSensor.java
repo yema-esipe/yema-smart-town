@@ -40,7 +40,7 @@ public class RequestSensor {
 		req.setTarget("vehiclesensor");
 			
 		try {
-			communication.startConnection(communication.getADDRESS(), communication.getPORT());
+			communication.startConnection(communication.getADDRESS(), communication.getPORTAQS());
 			Response resp = communication.sendMessage(req);
 			VehicleSensor parameter = converter.JsontoVehicleSensor(resp.getValues().get(resp.getValues().size() - 1));
 			
@@ -58,7 +58,7 @@ public class RequestSensor {
 		req.setTarget("retractablesbollard");
 			
 		try {
-			communication.startConnection(communication.getADDRESS(), communication.getPORT());
+			communication.startConnection(communication.getADDRESS(), communication.getPORTAQS());
 			Response resp = communication.sendMessage(req);
 			RetractableBollard parameter = converter.JsonToBollard(resp.getValues().get(resp.getValues().size() - 1));
 			
@@ -79,7 +79,7 @@ public class RequestSensor {
 	req.setTarget("DeviceConfigNbCar");
 		
 	try {
-		communication.startConnection(communication.getADDRESS(), communication.getPORT());
+		communication.startConnection(communication.getADDRESS(), communication.getPORTAQS());
 		Response resp = communication.sendMessage(req);
 		DeviceConfigNbCar DeviceConfigNbCar = converter.JsontoDeviceConfigNbCar(resp.getValues().get(resp.getValues().size() - 1));
 		

@@ -1,21 +1,24 @@
 package client;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import common.Car;
 import common.ConvertJSON;
 import common.Request;
 import common.RetractableBollard;
 import common.VehicleSensor;
 import common.infotraffic;
 import connection.PropertiesFileReader;
+import rectractable_bollard_vehicule_sensor.SensorOperation;
 
 public class TestMainSocket {
 	 
 	@SuppressWarnings("resource")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		Logger LOGGER = Logger.getLogger(TestMainSocket.class.getName());
 		PropertiesFileReader serveconfig = new PropertiesFileReader();
@@ -312,10 +315,33 @@ public class TestMainSocket {
 					}
 					
 				} else if (rep1.equals("3")) {
+					System.out.println("run the simulation  -> 1");
+					String rep2 = enter2.nextLine();
+					
+					if (rep2.equals("1")) {
+						 System.out.println(" simulation running ");
+						 int id ; Boolean way ;
+						 RetractableBollard bollard = new RetractableBollard();
+						 System.out.println("way : ");
+						 way = enter5.nextBoolean();
+						 bollard.setWay(way);
+						 
+						 
+						 bollard.setId(1);
+						 SensorOperation operation =new  SensorOperation();
+						 Car car =new Car();
+						 System.out.println("id : ");
+						id = enter3.nextInt();
+						car.setId(id);
+						 car.setId(11);
+						 car.setIsInTheCity(false);
+						 operation.start(bollard,car);
+						 System.out.println("good");}
+					
 					
 					 
 				} else if (rep1.equals("4")) {
-					System.out.println("Select max car number  -> 1");
+					System.out.println("Select max car number -> 1");
 					System.out.println("Insert  -> 2");
 					System.out.println("Update  -> 3");
 					System.out.println("Delete  -> 4");
@@ -325,13 +351,15 @@ public class TestMainSocket {
 				
 					if (rep2.equals("1")) {
 						System.out.println(" you chose SELECT max car number ");
-						req.setSource("client");			
-						req.setOperation_type("selectnbmax");
-						req.setTarget("infotraffic");
+						Request request1= new Request();
+						 request1.setOperation_type("selectnbmax");
+						 request1.setTarget("infotraffic"); 
+						 request1.setSource("client");
+						 
 						
-				
-						client.sendMessage(req);
-						System.out.println("ok");
+						ArrayList<String> list = client.sendMessageresp(request1).getValues();
+						System.out.println(list.get(0));
+						
 										
 					} else if (rep2.equals("2")) {
 						System.out.println(" you chose INSERT, please fill up the informations you want :");
@@ -408,14 +436,12 @@ public class TestMainSocket {
                         
 						
 					} else if (rep2.equals("5")) {
-						System.out.println(" you chose SELECT alert ");
-						req.setSource("client");			
-						req.setOperation_type("selectalert");
-						req.setTarget("infotraffic");
-						
-				
-						client.sendMessage(req);
-						System.out.println("ok");
+						 Request request3= new Request();
+						 request3.setOperation_type("selectalert");
+						 request3.setTarget("infotraffic"); 
+						 request3.setSource("client");                                               //code pour savoir alert ou pas 
+						 ArrayList<String> list = client.sendMessageresp(request3).getValues();
+						 System.out.println(list.get(0));
 					}
 					
 					

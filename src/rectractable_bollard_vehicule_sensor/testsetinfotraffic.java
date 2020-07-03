@@ -40,7 +40,7 @@ public class testsetinfotraffic {
 		}
 		Yaml yaml = new Yaml(new Constructor(infotraffic.class));
 	
-		InputStream inputStream = yaml.getClass().getClassLoader().getResourceAsStream("ressources/setinfotraffic.yaml");
+		InputStream inputStream = yaml.getClass().getClassLoader().getResourceAsStream("ressources/testsetinfotraffic.yaml");
 		infotraffic info   =  (infotraffic) yaml.load(inputStream);
 		ConvertJSON converter = new ConvertJSON();
 	

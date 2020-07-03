@@ -37,7 +37,8 @@ public class SensorOperation {
 
 	
 	public synchronized void carentry(Car car,CommunicationWithServer communication ) throws IOException {
-		Request request3= new Request();
+		 Request request3= new Request();
+		 car.setIsInTheCity(true);
 		 request3.setOperation_type("insert");
 		 request3.setTarget("car"); 
 		 request3.setSource("client");  
@@ -108,6 +109,7 @@ public class SensorOperation {
 			while (end== true) {
 				
 				if (bollard.isWay()== false && car.getIsInTheCity()==true ) {	// part that treat the cars that go out the city 
+					Thread.sleep(5000);
 					bollard.setState(true);					
 					carexit(car,communication); 
 					System.out.println("the car got out of the city successfully");
@@ -122,6 +124,7 @@ public class SensorOperation {
 						bollard.setState(true);	
 						System.out.println("bollard is open right now");
 						Request req = new Request();
+						car.setIsInTheCity(true);
 						req.setObj(converter.CarToJson(car));
 						req.setOperation_type("insert");
 						req.setTarget("car");

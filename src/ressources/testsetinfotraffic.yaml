@@ -1,7 +1,9 @@
 !!com.baeldung.snakeyaml.infotraffic
-id:10
-alert: true
-nbmaxcar : 3
+
+id: 1
+
+alert : true 
+nbmaxcar:7
 
 
      

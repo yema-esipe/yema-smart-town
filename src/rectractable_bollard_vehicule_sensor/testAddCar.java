@@ -22,7 +22,7 @@ public class testAddCar {
 	
 	public static void main(String[] args) throws IOException {
 		
-		Logger LOGGER = Logger.getLogger(testAddCar.class.getName());
+		Logger LOGGER = Logger.getLogger(testAddCar.class.getName()); 
 		PropertiesFileReader serveconfig = new PropertiesFileReader();
 		serveconfig.initServer();
 		YamlFileReader simul = new YamlFileReader();
@@ -42,7 +42,7 @@ public class testAddCar {
 		InputStream inputStream = yaml.getClass().getClassLoader().getResourceAsStream("ressources/AddCartest.yaml");
 		Car car = (Car) yaml.load(inputStream);
 		ConvertJSON converter = new ConvertJSON();
-		//converter.CarToJson(car);
+		
 		
 		Request req = new Request();
 		req.setObj(converter.CarToJson(car));

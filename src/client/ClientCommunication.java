@@ -43,6 +43,16 @@ public class ClientCommunication {
 		System.out.println(resp.toString());
 		
 	}
+public Response sendMessageresp(Request req) throws IOException {
+		
+		String jsonRequest = converter.RequestToJson(req); 
+		out.println(jsonRequest);
+		
+		String jsonResponse = in.readLine();
+		Response resp = converter.JsontoResponse(jsonResponse);
+		
+		return resp;
+	}
 	
 	/* test d'envoi de message en stringjson*/
 	public void send(String msg) throws IOException {

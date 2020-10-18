@@ -1,0 +1,11 @@
+!!com.baeldung.snakeyaml.RetractableBollard
+
+id: 10
+
+address: 78 rue des invalides
+
+state : true
+way : true
+
+
+     
